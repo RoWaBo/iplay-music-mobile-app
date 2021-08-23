@@ -31,12 +31,6 @@ Afspilleren og album details er dybe links fra henholdsvis albums og playlists/a
 ### Font, farve og ikoner:
 **Se styleguide:** https://github.com/rts-cmk-wuhf02/iPlayMusic/blob/master/styleguide.png 
 **OBS:** Ikonerne er fra ionic frameworket. De kan importeres igennem ```react-icons```` komponentet, eller hvordan du nu måtte foretrække.
-
-### Du skal bruge følgende i løsningen:
-1. ```gulp```
-2. ```ejs``` 
-3. ```sass```
-      * ```variabler```
       
 ### Hvis du har ekstra tid
 Hvis du har ekstra tid i slutningen af ugen, kan du tilføje splash-skærmen og walk-through delen. 
