@@ -1,8 +1,15 @@
+import { Router } from "@reach/router";
+import TokenContextProvider from "./contexts/TokenContextProvider";
+import Featured from "./Featured";
 
 function App() {
   return (
     <>
-      <h1>Fresh react project</h1>
+      <TokenContextProvider>
+        <Router>
+          <Featured path="/"/>
+        </Router>
+      </TokenContextProvider>
     </>
   );
 }
