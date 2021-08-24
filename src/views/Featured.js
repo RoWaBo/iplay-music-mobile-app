@@ -8,7 +8,6 @@ const Featured = () => {
     const { authToken } = useContext(AuthContext);
 
     useEffect(() => {
-        console.log(authToken);
         if (authToken) {
             axios("https://api.spotify.com/v1/browse/featured-playlists", {
                 headers: {
