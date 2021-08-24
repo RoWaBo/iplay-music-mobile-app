@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@emotion/react";
+import { useEffect, useState } from "react";
 /** @jsxImportSource @emotion/react */
 
 const Theme = ({ children }) => {
@@ -10,8 +11,13 @@ const Theme = ({ children }) => {
         primary: 'black'
     }
 
+    const themePicker = () => {
+        console.log(sessionStorage.getItem("darkmode"));
+        return sessionStorage.getItem("darkmode") == 'true' ? dark : light
+    }
+
     return ( 
-        <ThemeProvider theme={light}>
+        <ThemeProvider theme={themePicker()}>
             {children}
         </ThemeProvider>
      );

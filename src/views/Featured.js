@@ -26,9 +26,14 @@ const Featured = () => {
 
     playlists && console.log(playlists);
 
+    function handleClick() {
+        sessionStorage.setItem("darkmode", "true")    
+    }
+
     return (
         <> 
         <h1 css={theme => ({ color: theme.primary })}>Featured</h1>
+        <button onClick={handleClick}>Toggle darkmode</button>
         {playlists && playlists.map(list => (
             <div key={list.id}>
                 <h1>{list.name}</h1>
