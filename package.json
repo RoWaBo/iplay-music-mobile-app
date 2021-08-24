@@ -18,6 +18,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "dev": "netlify dev -f .netlify/functions",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -40,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "netlify-cli": "^6.7.3"
   }
 }
