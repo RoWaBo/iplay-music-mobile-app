@@ -12,6 +12,7 @@ import AuthContextProvider from './contexts/AuthContext';
 import TokenContextProvider from './contexts/TokenContext';
 // Style
 import GlobalStyle from './style/GlobalStyle';
+import Theme from './style/ThemeProvider';
 // Misc 
 import { Router } from '@reach/router';
 
@@ -22,16 +23,18 @@ function App() {
       <GlobalStyle />
       <AuthContextProvider>
         <TokenContextProvider>
-          <Router>
-            <Featured path="featured" />
-            <Login path="/" />
-            <Callback path="callback" />
-            <Albums path="albums" />
-            <AlbumDetails path="album_details" />
-            <Categories path="categories" />
-            <Playlists path="playlists" />
-            <Player path="player" />
-          </Router>
+          <Theme>
+            <Router>
+              <Featured path="featured" />
+              <Login path="/" />
+              <Callback path="callback" />
+              <Albums path="albums" />
+              <AlbumDetails path="album_details" />
+              <Categories path="categories" />
+              <Playlists path="playlists" />
+              <Player path="player" />
+            </Router>
+          </Theme>
         </TokenContextProvider>
       </AuthContextProvider>
     </>

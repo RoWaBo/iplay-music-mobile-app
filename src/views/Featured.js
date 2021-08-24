@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 
 const Featured = () => {
 
@@ -26,7 +28,7 @@ const Featured = () => {
 
     return (
         <> 
-        <h1>Featured</h1>
+        <h1 css={theme => ({ color: theme.primary })}>Featured</h1>
         {playlists && playlists.map(list => (
             <div key={list.id}>
                 <h1>{list.name}</h1>
