@@ -10,19 +10,16 @@ const Callback = ({ location }) => {
   let state = new URLSearchParams(location.search).get('state');
 
   useEffect(() => {
-    axios
-      .post(
-        '/.netlify/functions/token',
+    axios.post('/.netlify/functions/token',
         JSON.stringify({
           code,
           state,
-        })
-      )
+        }))
       .then(response => {
-        setAuthToken(response.data);
+        setAuthToken(`${response.data.token_type} ${response.data.access_token}`);
         navigate('/featured');
       });
-  }, []);
+  }, [setAuthToken, code, state]);
 
   return null;
 };
