@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
-import { TokenContext } from "./contexts/TokenContextProvider";
+import { TokenContext } from "../contexts/TokenContextProvider";
 
 const Featured = () => {
 
