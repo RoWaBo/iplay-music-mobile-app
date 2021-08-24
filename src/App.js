@@ -3,6 +3,7 @@ import Featured from './views/Featured';
 import Login from './views/Login';
 import AuthContextProvider from './contexts/AuthContext';
 import TokenContextProvider from './contexts/TokenContext';
+import Callback from './views/Callback';
 
 function App() {
   return (
@@ -10,8 +11,9 @@ function App() {
       <AuthContextProvider>
         <TokenContextProvider>
           <Router>
-            <Featured path="featured" />
-            <Login path="login" />
+            <Featured path="featured"/>
+            <Login path="/"/>
+            <Callback path="callback"/>
           </Router>
         </TokenContextProvider>
       </AuthContextProvider>
