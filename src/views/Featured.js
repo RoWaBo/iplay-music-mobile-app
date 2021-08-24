@@ -15,7 +15,10 @@ const Featured = () => {
                     "Authorization": `${authToken.token_type} ${authToken.access_token}` 
                 }
             })
-            .then(result => setPlaylists(result.data.playlists.items))            
+            .then(result => setPlaylists(result.data.playlists.items))
+            .catch(error => {
+                // axios("https://accounts.spotify.com/api/token")           
+            })            
         }
     }, [authToken]);
 
