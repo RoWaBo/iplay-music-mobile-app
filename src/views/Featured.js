@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../contexts/AuthContext";
+import { useEffect, useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
 
 const Featured = () => {
 
     const [playlists, setPlaylists] = useState();
-    const { authToken } = useContext(AuthContext);
+    const { authToken } = useAuth();
 
     useEffect(() => {
         console.log(authToken);

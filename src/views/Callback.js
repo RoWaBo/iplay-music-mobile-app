@@ -1,10 +1,10 @@
 import { navigate } from '@reach/router';
 import axios from 'axios';
-import { useEffect, useContext } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
+import { useEffect } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 
 const Callback = ({ location }) => {
-  const { setAuthToken } = useContext(AuthContext);
+  const { setAuthToken } = useAuth();
 
   let code = new URLSearchParams(location.search).get('code');
   let state = new URLSearchParams(location.search).get('state');
