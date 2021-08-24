@@ -16,7 +16,7 @@ const Callback = ({ location }) => {
           state,
         }))
       .then(response => {
-        setAuthToken(`${response.data.token_type} ${response.data.access_token}`);
+        setAuthToken(response.data);
         navigate('/featured');
       });
   }, [setAuthToken, code, state]);
