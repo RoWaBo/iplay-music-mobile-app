@@ -12,7 +12,7 @@ exports.handler = async function(event, context) {
         params: {
             code: body.code,
             redirect_uri: process.env.REACT_APP_REDIRECT_URI,
-            grant_type: "Authorization_code" 
+            grant_type: "authorization_code" 
         },
         headers: {
             Authorization: "Basic " + Buffer.from(process.env.REACT_APP_CLIENT_ID + ":" + process.env.REACT_APP_CLIENT_SECRET).toString("base64"),
