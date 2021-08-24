@@ -1,22 +1,23 @@
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
-import { TokenContext } from "../contexts/TokenContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Featured = () => {
 
     const [playlists, setPlaylists] = useState();
-    const { token } = useContext(TokenContext);
+    const { authToken } = useContext(AuthContext);
 
     useEffect(() => {
-        if (token) {
+        console.log(authToken);
+        if (authToken) {
             axios("https://api.spotify.com/v1/browse/featured-playlists", {
                 headers: {
-                    "Authorization": token 
+                    "Authorization": authToken 
                 }
             })
             .then(result => setPlaylists(result.data.playlists.items))            
         }
-    }, [token]);
+    }, [authToken]);
 
     playlists && console.log(playlists);
 
