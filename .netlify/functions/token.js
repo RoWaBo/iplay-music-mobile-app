@@ -24,7 +24,7 @@ exports.handler = async function(event, context) {
         let response = await axios(authOptions)
         return { 
             statusCode: 201,
-            body: JSON.stringify(reponse.data)
+            body: JSON.stringify(response.data)
          }
     } catch (error) {
         console.log(error);
