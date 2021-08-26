@@ -9,7 +9,7 @@ import Player from './views/Player';
 import Playlists from './views/Playlists';
 // Contexts
 import AuthContextProvider from './contexts/AuthContext';
-import TokenContextProvider from './contexts/TokenContext';
+import ThemeContextProvider from './contexts/ThemeContext';
 // Style
 import GlobalStyle from './style/GlobalStyle';
 import Theme from './style/ThemeProvider';
@@ -22,7 +22,7 @@ function App() {
     <>
       <GlobalStyle />
       <AuthContextProvider>
-        <TokenContextProvider>
+        <ThemeContextProvider>
           <Theme>
             <Router>
               <Featured path="featured" />
@@ -35,7 +35,7 @@ function App() {
               <Player path="player" />
             </Router>
           </Theme>
-        </TokenContextProvider>
+        </ThemeContextProvider>
       </AuthContextProvider>
     </>
   );
