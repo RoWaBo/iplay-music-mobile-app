@@ -1,11 +1,14 @@
 /** @jsxImportSource @emotion/react */
-// import { css } from '@emotion/react';
+import { css } from '@emotion/react';
+import NavigationBar from '../components/NavigationBar';
+import HeadingPrimary from '../components/HeadingPrimary';
 
 const Categories = () => {
     return ( 
-        <>
-            <h1>Categories</h1>
-        </>
+        <main css={({colors}) => css`background: ${colors.background.primary};`}> 
+        <HeadingPrimary>categories</HeadingPrimary>
+        <NavigationBar />
+        </main>
      );
 }
  

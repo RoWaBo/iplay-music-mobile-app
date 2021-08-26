@@ -1,11 +1,14 @@
 /** @jsxImportSource @emotion/react */
-// import { css } from '@emotion/react';
+import { css } from '@emotion/react';
+import NavigationBar from '../components/NavigationBar';
+import HeadingPrimary from '../components/HeadingPrimary';
 
 const Player = () => {
     return ( 
-        <>
-            <h1>Player</h1>
-        </>
+        <main css={({colors}) => css`background: ${colors.background.primary};`}> 
+        <HeadingPrimary>player</HeadingPrimary>
+        <NavigationBar />
+        </main>
      );
 }
  
