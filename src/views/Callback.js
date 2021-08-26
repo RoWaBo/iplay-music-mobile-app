@@ -18,7 +18,11 @@ const Callback = ({ location }) => {
       .then(response => {
         setAuthToken(response.data);
         navigate('/featured');
-      });
+      })
+      .catch(error => {
+        console.log(error);
+        navigate('/');
+      })
   }, [setAuthToken, code, state]);
 
   return null;
