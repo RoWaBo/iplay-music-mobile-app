@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import querystring from "querystring";
 import NavigationBar from "../components/NavigationBar";
+import { font, spacing } from '../style/Styles';
 
 const Login = () => {
 
@@ -14,13 +15,22 @@ const Login = () => {
     })
 
     const background = ({ colors }) => css`
-        background: ${colors.background.tertiary}
+        background: ${colors.background.tertiary};
+        width: 100vw;
+        height: 100vh;
+        padding: ${spacing.m} ${spacing.m};
+        color: ${colors.font.primary}; 
+    `
+
+    const loginLink = ({ colors }) => css`
+        color: ${colors.font.primary};
+        
     `
 
     return ( 
         <main css={background}>
-            <h1>Login</h1>
-            <a href={`https://accounts.spotify.com/authorize?${options}`}>SPOTIFY LOGIN</a>
+            <h1 css={css`font-size: ${font.size.xl};`}>Log In</h1>
+            <a css={loginLink} href={`https://accounts.spotify.com/authorize?${options}`}>SPOTIFY LOGIN</a>
             <NavigationBar />
         </main>
      );
