@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import NavigationBar from "../components/NavigationBar";
+import { navigate } from "@reach/router";
 
 const Featured = () => {
 
@@ -19,6 +21,7 @@ const Featured = () => {
             })
             .then(result => setPlaylists(result.data.playlists.items))
             .catch(error => {
+                navigate("/")
                 // axios("https://accounts.spotify.com/api/token")           
             })            
         }
@@ -35,6 +38,7 @@ const Featured = () => {
                 <img src={list.images[0].url} alt={list.name} />
             </div>    
         ))}
+        <NavigationBar />
         </>
      );
 }
