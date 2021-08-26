@@ -7,6 +7,9 @@ export const font = {
         l: "20px",
         m: "15px",
         s: "12px"
+    },
+    weight: {
+        bold: "600"
     }
 }
 

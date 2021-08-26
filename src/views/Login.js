@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import querystring from "querystring";
-import NavigationBar from "../components/NavigationBar";
+import { bigButtonStyle } from '../style/BigButtonStyle';
 import { font, spacing } from '../style/Styles';
 
 const Login = () => {
@@ -19,19 +19,16 @@ const Login = () => {
         width: 100vw;
         height: 100vh;
         padding: ${spacing.m} ${spacing.m};
-        color: ${colors.font.primary}; 
-    `
-
-    const loginLink = ({ colors }) => css`
         color: ${colors.font.primary};
-        
+        display: grid;
     `
 
     return ( 
         <main css={background}>
-            <h1 css={css`font-size: ${font.size.xl};`}>Log In</h1>
-            <a css={loginLink} href={`https://accounts.spotify.com/authorize?${options}`}>SPOTIFY LOGIN</a>
-            <NavigationBar />
+            <h1 css={css`font-size: ${font.size.xl}; font-weight: ${font.weight.bold};`}>Log In</h1>
+            <div css={css`align-self: center;`}> 
+            <a css={bigButtonStyle} href={`https://accounts.spotify.com/authorize?${options}`}>log in with spotify</a>
+            </div>
         </main>
      );
 }
