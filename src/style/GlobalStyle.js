@@ -11,7 +11,7 @@ const GlobalStyle = () => {
             margin:0;
             padding:0;
             box-sizing:border-box;
-            line-height: 1.7;
+            line-height: 1.5;
             font-family: ${font.family};
         }
         img {

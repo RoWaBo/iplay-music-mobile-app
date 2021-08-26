@@ -8,7 +8,7 @@ const HeadingPrimary = ({ children }) => {
             color: ${colors.font.primary};
             font-size: ${font.size.xl};
             text-transform: capitalize;
-            margin: ${spacing.m}   
+            margin: ${spacing.s} ${spacing.m};   
         `}
         >{ children }</h1>
      );
