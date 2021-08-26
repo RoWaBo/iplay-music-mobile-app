@@ -5,7 +5,11 @@ import { font, spacing } from '../style/Styles';
 const HeadingPrimary = ({ children }) => {
     return ( 
         <h1 css={({colors}) => css`
-            color: ${colors.font.primary};
+            background: ${colors.gradient};
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: initial;
+            
             font-size: ${font.size.xl};
             text-transform: capitalize;
             margin: ${spacing.s} ${spacing.m};   
