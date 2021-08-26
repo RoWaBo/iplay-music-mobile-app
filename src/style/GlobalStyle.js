@@ -1,18 +1,18 @@
 import { Global, css } from "@emotion/react";
 /** @jsxImportSource @emotion/react */
+import { font } from "./Styles";
 
 const GlobalStyle = () => {
 
-    const boilerPlate = css`
-
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+    const globalStyles = css`
+        @import url(${font.fontImportUrl});
 
         * {
             margin:0;
             padding:0;
             box-sizing:border-box;
             line-height: 1.7;
-            font-family: 'Poppins', sans-serif;
+            font-family: ${font.family};
         }
         img {
             width:100%;
@@ -28,7 +28,7 @@ const GlobalStyle = () => {
         } 
     `
 
-    return <Global styles={boilerPlate} />
+    return <Global styles={globalStyles} />
 }
 
 export default GlobalStyle;

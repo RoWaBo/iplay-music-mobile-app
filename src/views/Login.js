@@ -1,4 +1,8 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import querystring from "querystring";
+import { bigButtonStyle } from '../style/BigButtonStyle';
+import { font, spacing } from '../style/Styles';
 
 const Login = () => {
 
@@ -10,13 +14,22 @@ const Login = () => {
         state: "oksdg7f2nk3ufvn0jyhj7kds34fadsf"
     })
 
-    console.log(options);
+    const background = ({ colors }) => css`
+        background: ${colors.background.tertiary};
+        width: 100vw;
+        height: 100vh;
+        padding: ${spacing.m} ${spacing.m};
+        color: ${colors.font.primary};
+        display: grid;
+    `
 
     return ( 
-        <>
-            <h1>Login</h1>
-            <a href={`https://accounts.spotify.com/authorize?${options}`}>SPOTIFY LOGIN</a>
-        </>
+        <main css={background}>
+            <h1 css={css`font-size: ${font.size.xl}; font-weight: ${font.weight.bold};`}>Log In</h1>
+            <div css={css`align-self: center;`}> 
+            <a css={bigButtonStyle} href={`https://accounts.spotify.com/authorize?${options}`}>log in with spotify</a>
+            </div>
+        </main>
      );
 }
  
