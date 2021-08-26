@@ -6,6 +6,8 @@ import { css } from "@emotion/react";
 import NavigationBar from "../components/NavigationBar";
 import { navigate } from "@reach/router";
 import HeadingPrimary from "../components/HeadingPrimary";
+import ShadowBox from "../components/ShadowBox";
+import { spacing } from "../style/Styles";
 
 const Featured = () => {
 
@@ -16,28 +18,41 @@ const Featured = () => {
         if (authToken) {
             axios("https://api.spotify.com/v1/browse/featured-playlists", {
                 headers: {
-                    "Authorization": `${authToken.token_type} ${authToken.access_token}` 
+                    "Authorization": `${authToken.token_type} ${authToken.access_token}`
                 }
             })
-            .then(result => setPlaylists(result.data.playlists.items))
-            .catch(error => {
-                navigate("/")
-                // axios("https://accounts.spotify.com/api/token")           
-            })            
+                .then(result => setPlaylists(result.data.playlists.items))
+                .catch(error => {
+                    navigate("/")
+                    // axios("https://accounts.spotify.com/api/token")           
+                })
         }
     }, [authToken]);
 
+    const contentContainer = css`
+        margin: ${spacing.m};
+
+        & > * {
+            margin-bottom: ${spacing.xl};    
+        }
+        & > :last-of-type {
+            margin-bottom: 5.5rem;    
+        }
+    `
+
     return (
-        <main css={({colors}) => css`background: ${colors.background.primary};`}> 
-        <HeadingPrimary>featured</HeadingPrimary>
-        {playlists && playlists.map(list => (
-            <div key={list.id}>
-                <img src={list.images[0].url} alt={list.name} />
-            </div>    
-        ))}
-        <NavigationBar />
+        <main css={({ colors }) => css`background: ${colors.background.primary};`}>
+            <HeadingPrimary>featured</HeadingPrimary>
+            <div css={contentContainer}>
+                {playlists && playlists.map(list => (
+                    <ShadowBox key={list.id}>
+                        <img src={list.images[0].url} alt={list.name} />
+                    </ShadowBox>
+                ))}
+            </div>
+            <NavigationBar />
         </main>
-     );
+    );
 }
- 
+
 export default Featured;
