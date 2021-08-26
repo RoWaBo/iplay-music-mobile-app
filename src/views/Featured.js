@@ -3,13 +3,11 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { useTheme } from "../contexts/ThemeContext";
 
 const Featured = () => {
 
     const [playlists, setPlaylists] = useState();
     const { authToken } = useAuth();
-    const { theme, setTheme } = useTheme();
 
     useEffect(() => {
         console.log(authToken);
@@ -28,21 +26,9 @@ const Featured = () => {
 
     playlists && console.log(playlists);
 
-    const toggleTheme = () => {
-        console.log(theme);
-        if (theme === "light") {
-            setTheme("dark")
-            localStorage.setItem("theme", "dark")    
-        } else {
-            setTheme("light")
-            localStorage.setItem("theme", "light") 
-        }    
-    }
-
     return (
         <> 
         <h1 css={theme => ({ color: theme.primary })}>Featured</h1>
-        <button onClick={toggleTheme}>Toggle darkmode</button>
         {playlists && playlists.map(list => (
             <div key={list.id}>
                 <h1>{list.name}</h1>

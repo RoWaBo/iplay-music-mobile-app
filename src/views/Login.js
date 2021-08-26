@@ -1,4 +1,7 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import querystring from "querystring";
+import NavigationBar from "../components/NavigationBar";
 
 const Login = () => {
 
@@ -10,13 +13,16 @@ const Login = () => {
         state: "oksdg7f2nk3ufvn0jyhj7kds34fadsf"
     })
 
-    console.log(options);
+    const background = ({ colors }) => css`
+        background: ${colors.background.tertiary}
+    `
 
     return ( 
-        <>
+        <main css={background}>
             <h1>Login</h1>
             <a href={`https://accounts.spotify.com/authorize?${options}`}>SPOTIFY LOGIN</a>
-        </>
+            <NavigationBar />
+        </main>
      );
 }
  
