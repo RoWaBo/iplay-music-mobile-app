@@ -25,8 +25,8 @@ const NavigationBar = () => {
         const highlight = ({ colors }) => css`
             color: ${colors.font.primary};
         `
-    
-        if (window.location.pathname === linkName) {
+
+        if (window.location.pathname.split("/")[1] === linkName) {
             return highlight   
         } else {
             return ( 
@@ -70,19 +70,19 @@ const NavigationBar = () => {
         <>
             <div css={navBarContainer}>
                 <Link css={navLink} to="/albums">
-                    <IoIosPulse css={highlightIfCurrent("/albums")} />
+                    <IoIosPulse css={highlightIfCurrent("albums")} />
                 </Link>
-                <Link css={navLink} to="/playlists">
-                    <IoIosMicrophone css={highlightIfCurrent("/playlists")} />
+                <Link css={navLink} to="/playlists/featured">
+                    <IoIosMicrophone css={highlightIfCurrent("playlists")} />
                 </Link>
                 <Link css={navLink} to="/featured">
-                    <IoIosDisc css={highlightIfCurrent("/featured")} />
+                    <IoIosDisc css={highlightIfCurrent("featured")} />
                 </Link>
                 <div css={navLink} onClick={toggleTheme}>
                     <IoIosContrast css={highlightIfCurrent()} />
                 </div>
                 <Link css={navLink} to="/categories">
-                    <IoIosAlbums css={highlightIfCurrent("/categories")} />
+                    <IoIosAlbums css={highlightIfCurrent("categories")} />
                 </Link>
             </div>
             <svg width="0" height="0" style={{ position: "absolute" }}>
