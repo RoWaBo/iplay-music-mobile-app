@@ -48,14 +48,19 @@ const NavigationBar = () => {
     `
 
     const highlightCurrent = linkName => {
+
+        const highlight = ({ colors }) => css`
+            color: ${colors.font.primary};
+        `
     
         if (window.location.pathname === linkName) {
-            return (
-                { color: "black" }    
-            )    
+            return highlight   
         } else {
-            return (
-                { fill: "url(#gradient-fill)", display: "initial" }    
+            return ( 
+                css`
+                fill: url(#gradient-fill); 
+                display: initial;
+                `
             )            
         }
     }
@@ -64,19 +69,19 @@ const NavigationBar = () => {
         <>
             <div css={navBarContainer}>
                 <Link css={navLink} to="/albums">
-                    <IoIosPulse style={highlightCurrent("/albums")} />
+                    <IoIosPulse css={highlightCurrent("/albums")} />
                 </Link>
                 <Link css={navLink} to="/playlists">
-                    <IoIosMicrophone style={highlightCurrent("/playlists")} />
+                    <IoIosMicrophone css={highlightCurrent("/playlists")} />
                 </Link>
                 <Link css={navLink} to="/featured">
-                    <IoIosDisc style={highlightCurrent("/featured")} />
+                    <IoIosDisc css={highlightCurrent("/featured")} />
                 </Link>
                 <div css={navLink} onClick={toggleTheme}>
-                    <IoIosContrast style={highlightCurrent()} />
+                    <IoIosContrast css={highlightCurrent()} />
                 </div>
                 <Link css={navLink} to="/categories">
-                    <IoIosAlbums style={highlightCurrent("/categories")} />
+                    <IoIosAlbums css={highlightCurrent("/categories")} />
                 </Link>
             </div>
             <svg width="0" height="0" style={{ position: "absolute" }}>
