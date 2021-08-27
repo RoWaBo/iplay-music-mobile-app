@@ -20,6 +20,25 @@ const NavigationBar = () => {
         }
     }
 
+    const highlightCurrent = linkName => {
+
+        const highlight = ({ colors }) => css`
+            color: ${colors.font.primary};
+        `
+    
+        if (window.location.pathname === linkName) {
+            return highlight   
+        } else {
+            return ( 
+                css`
+                fill: url(#gradient-fill); 
+                display: initial;
+                `
+            )            
+        }
+    }
+
+    // === STYLING ===
     const navBarContainer = ({ colors }) => css`
         background: ${colors.background.secondary};
         display: flex;
@@ -46,24 +65,6 @@ const NavigationBar = () => {
         display: grid;
         place-content: center;
     `
-
-    const highlightCurrent = linkName => {
-
-        const highlight = ({ colors }) => css`
-            color: ${colors.font.primary};
-        `
-    
-        if (window.location.pathname === linkName) {
-            return highlight   
-        } else {
-            return ( 
-                css`
-                fill: url(#gradient-fill); 
-                display: initial;
-                `
-            )            
-        }
-    }
 
     return (
         <>
