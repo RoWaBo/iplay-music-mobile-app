@@ -31,7 +31,7 @@ function App() {
               <Albums path="albums" />
               <AlbumDetails path="album_details" />
               <Categories path="categories" />
-              <Playlists path="playlists" />
+              <Playlists path="playlists/:playlistId" />
               <Player path="player" />
             </Router>
           </Theme>

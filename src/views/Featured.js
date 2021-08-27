@@ -5,6 +5,7 @@ import HeadingPrimary from "../components/HeadingPrimary";
 import ShadowBox from "../components/ShadowBox";
 import { spacing } from "../style/Styles";
 import SpotifyApiFetch from "../components/SpotifyApiFetch";
+import { Link } from "@reach/router";
 
 const Featured = () => {
 
@@ -27,7 +28,9 @@ const Featured = () => {
             <div css={contentContainer}>
                 {playlists && playlists.data.playlists.items.map(list => (
                     <ShadowBox key={list.id}>
-                        <img src={list.images[0].url} alt={list.name} />
+                        <Link to={`/playlists/${list.id}`}>
+                            <img src={list.images[0].url} alt={list.name} />
+                        </Link>
                     </ShadowBox>
                 ))}
             </div>
