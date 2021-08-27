@@ -87,23 +87,8 @@ const NavigationBar = () => {
             </div>
             <svg width="0" height="0" style={{ position: "absolute" }}>
                 <linearGradient id="gradient-fill" x1="0" y1="0" x2="800" y2="0" gradientUnits="userSpaceOnUse">
-
                     <stop offset="0" stopColor="#ee0979" />
-
-                    <stop offset="0.14285714285714285" stopColor="#f7126c" />
-
-                    <stop offset="0.2857142857142857" stopColor="#fd205f" />
-
-                    <stop offset="0.42857142857142855" stopColor="#ff2f51" />
-
-                    <stop offset="0.5714285714285714" stopColor="#ff3e43" />
-
-                    <stop offset="0.7142857142857142" stopColor="#ff4d33" />
-
-                    <stop offset="0.8571428571428571" stopColor="#ff5c21" />
-
                     <stop offset="1" stopColor="#ff6a00" />
-
                 </linearGradient>
             </svg>
         </>
