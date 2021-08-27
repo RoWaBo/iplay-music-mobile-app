@@ -15,12 +15,15 @@ const SpotifyApiFetch = url => {
                     "Authorization": `${authToken.token_type} ${authToken.access_token}`
                 }
             })
-                .then(result => setData(result))
-                .catch(error => {
-                    console.log(error);
+                .then(result => { 
+                    setData(result)
+                    console.log(result) 
+                })
+                .catch(error => { 
+                    console.log(error) 
                 })                 
         }
-    }, [authToken])
+    }, [authToken, url])
 
     return data
 }
