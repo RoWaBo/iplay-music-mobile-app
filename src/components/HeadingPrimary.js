@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { font, spacing } from '../style/Styles';
 
 const HeadingPrimary = ({ children }) => {
+
     return (
         <h1 css={({ colors }) => css`
             background: ${colors.gradient};
@@ -14,7 +15,7 @@ const HeadingPrimary = ({ children }) => {
             text-transform: capitalize;
             margin: ${spacing.s} ${spacing.m};   
         `}>
-            {children ? children : window.location.pathname.slice(1)}
+            {children ? children : window.location.pathname.split("/")[1]}
         </h1>
     );
 }
