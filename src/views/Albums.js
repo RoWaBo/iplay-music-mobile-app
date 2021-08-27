@@ -6,7 +6,7 @@ import HeadingPrimary from '../components/HeadingPrimary';
 const Albums = () => {
     return ( 
         <main css={({colors}) => css`background: ${colors.background.primary};`}> 
-        <HeadingPrimary>albums</HeadingPrimary>
+        <HeadingPrimary />
         <NavigationBar />
         </main>
      );
