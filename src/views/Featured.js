@@ -42,7 +42,7 @@ const Featured = () => {
 
     return (
         <main css={({ colors }) => css`background: ${colors.background.primary};`}>
-            <HeadingPrimary>featured</HeadingPrimary>
+            <HeadingPrimary />
             <div css={contentContainer}>
                 {playlists && playlists.map(list => (
                     <ShadowBox key={list.id}>

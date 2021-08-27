@@ -20,7 +20,7 @@ const NavigationBar = () => {
         }
     }
 
-    const highlightCurrent = linkName => {
+    const highlightIfCurrent = linkName => {
 
         const highlight = ({ colors }) => css`
             color: ${colors.font.primary};
@@ -70,19 +70,19 @@ const NavigationBar = () => {
         <>
             <div css={navBarContainer}>
                 <Link css={navLink} to="/albums">
-                    <IoIosPulse css={highlightCurrent("/albums")} />
+                    <IoIosPulse css={highlightIfCurrent("/albums")} />
                 </Link>
                 <Link css={navLink} to="/playlists">
-                    <IoIosMicrophone css={highlightCurrent("/playlists")} />
+                    <IoIosMicrophone css={highlightIfCurrent("/playlists")} />
                 </Link>
                 <Link css={navLink} to="/featured">
-                    <IoIosDisc css={highlightCurrent("/featured")} />
+                    <IoIosDisc css={highlightIfCurrent("/featured")} />
                 </Link>
                 <div css={navLink} onClick={toggleTheme}>
-                    <IoIosContrast css={highlightCurrent()} />
+                    <IoIosContrast css={highlightIfCurrent()} />
                 </div>
                 <Link css={navLink} to="/categories">
-                    <IoIosAlbums css={highlightCurrent("/categories")} />
+                    <IoIosAlbums css={highlightIfCurrent("/categories")} />
                 </Link>
             </div>
             <svg width="0" height="0" style={{ position: "absolute" }}>
