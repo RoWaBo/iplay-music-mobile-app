@@ -38,11 +38,17 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo }) =
         color: ${colors.font.secondary};
     `
     
+    const splitOnLineBreak = string => {
+        console.log(string.split("\n"));
+        
+        return string
+    }    
+
     return (
         <article css={container}>
-            {imgUrl ? <ShadowBox small><img src={imgUrl} /></ShadowBox> : <div css={icon}><IoIosPlay /></div>}
+            {imgUrl ? <ShadowBox small><img src={imgUrl} alt={heading} /></ShadowBox> : <div css={icon}><IoIosPlay /></div>}
             <div css={textContainer}>
-                <SubHeading>{heading}</SubHeading>
+                <SubHeading>{splitOnLineBreak(heading)}</SubHeading>
                 <p>{description}</p>
             </div>
             <div css={infoContainer}>
