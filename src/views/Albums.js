@@ -31,12 +31,7 @@ const Albums = () => {
     margin-left: auto;
     cursor: pointer;
     `
-
-    const style = css`
-        min-width: 100px;
-        min-height: 100px;
-    `
-
+    
     return (
         <main css={({ colors }) => css`background: ${colors.background.primary};`}>
             <UtilityBar heading="music" />
@@ -61,9 +56,9 @@ const Albums = () => {
                     <SubHeading>new releases</SubHeading>
                     <p css={viewAll}>view all</p>
                 </div>
-                {newReleases?.data.albums.items.map(album => (
-                    <Link to={`/album_details/${album.id}`} key={album.id}>
-                        <ItemPresentationBar 
+                {newReleases?.data.albums.items.map((album, index) => (
+                    <Link to={`/album_details/${album.id}`} key={album.id + index}>
+                        <ItemPresentationBar
                             imgUrl={album.images[2].url}
                             heading={album.name}
                             description={album.artists[0].name}
