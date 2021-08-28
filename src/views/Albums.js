@@ -56,7 +56,7 @@ const Albums = () => {
                     ))}
                 </SwipableContainer>
             </section>
-            <section css={css`margin-top: ${spacing.xs};`}>
+            <section css={css`margin: ${spacing.s} 0 ${spacing.xxl};`}>
                 <div css={subHeadingContainer}>
                     <SubHeading>new releases</SubHeading>
                     <p css={viewAll}>view all</p>
@@ -67,7 +67,7 @@ const Albums = () => {
                             imgUrl={album.images[2].url}
                             heading={album.name}
                             description={album.artists[0].name}
-                            additionalInfo={album.total_tracks}
+                            additionalInfo={album.total_tracks + " songs"}
                         />
                     </Link>    
                 ))}

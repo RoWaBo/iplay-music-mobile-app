@@ -15,6 +15,7 @@ export const font = {
 }
 
 export const spacing = {
+    xxs: "0.2rem",
     xs: "0.5rem",
     s: "1rem",
     m: "1.5rem",
