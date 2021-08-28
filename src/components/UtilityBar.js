@@ -25,7 +25,7 @@ const UtilityBar = ({ heading, light }) => {
 
     const text = css`
         margin: 0 auto;
-        font-weight: ${font.weight.standard};
+        font-weight: ${font.weight.light};
         font-size: ${font.size.m};
         text-transform: uppercase;
         letter-spacing: 2px;

@@ -10,8 +10,7 @@ export const font = {
     },
     weight: {
         bold: "600",
-        light: "300",
-        standard: "400"
+        light: "400"
     }
 }
 
@@ -21,7 +20,7 @@ export const spacing = {
     m: "1.5rem",
     l: "2rem",
     xl: "2.5rem",
-    xxl: "4.5rem"
+    xxl: "5rem"
 }
 
 
