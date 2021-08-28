@@ -1,42 +1,44 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+import { css } from "@emotion/react";
+import NavigationBar from "../components/NavigationBar";
+import HeadingPrimary from "../components/HeadingPrimary";
+import ShadowBox from "../components/ShadowBox";
+import { spacing } from "../style/Styles";
+import SpotifyApiFetch from "../components/SpotifyApiFetch";
+import { Link } from "@reach/router";
+import UtilityBar from "../components/UtilityBar";
 
 const Featured = () => {
 
-    const [playlists, setPlaylists] = useState();
-    const { authToken } = useAuth();
+    const playlists = SpotifyApiFetch("https://api.spotify.com/v1/browse/featured-playlists")   
 
-    useEffect(() => {
-        console.log(authToken);
-        if (authToken) {
-            axios("https://api.spotify.com/v1/browse/featured-playlists", {
-                headers: {
-                    "Authorization": `${authToken.token_type} ${authToken.access_token}` 
-                }
-            })
-            .then(result => setPlaylists(result.data.playlists.items))
-            .catch(error => {
-                // axios("https://accounts.spotify.com/api/token")           
-            })            
+    const contentContainer = css`
+        margin: ${spacing.m};
+
+        & > * {
+            margin-bottom: ${spacing.xl};    
         }
-    }, [authToken]);
-
-    playlists && console.log(playlists);
+        & > :last-of-type {
+            margin-bottom: 5.5rem;    
+        }
+    `
 
     return (
-        <> 
-        <h1 css={theme => ({ color: theme.primary })}>Featured</h1>
-        {playlists && playlists.map(list => (
-            <div key={list.id}>
-                <h1>{list.name}</h1>
-                <img src={list.images[0].url} alt={list.name} />
-            </div>    
-        ))}
-        </>
-     );
+        <main css={({ colors }) => css`background: ${colors.background.primary};`}>
+            <UtilityBar heading="Featured" />
+            <HeadingPrimary />
+            <div css={contentContainer}>
+                {playlists?.data.playlists.items.map(list => (
+                    <ShadowBox key={list.id}>
+                        <Link to={`/playlists/${list.id}`}>
+                            <img src={list.images[0].url} alt={list.name} />
+                        </Link>
+                    </ShadowBox>
+                ))}
+            </div>
+            <NavigationBar />
+        </main>
+    );
 }
- 
+
 export default Featured;

@@ -12,7 +12,7 @@ export const lightTheme = {
         },
         font: {
             primary: "#341931",
-            light: "#FFF"
+            secondary: "#FFF"
         }
     }
 }
@@ -30,7 +30,7 @@ export const darkTheme = {
         },
         font: {
             primary: "#FFF",
-            light: "#FFF"
+            secondary: "#FFF"
         }
     } 
 }

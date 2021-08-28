@@ -12,5 +12,6 @@ export const bigButtonStyle = ({ colors }) => css`
     width: 100%;
     display: block;
     text-align: center;
-    padding: .5rem;    
+    padding: .5rem;
+    cursor: pointer;    
 `

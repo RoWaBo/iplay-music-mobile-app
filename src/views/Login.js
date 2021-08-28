@@ -18,7 +18,7 @@ const Login = () => {
         background: ${colors.background.tertiary};
         width: 100vw;
         height: 100vh;
-        padding: ${spacing.m} ${spacing.m};
+        padding: ${spacing.m};
         color: ${colors.font.primary};
         display: grid;
     `
