@@ -11,6 +11,7 @@ const ShadowBox = ({ children, small }) => {
         border-radius: 8px;
         box-shadow: 0px 0px 25px #00000026;
         overflow: hidden;
+        object-fit: cover;
     `
 
     return ( 
