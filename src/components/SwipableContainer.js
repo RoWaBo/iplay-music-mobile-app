@@ -10,12 +10,13 @@ const SwipableContainer = ({ children }) => {
         -ms-overflow-style:none;
         overflow-x: scroll;
         scrollbar-width: none;
+        padding: ${spacing.m};
 
         &::-webkit-scrollbar {
             display: none;
         }
         & > :not(:last-of-type) {
-            margin-right: ${spacing.xs};
+            margin-right: ${spacing.s};
         }
     `
 

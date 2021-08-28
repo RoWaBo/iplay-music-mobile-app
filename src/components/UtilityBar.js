@@ -11,7 +11,7 @@ const UtilityBar = ({ heading, light }) => {
         display: flex;
         align-items: center;
         width: 100%;
-        height: 73px;
+        height: 81px;
         position: absolute;
         top:0; 
     `

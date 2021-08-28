@@ -10,7 +10,7 @@ const HeadingPrimary = ({ children }) => {
     `
 
     return (
-        <div css={container}>
+        <header css={container}>
             <h1 css={({ colors }) => css`
             background: ${colors.gradient};
             background-clip: text;
@@ -22,7 +22,7 @@ const HeadingPrimary = ({ children }) => {
         `}>
                 {children ? children : window.location.pathname.split("/")[1]}
             </h1>
-        </div>
+        </header>
     );
 }
 
