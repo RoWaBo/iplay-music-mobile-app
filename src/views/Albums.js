@@ -9,10 +9,13 @@ import SpotifyApiFetch from '../components/SpotifyApiFetch';
 import ShadowBox from '../components/ShadowBox';
 import { Link } from '@reach/router';
 import SwipableContainer from '../components/SwipableContainer';
+import ItemPresentationBar from '../components/ItemPresentationBar';
 
 const Albums = () => {
 
     const featuredAlbums = SpotifyApiFetch("https://api.spotify.com/v1/browse/featured-playlists");
+
+    const newReleases = SpotifyApiFetch("https://api.spotify.com/v1/browse/new-releases?limit=4");
 
     // === STYLING ===
     const subHeadingContainer = css`
@@ -38,15 +41,37 @@ const Albums = () => {
         <main css={({ colors }) => css`background: ${colors.background.primary};`}>
             <UtilityBar heading="music" />
             <HeadingPrimary>all albums</HeadingPrimary>
-            <div css={subHeadingContainer}>
-                <SubHeading>featured albums</SubHeading>
-                <p css={viewAll}>view all</p>
-            </div>
-            <SwipableContainer>
-                {featuredAlbums?.data.playlists.items.map(list => (
-                    <img css={style} src={list.images[0].url} alt={list.name} />
+            <section>
+                <div css={subHeadingContainer}>
+                    <SubHeading>featured albums</SubHeading>
+                    <p css={viewAll}>view all</p>
+                </div>
+                <SwipableContainer>
+                    {featuredAlbums?.data.playlists.items.map(list => (
+                        <Link to="/album_details">
+                            <ShadowBox>
+                                <img src={list.images[0].url} alt={list.name} />
+                            </ShadowBox>
+                        </Link>
+                    ))}
+                </SwipableContainer>
+            </section>
+            <section css={css`margin-top: ${spacing.xs};`}>
+                <div css={subHeadingContainer}>
+                    <SubHeading>new releases</SubHeading>
+                    <p css={viewAll}>view all</p>
+                </div>
+                {newReleases?.data.albums.items.map(album => (
+                    <Link to={`/album_details/${album.id}`} key={album.id}>
+                        <ItemPresentationBar 
+                            imgUrl={album.images[2].url}
+                            heading={album.name}
+                            description={album.artists[0].name}
+                            additionalInfo={album.total_tracks}
+                        />
+                    </Link>    
                 ))}
-            </SwipableContainer>
+            </section>
             <NavigationBar />
         </main>
     );
