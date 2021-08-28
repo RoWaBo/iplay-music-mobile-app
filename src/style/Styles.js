@@ -9,7 +9,9 @@ export const font = {
         s: "12px"
     },
     weight: {
-        bold: "600"
+        bold: "600",
+        light: "300",
+        standard: "400"
     }
 }
 
@@ -18,7 +20,8 @@ export const spacing = {
     s: "1rem",
     m: "1.5rem",
     l: "2rem",
-    xl: "2.5rem"
+    xl: "2.5rem",
+    xxl: "4.5rem"
 }
 
 
