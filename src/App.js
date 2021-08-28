@@ -29,7 +29,7 @@ function App() {
               <Login path="/" />
               <Callback path="callback" />
               <Albums path="albums" />
-              <AlbumDetails path="album_details" />
+              <AlbumDetails path="album_details/:id" />
               <Categories path="categories" />
               <Playlists path="playlists/:playlistId" />
               <Player path="player" />
