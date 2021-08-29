@@ -7,25 +7,26 @@ import { spacing } from "../style/Styles";
 import SpotifyApiFetch from "../components/SpotifyApiFetch";
 import { Link } from "@reach/router";
 import UtilityBar from "../components/UtilityBar";
+import MainFullViewContainer from "../components/MainFullViewContainer"; 
 
 const Featured = () => {
 
     const playlists = SpotifyApiFetch("https://api.spotify.com/v1/browse/featured-playlists")   
 
-    const contentContainer = css`
+    const contentContainer = ({ colors }) => css`
         margin: ${spacing.m};
+        background: ${colors.background.primary};
 
         & > * {
             margin-bottom: ${spacing.xl};    
         }
         & > :last-of-type {
-            padding-bottom: 5.5rem;    
+            margin-bottom: 5.5rem;    
         }
     `
 
     return (
-        <main css={({ colors }) => css`background: ${colors.background.primary}; height: 100vh;
-        margin-bottom: 53px;`}>
+        <MainFullViewContainer>
             <UtilityBar heading="Featured" />
             <HeadingPrimary />
             <div css={contentContainer}>
@@ -38,7 +39,7 @@ const Featured = () => {
                 ))}
             </div>
             <NavigationBar />
-        </main>
+        </MainFullViewContainer>
     );
 }
 

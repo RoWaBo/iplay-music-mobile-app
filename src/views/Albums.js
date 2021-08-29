@@ -10,6 +10,7 @@ import ShadowBox from '../components/ShadowBox';
 import { Link } from '@reach/router';
 import SwipableContainer from '../components/SwipableContainer';
 import ItemPresentationBar from '../components/ItemPresentationBar';
+import MainFullViewContainer from "../components/MainFullViewContainer"; 
 
 const Albums = () => {
 
@@ -33,8 +34,7 @@ const Albums = () => {
     `
     
     return (
-        <main css={({ colors }) => css`background: ${colors.background.primary}; height: 100vh;
-        margin-bottom: 53px;`}>
+        <MainFullViewContainer>
             <UtilityBar heading="music" />
             <HeadingPrimary>all albums</HeadingPrimary>
             <section>
@@ -69,7 +69,7 @@ const Albums = () => {
                 ))}
             </section>
             <NavigationBar />
-        </main>
+        </MainFullViewContainer>
     );
 }
 
