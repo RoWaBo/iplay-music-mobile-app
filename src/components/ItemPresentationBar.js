@@ -11,12 +11,13 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo }) =
         color: ${colors.font.primary};
         margin: ${spacing.m};
         display: flex;
+        align-items: center;
     `
     const textContainer = css`
         padding-left: ${spacing.s};
 
         & h2 {
-            overflow-x: hidden;
+            overflow: hidden;
             max-height: 22px;            
         }
 

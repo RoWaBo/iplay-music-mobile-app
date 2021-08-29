@@ -7,7 +7,7 @@ const UtilityBar = ({ heading, light }) => {
 
     const container = ({ colors }) => css`
         color: ${light ? colors.font.secondary : colors.font.primary};
-        background: ${colors.background.primary};
+        background: ${light ? "transparrent" : colors.background.primary};
         display: flex;
         align-items: center;
         width: 100%;
