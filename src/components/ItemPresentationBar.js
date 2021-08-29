@@ -10,10 +10,15 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo }) =
     const container = ({ colors }) => css`
         color: ${colors.font.primary};
         margin: ${spacing.m};
-        display: flex;    
+        display: flex;
     `
     const textContainer = css`
         padding-left: ${spacing.s};
+
+        & h2 {
+            overflow-x: hidden;
+            max-height: 22px;            
+        }
 
         & p {
             font-size: ${font.size.s};
@@ -24,7 +29,8 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo }) =
     const infoContainer = css`
         font-size: ${font.size.s};
         font-weight: ${font.weight.light};
-        margin-left: auto;    
+        margin-left: auto;
+        min-width: fit-content;
     `
     const icon = ({ colors }) => css`
         width: 30px;
@@ -38,17 +44,11 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo }) =
         color: ${colors.font.secondary};
     `
     
-    const splitOnLineBreak = string => {
-        console.log(string.split("\n"));
-        
-        return string
-    }    
-
     return (
         <article css={container}>
             {imgUrl ? <ShadowBox small><img src={imgUrl} alt={heading} /></ShadowBox> : <div css={icon}><IoIosPlay /></div>}
             <div css={textContainer}>
-                <SubHeading>{splitOnLineBreak(heading)}</SubHeading>
+                <SubHeading>{heading}</SubHeading>
                 <p>{description}</p>
             </div>
             <div css={infoContainer}>

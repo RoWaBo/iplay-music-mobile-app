@@ -4,7 +4,12 @@ import { css } from "@emotion/react";
 const ShadowBox = ({ children, small }) => {
 
     const mediumSize = `min-width: 130px; min-height: 130px;`        
-    const smallSize = `max-width: 50px; max-height: 50px;`        
+    const smallSize = `
+        min-width: 50px; 
+        min-height: 50px;
+        max-width: 50px; 
+        max-height: 50px;
+    `        
     
     const styling = css`
         ${small ? smallSize : mediumSize};
