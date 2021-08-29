@@ -19,12 +19,13 @@ const Featured = () => {
             margin-bottom: ${spacing.xl};    
         }
         & > :last-of-type {
-            margin-bottom: 5.5rem;    
+            padding-bottom: 5.5rem;    
         }
     `
 
     return (
-        <main css={({ colors }) => css`background: ${colors.background.primary};`}>
+        <main css={({ colors }) => css`background: ${colors.background.primary}; height: 100vh;
+        margin-bottom: 53px;`}>
             <UtilityBar heading="Featured" />
             <HeadingPrimary />
             <div css={contentContainer}>

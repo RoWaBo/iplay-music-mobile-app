@@ -33,7 +33,8 @@ const Albums = () => {
     `
     
     return (
-        <main css={({ colors }) => css`background: ${colors.background.primary};`}>
+        <main css={({ colors }) => css`background: ${colors.background.primary}; height: 100vh;
+        margin-bottom: 53px;`}>
             <UtilityBar heading="music" />
             <HeadingPrimary>all albums</HeadingPrimary>
             <section>
