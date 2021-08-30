@@ -19,6 +19,8 @@ const PlayAudioButton = ({ audioUrl }) => {
             currentAudio.pause()
             setIconState("play")
         }
+        // Change icon when audio is finnished
+        setTimeout(() => !currentAudio.paused && setIconState("play"),29990)
     }
 
     const icon = ({ colors }) => css`
