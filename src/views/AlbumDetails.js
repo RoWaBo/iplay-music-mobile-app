@@ -9,7 +9,7 @@ import DecideSingularPlural from '../functions/SingularPluralFunction';
 import { font, spacing } from '../style/Styles';
 import SubHeading from '../components/SubHeading';
 import ItemPresentationBar from '../components/ItemPresentationBar';
-import convertMsToM from '../functions/ConvertMsToM';
+import convertMsToMAndS from '../functions/convertMsToMAndS';
 
 const AlbumDetails = ({ id }) => {
 
@@ -50,7 +50,7 @@ const AlbumDetails = ({ id }) => {
                             key={track.uri} 
                             heading={track.name}
                             description={track.artists[0].name}
-                            additionalInfo={convertMsToM(track.duration_ms)}
+                            additionalInfo={convertMsToMAndS(track.duration_ms)}
                             audioUrl={track.preview_url}
                         />    
                     ))}
