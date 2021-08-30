@@ -22,10 +22,8 @@ const PlayAudioButton = ({ audioUrl }) => {
                 console.log("audio match");
                 if (currentAudio.paused) {
                     currentAudio.play()
-                    setIconState("pause")
                 } else {
                     currentAudio.pause()
-                    setIconState("play")
                 }  
             } else {
                 console.log("else triggered");
