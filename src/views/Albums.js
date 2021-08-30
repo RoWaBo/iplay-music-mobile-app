@@ -45,7 +45,7 @@ const Albums = () => {
                 </div>
                 <SwipableContainer>
                     {featuredAlbums?.data.playlists.items.map(list => (
-                        <Link to="/album_details">
+                        <Link to="/album_details" key={list.id}>
                             <ShadowBox>
                                 <img src={list.images[0].url} alt={list.name} />
                             </ShadowBox>
@@ -59,7 +59,7 @@ const Albums = () => {
                     <p css={viewAll}>view all</p>
                 </div>
                 {newReleases?.data.albums.items.map((album, index) => (
-                    <Link to={`/album_details/${album.id}`} key={album.id + index}>
+                    <Link to={`/album_details/${album.id}`} key={album.id}>
                         <ItemPresentationBar
                             imgUrl={album.images[2].url}
                             heading={album.name}
