@@ -1,17 +1,23 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { IoIosPlay } from 'react-icons/io';
+import { useState } from 'react';
+import { IoIosPlay, IoIosPause } from 'react-icons/io';
 
 
 const PlayAudioButton = ({ audioUrl }) => {
 
-    const playPause = e => {
-        const audio = new Audio(e.target.dataset.audiourl) 
+    const [iconState, setIconState] = useState("play")
 
-        if (audio.paused) {
-            audio.play()
+    const playPause = e => {
+
+        const currentAudio = e.target.querySelector("audio")  
+
+        if (currentAudio.paused) {
+            currentAudio.play()
+            setIconState("pause")
         } else {
-            audio.pause()
+            currentAudio.pause()
+            setIconState("play")
         }
     }
 
@@ -33,7 +39,10 @@ const PlayAudioButton = ({ audioUrl }) => {
     `
 
     return ( 
-        <button data-audiourl={audioUrl} onClick={playPause} css={icon}><IoIosPlay /></button>
+        <button data-audiourl={audioUrl} onClick={playPause} css={icon}>
+            <audio src={audioUrl} />
+            {iconState === "pause" ? <IoIosPause /> : <IoIosPlay />}
+        </button>
      );
 }
  
