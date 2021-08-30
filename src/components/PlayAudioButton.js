@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { useState } from 'react';
 import { IoIosPlay, IoIosPause } from 'react-icons/io';
 
+let previousAudio;
 
 const PlayAudioButton = ({ audioUrl }) => {
 
@@ -10,17 +11,40 @@ const PlayAudioButton = ({ audioUrl }) => {
 
     const playPause = e => {
 
-        const currentAudio = e.target.querySelector("audio")  
+        let currentAudio = e.target.querySelector("audio")  
 
-        if (currentAudio.paused) {
+        if (!previousAudio) {
+            console.log("no previous audio");
+            previousAudio = currentAudio;
             currentAudio.play()
-            setIconState("pause")
         } else {
-            currentAudio.pause()
-            setIconState("play")
+            if (previousAudio === currentAudio){
+                console.log("audio match");
+                if (currentAudio.paused) {
+                    currentAudio.play()
+                    setIconState("pause")
+                } else {
+                    currentAudio.pause()
+                    setIconState("play")
+                }  
+            } else {
+                console.log("else triggered");
+                previousAudio.pause()
+                currentAudio.play()
+                previousAudio = currentAudio;                
+            }           
         }
+        
+        // if (currentAudio.paused) {
+        //     currentAudio.play()
+        //     setIconState("pause")
+        // } else {
+        //     currentAudio.pause()
+        //     setIconState("play")
+        // }
+
         // Change icon when audio is finnished
-        setTimeout(() => !currentAudio.paused && setIconState("play"),29990)
+        // setTimeout(() => !currentAudio.paused && setIconState("play"),29990)
     }
 
     const icon = ({ colors }) => css`
