@@ -4,7 +4,7 @@ import NavigationBar from "../components/NavigationBar";
 import HeadingPrimary from "../components/HeadingPrimary";
 import ShadowBox from "../components/ShadowBox";
 import { spacing } from "../style/Styles";
-import SpotifyApiFetch from "../components/SpotifyApiFetch";
+import SpotifyApiFetch from "../functions/SpotifyApiFetch";
 import { Link } from "@reach/router";
 import UtilityBar from "../components/UtilityBar";
 import MainFullViewContainer from "../components/MainFullViewContainer"; 

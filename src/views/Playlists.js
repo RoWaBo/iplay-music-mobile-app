@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 import NavigationBar from '../components/NavigationBar';
 import HeadingPrimary from '../components/HeadingPrimary';
-import SpotifyApiFetch from '../components/SpotifyApiFetch';
+import SpotifyApiFetch from '../functions/SpotifyApiFetch';
 
 const Playlists = ({ playlistId }) => {
 
