@@ -33,7 +33,7 @@ const UtilityBar = ({ heading, light }) => {
 
     return ( 
         <div css={container}>
-            <div css={icons}>
+            <div css={icons} onClick={() => window.history.back()}>
                 <IoIosArrowBack />
             </div>    
             <div css={text}>
