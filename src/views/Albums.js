@@ -5,12 +5,13 @@ import NavigationBar from '../components/NavigationBar';
 import HeadingPrimary from '../components/HeadingPrimary';
 import UtilityBar from '../components/UtilityBar';
 import SubHeading from '../components/SubHeading';
-import SpotifyApiFetch from '../components/SpotifyApiFetch';
+import SpotifyApiFetch from '../functions/SpotifyApiFetch';
 import ShadowBox from '../components/ShadowBox';
 import { Link } from '@reach/router';
 import SwipableContainer from '../components/SwipableContainer';
 import ItemPresentationBar from '../components/ItemPresentationBar';
-import MainFullViewContainer from "../components/MainFullViewContainer"; 
+import MainFullViewContainer from "../components/MainFullViewContainer";
+import DecideSingularPlural from '../functions/SingularPluralFunction'; 
 
 const Albums = () => {
 
@@ -32,7 +33,7 @@ const Albums = () => {
     margin-left: auto;
     cursor: pointer;
     `
-    
+
     return (
         <MainFullViewContainer>
             <UtilityBar heading="music" />
@@ -63,7 +64,7 @@ const Albums = () => {
                             imgUrl={album.images[2].url}
                             heading={album.name}
                             description={album.artists[0].name}
-                            additionalInfo={album.total_tracks + " songs"}
+                            additionalInfo={DecideSingularPlural(album.total_tracks, "Song")}
                         />
                     </Link>    
                 ))}
