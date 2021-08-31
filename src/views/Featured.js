@@ -4,14 +4,14 @@ import NavigationBar from "../components/NavigationBar";
 import HeadingPrimary from "../components/HeadingPrimary";
 import ShadowBox from "../components/ShadowBox";
 import { spacing } from "../style/Styles";
-import SpotifyApiFetch from "../functions/SpotifyApiFetch";
+import useSpotifyApiFetch from "../functions/useSpotifyApiFetch";
 import { Link } from "@reach/router";
 import UtilityBar from "../components/UtilityBar";
 import MainFullViewContainer from "../components/MainFullViewContainer"; 
 
 const Featured = () => {
 
-    const playlists = SpotifyApiFetch("https://api.spotify.com/v1/browse/featured-playlists")   
+    const playlists = useSpotifyApiFetch("https://api.spotify.com/v1/browse/featured-playlists")   
 
     const contentContainer = ({ colors }) => css`
         margin: ${spacing.m};

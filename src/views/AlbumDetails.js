@@ -3,17 +3,16 @@ import { css } from '@emotion/react';
 import HeadingPrimary from '../components/HeadingPrimary';
 import MainFullViewContainer from '../components/MainFullViewContainer';
 import NavigationBar from "../components/NavigationBar"
-import SpotifyApiFetch from "../functions/SpotifyApiFetch";
+import useSpotifyApiFetch from "../functions/useSpotifyApiFetch";
 import UtilityBar from "../components/UtilityBar";
-import DecideSingularPlural from '../functions/SingularPluralFunction'; 
 import { font, spacing } from '../style/Styles';
 import SubHeading from '../components/SubHeading';
 import ItemPresentationBar from '../components/ItemPresentationBar';
-import convertMsToMAndS from '../functions/convertMsToMAndS';
+import { decideSingularPlural, convertMsToMAndS } from '../functions/HelperFunctions';
 
 const AlbumDetails = ({ id }) => {
 
-    const album = SpotifyApiFetch(`https://api.spotify.com/v1/albums/${id}`)
+    const album = useSpotifyApiFetch(`https://api.spotify.com/v1/albums/${id}`)
 
     const backgroundImg = ({ colors }) => css`
         /* background-image: url(${album?.data.images[0].url}); */
@@ -41,7 +40,7 @@ const AlbumDetails = ({ id }) => {
                 <UtilityBar light heading="album" />
                 <section css={backgroundImg}>
                     <HeadingPrimary light>{album?.data.name}</HeadingPrimary>
-                    <p css={songs}>{DecideSingularPlural(album?.data.total_tracks, "Song")}</p>
+                    <p css={songs}>{decideSingularPlural(album?.data.total_tracks, "Song")}</p>
                 </section>
                 <section css={trackContainer}>
                     <SubHeading>all songs</SubHeading>

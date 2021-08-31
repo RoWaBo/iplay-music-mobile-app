@@ -5,20 +5,20 @@ import NavigationBar from '../components/NavigationBar';
 import HeadingPrimary from '../components/HeadingPrimary';
 import UtilityBar from '../components/UtilityBar';
 import SubHeading from '../components/SubHeading';
-import SpotifyApiFetch from '../functions/SpotifyApiFetch';
+import useSpotifyApiFetch from '../functions/useSpotifyApiFetch';
 import ShadowBox from '../components/ShadowBox';
 import { Link } from '@reach/router';
 import SwipableContainer from '../components/SwipableContainer';
 import ItemPresentationBar from '../components/ItemPresentationBar';
 import MainFullViewContainer from "../components/MainFullViewContainer";
-import DecideSingularPlural from '../functions/SingularPluralFunction'; 
+import { decideSingularPlural } from '../functions/HelperFunctions';
 
 const Albums = () => {
 
     // Fetches Yussef Dayes albums
-    const featuredAlbums = SpotifyApiFetch("https://api.spotify.com/v1/artists/2rspptKP0lPBdlJJAJHqht/albums?limit=10");
+    const featuredAlbums = useSpotifyApiFetch("https://api.spotify.com/v1/artists/2rspptKP0lPBdlJJAJHqht/albums?limit=10");
 
-    const newReleases = SpotifyApiFetch("https://api.spotify.com/v1/browse/new-releases?limit=4");
+    const newReleases = useSpotifyApiFetch("https://api.spotify.com/v1/browse/new-releases?limit=4");
 
     // === STYLING ===
     const subHeadingContainer = css`
@@ -65,7 +65,7 @@ const Albums = () => {
                             imgUrl={album.images[2].url}
                             heading={album.name}
                             description={album.artists[0].name}
-                            additionalInfo={DecideSingularPlural(album.total_tracks, "Song")}
+                            additionalInfo={decideSingularPlural(album.total_tracks, "Song")}
                         />
                     </Link>    
                 ))}

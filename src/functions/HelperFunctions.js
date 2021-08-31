@@ -1,5 +1,5 @@
 
-const convertMsToMAndS = ms => {
+export const convertMsToMAndS = ms => {
     const msToMinutes = ms / 60000 
     const minutes = Math.floor(msToMinutes)
     const minutesDecimals = Number(JSON.stringify(msToMinutes).substring(1)) 
@@ -10,4 +10,6 @@ const convertMsToMAndS = ms => {
     return minutes + ":" + seconds
 }
 
-export default convertMsToMAndS; 
+export const decideSingularPlural = (amount, singularItemName) => (
+    `${amount} ${amount === 1 ? singularItemName : singularItemName + "s"}`
+)
