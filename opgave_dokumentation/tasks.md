@@ -1,7 +1,19 @@
 # Todo
+  - Featured: lazyload content with Intersection Observer API
+  - Fetch categories
+  - Search on view specific endpoint and print to Song view
+  - Fetch random playlist on Playlists
+  - Click on featured playlist and link and print to Playlists 
 
 # Nice to have
+  - NavBar current page icon highlight
+  - PlayAudioButton change icon depending on play/pause
+  - View All button fetches more content
+  - Clicking on song name links to Player view
+  - karrausel on playlists
+  - rename spotifyApifetch
+  - create helper file
 
 # Issues
-[] First child error message
+  - NavBar: First child error message 
 
