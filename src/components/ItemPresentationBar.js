@@ -17,8 +17,10 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, aud
         padding-left: ${spacing.s};
 
         & h2 {
+            width: ${imgUrl ? '45vw' : '58vw'} ;
             overflow: hidden;
-            max-height: 22px;            
+            text-overflow: ellipsis;
+            white-space: nowrap;            
         }
 
         & p {
