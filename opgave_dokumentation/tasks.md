@@ -3,7 +3,8 @@
   - Fetch categories
   - Search on view specific endpoint and print to Song view
   - Fetch random playlist on Playlists
-  - Click on featured playlist and link and print to Playlists 
+  - Click on featured playlist and link and print to Playlists
+  - Click on album name and link to Player. Fetch entire album or playlist on Player. 
 
 # Nice to have
   - NavBar current page icon highlight
