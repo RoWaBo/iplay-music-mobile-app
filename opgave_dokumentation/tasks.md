@@ -12,8 +12,6 @@
   - View All button fetches more content
   - Clicking on song name links to Player view
   - karrausel on playlists
-  - rename spotifyApifetch
-  - create helper file
 
 # Issues
   - NavBar: First child error message 
