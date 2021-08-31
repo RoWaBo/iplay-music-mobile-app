@@ -15,7 +15,8 @@ import DecideSingularPlural from '../functions/SingularPluralFunction';
 
 const Albums = () => {
 
-    const featuredAlbums = SpotifyApiFetch("https://api.spotify.com/v1/browse/featured-playlists");
+    // Fetches Yussef Dayes albums
+    const featuredAlbums = SpotifyApiFetch("https://api.spotify.com/v1/artists/2rspptKP0lPBdlJJAJHqht/albums?limit=10");
 
     const newReleases = SpotifyApiFetch("https://api.spotify.com/v1/browse/new-releases?limit=4");
 
@@ -44,10 +45,10 @@ const Albums = () => {
                     <p css={viewAll}>view all</p>
                 </div>
                 <SwipableContainer>
-                    {featuredAlbums?.data.playlists.items.map(list => (
-                        <Link to="/album_details" key={list.id}>
+                    {featuredAlbums?.data.items.map(album => (
+                        <Link to={`/album_details/${album.id}`} key={album.id}>
                             <ShadowBox>
-                                <img src={list.images[0].url} alt={list.name} />
+                                <img src={album.images[0].url} alt={album.name} />
                             </ShadowBox>
                         </Link>
                     ))}
