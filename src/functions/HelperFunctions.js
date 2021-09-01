@@ -13,3 +13,5 @@ export const convertMsToMAndS = ms => {
 export const decideSingularPlural = (amount, singularItemName) => (
     `${amount} ${amount === 1 ? singularItemName : singularItemName + "s"}`
 )
+
+export const getRandomInt = max => Math.floor(Math.random() * max);
