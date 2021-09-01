@@ -16,8 +16,7 @@ const useSpotifyApiFetch = url => {
                 }
             })
                 .then(result => { 
-                    setData(result)
-                    console.log(result) 
+                    setData(result) 
                 })
                 .catch(error => { 
                     console.log(error) 
