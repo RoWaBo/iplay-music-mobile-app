@@ -12,6 +12,7 @@
   - View All button fetches more content
   - Clicking on song name links to Player view
   - karrausel on playlists
+  - Allow boxshadows to overflow container?
 
 # Issues
   - NavBar: First child error message 
