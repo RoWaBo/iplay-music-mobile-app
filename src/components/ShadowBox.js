@@ -1,9 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
-const ShadowBox = ({ children, small }) => {
+const ShadowBox = ({ children, small, medium }) => {
 
-    const mediumSize = `min-width: 130px; min-height: 130px;`        
+    const defaultSize = `min-width: 130px; min-height: 130px;`        
+    const mediumSize = `
+        min-width: 155px; 
+        min-height: 155px;
+        max-width: 155px; 
+        max-height: 155px;
+    `        
     const smallSize = `
         min-width: 50px; 
         min-height: 50px;
@@ -12,7 +18,9 @@ const ShadowBox = ({ children, small }) => {
     `        
     
     const styling = css`
-        ${small ? smallSize : mediumSize};
+        ${small && smallSize};
+        ${medium && mediumSize};
+        ${!small && !medium && defaultSize};
         border-radius: 8px;
         box-shadow: 0px 0px 25px #00000026;
         overflow: hidden;
