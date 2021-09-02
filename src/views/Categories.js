@@ -45,13 +45,11 @@ const Categories = () => {
 
     const toggleButton = (category, e) => {
         if (e.target.value === "false") {
-            setIsOpened("true")
             setCategoryId(category.id)
             resetButtonValuesToFalse()
             e.target.value = "true"
         } else {
             e.target.value = "false"
-            setIsOpened("false")
             setCategoryId("")
         }
     }
@@ -126,7 +124,7 @@ const Categories = () => {
                             <ShadowBox xSmall circle><img src={category.icons[0].url} /></ShadowBox>
                         </button>
                         <ul>
-                            {isOpened && categoryId === category.id && categoryPlaylists?.map(playlist => (
+                            {categoryId === category.id && categoryPlaylists?.map(playlist => (
                                 <li key={playlist.id}>
                                     <Link to={`/playlists/${playlist.id}`} css={categoryPlaylistLink}>
                                         <h3>{playlist.name}</h3>
