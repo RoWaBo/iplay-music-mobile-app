@@ -13,6 +13,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from '@reach/router';
 import { IoIosArrowForward } from 'react-icons/io';
+import ShadowBox from '../components/ShadowBox';
 
 
 const Categories = () => {
@@ -32,21 +33,21 @@ const Categories = () => {
                     "Authorization": `${authToken.token_type} ${authToken.access_token}`
                 }
             })
-                .then(result => { 
+                .then(result => {
                     setCategoryPlaylists(result.data.playlists.items)
                 })
-                .catch(error => { 
-                    console.log(error) 
-                })                 
+                .catch(error => {
+                    console.log(error)
+                })
         }
     }, [categoryId, authToken])
 
-    const toggle = (category, e) => {
+    const toggleButton = (category, e) => {
 
         if (e.target.value === "false") {
             e.target.value = "true"
             setIsOpened(true)
-            setCategoryId(category)
+            setCategoryId(category.id)
         } else {
             e.target.value = "false"
             setIsOpened(false)
@@ -64,7 +65,6 @@ const Categories = () => {
     `
     const categoryButton = ({ colors }) => css`
         color: ${colors.font.secondary};
-        background: grey;
         padding: ${spacing.xs} ${spacing.m};
         display: flex;
         align-items: center;
@@ -74,6 +74,7 @@ const Categories = () => {
 
         & h2 {
             color: ${colors.font.secondary};
+            margin-right: auto;
         }
 
         & svg {
@@ -109,22 +110,27 @@ const Categories = () => {
         <MainFullViewContainer>
             <UtilityBar heading="categories" />
             <HeadingPrimary />
-            <section css={categoryContainer}>
+            <ul css={categoryContainer}>
                 {allCategories?.map((category, index) => index <= 8 && (
-                    <article key={category.id + index}>
-                        <button style={{ background: categoryColors[index] }} css={categoryButton} onClick={ e => toggle(category.id, e)} value="false">
+                    <li key={category.id + index}>
+                        <button style={{ background: categoryColors[index] }} css={categoryButton} onClick={e => toggleButton(category, e)} value="false">
                             <SubHeading>{category.name}</SubHeading>
-                            <HiOutlineDotsHorizontal />
+                            {/* <HiOutlineDotsHorizontal /> */}
+                            <ShadowBox xSmall circle><img src={category.icons[0].url} /></ShadowBox>
                         </button>
-                        {isOpened && categoryId === category.id && categoryPlaylists?.map(playlist => (
-                            <Link to={`/playlists/${playlist.id}`} key={playlist.id} css={categoryPlaylistLink}>
-                                <h3>{playlist.name}</h3>
-                                <IoIosArrowForward />    
-                            </Link>   
-                        ))}
-                    </article>
+                        <ul>
+                            {isOpened && categoryId === category.id && categoryPlaylists?.map(playlist => (
+                                <li>
+                                    <Link to={`/playlists/${playlist.id}`} key={playlist.id} css={categoryPlaylistLink}>
+                                        <h3>{playlist.name}</h3>
+                                        <IoIosArrowForward />
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </li>
                 ))}
-            </section>
+            </ul>
             <NavigationBar />
         </MainFullViewContainer>
     );
