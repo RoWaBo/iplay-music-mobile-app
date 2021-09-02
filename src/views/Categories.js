@@ -14,7 +14,7 @@ import { useState } from 'react';
 const Categories = () => {
 
     const [categoryId, setCategoryId] = useState();
-    const [isCategoryOpened, setIsCategoryOpened] = useState(false);
+    const [isOpened, setIsOpened] = useState(false);
 
     const allCategories = useSpotifyApiFetch("https://api.spotify.com/v1/browse/categories")?.data.categories.items
 
@@ -46,15 +46,22 @@ const Categories = () => {
             color: ${colors.font.secondary};
             font-size: ${font.size.xl}; 
         }
+
+        & > * {
+            pointer-events: none;
+        }
     `
 
-    const toggle = e => {
+    const toggle = (category, e) => {
+
         if (e.target.value === "false") {
             e.target.value = "true"
-            setIsCategoryOpened(true)
+            setIsOpened(true)
+            setCategoryId(category)
         } else {
             e.target.value = "false"
-            setIsCategoryOpened(false)
+            setIsOpened(false)
+            setCategoryId("")
         }
     }
 
@@ -64,12 +71,12 @@ const Categories = () => {
             <HeadingPrimary />
             <section css={categoryContainer}>
                 {allCategories?.map((category, index) => index < 8 && (
-                    <div>
-                        <button css={categoryButton} onClick={(category.id) => toggle(category.id)} value="false">
+                    <div key={category.id + index}>
+                        <button css={categoryButton} onClick={ e => toggle(category.id, e)} value="false">
                             <SubHeading>{category.name}</SubHeading>
                             <HiOutlineDotsHorizontal />
                         </button>
-                        {isCategoryOpened && <p>category is opened</p>}
+                        {isOpened && categoryId === category.id && <p>{category.id} is opened</p>}
                     </div>
                 ))}
             </section>
