@@ -10,7 +10,7 @@ import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { font, spacing } from '../style/Styles';
 import { useAuth } from "../contexts/AuthContext";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from '@reach/router';
 import { IoIosArrowForward } from 'react-icons/io';
 import ShadowBox from '../components/ShadowBox';
@@ -22,6 +22,7 @@ const Categories = () => {
     const [isOpened, setIsOpened] = useState("false");
     const [categoryPlaylists, setCategoryPlaylists] = useState();
     const { authToken } = useAuth();
+    const categoryList = useRef();
 
     const allCategories = useSpotifyApiFetch("https://api.spotify.com/v1/browse/categories")?.data.categories.items
 
@@ -43,16 +44,22 @@ const Categories = () => {
     }, [categoryId, authToken])
 
     const toggleButton = (category, e) => {
-
         if (e.target.value === "false") {
-            e.target.value = "true"
-            setIsOpened(true)
+            setIsOpened("true")
             setCategoryId(category.id)
+            resetButtonValuesToFalse()
+            e.target.value = "true"
         } else {
             e.target.value = "false"
-            setIsOpened(false)
+            setIsOpened("false")
             setCategoryId("")
         }
+    }
+
+    function resetButtonValuesToFalse() {
+        Array.from(categoryList.current.children).forEach(li => {
+            li.children[0].setAttribute("value", "false")
+        })
     }
 
     // === STYLING ===
@@ -110,8 +117,8 @@ const Categories = () => {
         <MainFullViewContainer>
             <UtilityBar heading="categories" />
             <HeadingPrimary />
-            <ul css={categoryContainer}>
-                {allCategories?.map((category, index) => index <= 8 && (
+            <ul css={categoryContainer} ref={categoryList}>
+                {allCategories?.map((category, index) => index < categoryColors.length && (
                     <li key={category.id + index}>
                         <button style={{ background: categoryColors[index] }} css={categoryButton} onClick={e => toggleButton(category, e)} value="false">
                             <SubHeading>{category.name}</SubHeading>
@@ -120,8 +127,8 @@ const Categories = () => {
                         </button>
                         <ul>
                             {isOpened && categoryId === category.id && categoryPlaylists?.map(playlist => (
-                                <li>
-                                    <Link to={`/playlists/${playlist.id}`} key={playlist.id} css={categoryPlaylistLink}>
+                                <li key={playlist.id}>
+                                    <Link to={`/playlists/${playlist.id}`} css={categoryPlaylistLink}>
                                         <h3>{playlist.name}</h3>
                                         <IoIosArrowForward />
                                     </Link>
