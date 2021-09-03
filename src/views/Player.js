@@ -107,7 +107,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
                 </>
             )}
             <div css={mediaControlContainer}>
-                <button css={skipButtons}><IoPlaySkipBackSharp /></button>
+                <button css={skipButtons} onClick={() => trackIndex > 0 && setTrackIndex(trackIndex - 1) }><IoPlaySkipBackSharp /></button>
                 <button css={backForwardButtons}><IoPlayBackSharp /></button>
                 <button css={playButton}>
                     <audio />
