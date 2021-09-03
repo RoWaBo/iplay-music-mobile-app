@@ -15,25 +15,27 @@ const Player = ({ mediaUrl, trackNumber }) => {
 
     const { theme } = useTheme()
     const { authToken } = useAuth();
-    const [data, setData] = useState();
+    const [tracks, setTracks] = useState();
+    let [trackIndex, setTrackIndex] = useState(Number(trackNumber));
 
-    // useEffect(() => {
-    //     if (authToken) {
-    //         axios(url, {
-    //             headers: {
-    //                 "Authorization": `${authToken.token_type} ${authToken.access_token}`
-    //             }
-    //         })
-    //             .then(result => {
-    //                 setData(result)
-    //             })
-    //             .catch(error => {
-    //                 console.log(error)
-    //             })
-    //     }
-    // }, [authToken, url])
+    useEffect(() => {
+        if (authToken) {
+            axios(decodeURIComponent(mediaUrl), {
+                headers: {
+                    "Authorization": `${authToken.token_type} ${authToken.access_token}`
+                }
+            })
+                .then(result => {
+                    setTracks(result.data.items)    
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
+    }, [authToken, mediaUrl])
 
-    console.log( decodeURIComponent(mediaUrl));
+    tracks && console.log(trackIndex);
+
     // === STYLE ===
     const imgContainer = css`
         background-image: url('/vinyl.png'), ${theme === 'light' ? `url('/sound-wave-light.png')` : `url('/sound-wave-dark.png')`};
@@ -98,8 +100,12 @@ const Player = ({ mediaUrl, trackNumber }) => {
         <MainFullViewContainer>
             <UtilityBar heading="playing" />
             <div css={imgContainer}></div>
-            <SubHeading large>track name</SubHeading>
-            <h3 css={infoText}>artist name</h3>
+            {tracks && (
+                <>
+                    <SubHeading large>{tracks[trackIndex].track?.name || tracks[trackIndex].name}</SubHeading>
+                    <h3 css={infoText}>{tracks[trackIndex].track?.artists[0].name || tracks[trackIndex].artists[0].name}</h3>                    
+                </>
+            )}
             <div css={mediaControlContainer}>
                 <button css={skipButtons}><IoPlaySkipBackSharp /></button>
                 <button css={backForwardButtons}><IoPlayBackSharp /></button>
@@ -108,7 +114,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
                     <IoIosPlay />
                 </button>
                 <button css={backForwardButtons}><IoPlayForwardSharp /></button>
-                <button css={skipButtons}><IoPlaySkipForwardSharp /></button>
+                <button css={skipButtons} onClick={() => trackIndex < tracks.length - 1 && setTrackIndex(trackIndex + 1) }><IoPlaySkipForwardSharp /></button>
             </div>
         </MainFullViewContainer>
     );

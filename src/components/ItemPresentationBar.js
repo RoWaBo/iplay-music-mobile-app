@@ -46,15 +46,28 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, aud
         <article css={container}>
             {imgUrl ? <ShadowBox small><img src={imgUrl} alt={heading} /></ShadowBox> : <PlayAudioButton audioUrl={audioUrl} />}
             <div css={textContainer}>
+                {tracksUrl ? (
                 <Link css={linkStyle} to={`/player/${encodeURIComponent(tracksUrl)}/${trackNumber}`}>
                     <SubHeading>{heading}</SubHeading>
                     <p>{description}</p>
-                </Link>
+                </Link>                    
+                ) : (
+                <>
+                    <SubHeading>{heading}</SubHeading>
+                    <p>{description}</p>
+                </>    
+                )}
             </div>
             <div css={infoContainer}>
+            {tracksUrl ? (
                 <Link css={linkStyle} to={`/player/${encodeURIComponent(tracksUrl)}/${trackNumber}`}>
-                    {additionalInfo}
-                </Link>
+                    <p>{additionalInfo}</p>
+                </Link>                    
+                ) : (
+                <>
+                    <p>{additionalInfo}</p>
+                </>    
+                )}
             </div>
 
         </article>
