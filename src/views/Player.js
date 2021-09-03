@@ -9,7 +9,7 @@ import { IoIosPlay, IoIosPause } from 'react-icons/io';
 import { IoPlayBackSharp, IoPlayForwardSharp, IoPlaySkipBackSharp, IoPlaySkipForwardSharp } from 'react-icons/io5';
 import { useAuth } from "../contexts/AuthContext";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Player = ({ mediaUrl, trackNumber }) => {
 
@@ -17,6 +17,8 @@ const Player = ({ mediaUrl, trackNumber }) => {
     const { authToken } = useAuth();
     const [tracks, setTracks] = useState();
     let [trackIndex, setTrackIndex] = useState(Number(trackNumber));
+    const audioElement = useRef();
+    const [isPlaying, setIsPlaying] = useState(false);
 
     useEffect(() => {
         if (authToken) {
@@ -34,7 +36,20 @@ const Player = ({ mediaUrl, trackNumber }) => {
         }
     }, [authToken, mediaUrl])
 
-    tracks && console.log(trackIndex);
+    // tracks && console.log(tracks[trackIndex]);
+
+    function playPause() {
+        if (audioElement.current.paused) {
+            audioElement.current.play()
+            setIsPlaying(true)
+        } else {
+            audioElement.current.pause()
+            setIsPlaying(false)
+        }
+        
+        // Change icon when audio is finnished
+        setTimeout(() => !audioElement.current.paused && setIsPlaying(false), 29990)
+    }
 
     // === STYLE ===
     const imgContainer = css`
@@ -43,6 +58,10 @@ const Player = ({ mediaUrl, trackNumber }) => {
         background-repeat: no-repeat;
         height: 350px;
         margin-top: 81px;
+    `
+
+    const textContainer = css`
+        margin: ${spacing.m};
     `
 
     const infoText = ({ colors }) => css`
@@ -91,7 +110,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
 
         & > * {
             font-size: 3.5rem;
-            margin-left: .4rem;
+            margin-left: ${isPlaying ? 'unset' : '.4rem'};
             pointer-events: none;
         }
     `
@@ -101,17 +120,19 @@ const Player = ({ mediaUrl, trackNumber }) => {
             <UtilityBar heading="playing" />
             <div css={imgContainer}></div>
             {tracks && (
-                <>
+                <div css={textContainer}>
                     <SubHeading large>{tracks[trackIndex].track?.name || tracks[trackIndex].name}</SubHeading>
                     <h3 css={infoText}>{tracks[trackIndex].track?.artists[0].name || tracks[trackIndex].artists[0].name}</h3>                    
-                </>
+                </div>
             )}
             <div css={mediaControlContainer}>
                 <button css={skipButtons} onClick={() => trackIndex > 0 && setTrackIndex(trackIndex - 1) }><IoPlaySkipBackSharp /></button>
                 <button css={backForwardButtons}><IoPlayBackSharp /></button>
-                <button css={playButton}>
-                    <audio />
-                    <IoIosPlay />
+                <button css={playButton} onClick={playPause}>
+                    {tracks && (
+                        <audio ref={audioElement} src={tracks[trackIndex].track?.preview_url || tracks[trackIndex].preview_url}/>    
+                    )}
+                    {isPlaying ? <IoIosPause /> : <IoIosPlay />}
                 </button>
                 <button css={backForwardButtons}><IoPlayForwardSharp /></button>
                 <button css={skipButtons} onClick={() => trackIndex < tracks.length - 1 && setTrackIndex(trackIndex + 1) }><IoPlaySkipForwardSharp /></button>
