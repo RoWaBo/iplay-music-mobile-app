@@ -14,14 +14,11 @@ const Featured = () => {
     const playlists = useSpotifyApiFetch("https://api.spotify.com/v1/browse/featured-playlists")   
 
     const contentContainer = ({ colors }) => css`
-        margin: ${spacing.m};
+        margin: 0 ${spacing.m};
         background: ${colors.background.primary};
 
         & > * {
             margin-bottom: ${spacing.xl};    
-        }
-        & > :last-of-type {
-            margin-bottom: 5.5rem;    
         }
     `
 

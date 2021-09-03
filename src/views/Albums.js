@@ -54,7 +54,7 @@ const Albums = () => {
                     ))}
                 </SwipableContainer>
             </section>
-            <section css={css`margin: ${spacing.s} 0 ${spacing.xxl};`}>
+            <section css={css`margin: ${spacing.s} 0;`}>
                 <div css={subHeadingContainer}>
                     <SubHeading>new releases</SubHeading>
                     <p css={viewAll}>view all</p>

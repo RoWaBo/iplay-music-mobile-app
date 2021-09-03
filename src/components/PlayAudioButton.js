@@ -7,7 +7,7 @@ let previousAudio;
 
 const PlayAudioButton = ({ audioUrl }) => {
 
-    const [iconState, setIconState] = useState("play")
+    const [iconState] = useState("play")
 
     const playPause = e => {
 

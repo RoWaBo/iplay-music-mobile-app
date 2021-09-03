@@ -6,7 +6,7 @@ import MainFullViewContainer from '../components/MainFullViewContainer';
 import useSpotifyApiFetch from '../functions/useSpotifyApiFetch';
 import UtilityBar from '../components/UtilityBar';
 import SubHeading from '../components/SubHeading';
-import { HiOutlineDotsHorizontal } from 'react-icons/hi';
+// import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { font, spacing } from '../style/Styles';
 import { useAuth } from "../contexts/AuthContext";
 import axios from "axios";
@@ -57,7 +57,7 @@ const Categories = () => {
 
     // === STYLING ===
     const categoryContainer = ({ colors }) => css`
-        padding: 0 ${spacing.m};
+        padding: 0 ${spacing.m} ${spacing.l};
 
         & > * {
             margin-bottom: ${spacing.s};
@@ -116,7 +116,7 @@ const Categories = () => {
                         <button style={{ background: categoryColors[index] }} css={categoryButton} onClick={e => toggleButton(category, e)} value="false">
                             <SubHeading>{category.name}</SubHeading>
                             {/* <HiOutlineDotsHorizontal /> */}
-                            <ShadowBox xSmall circle><img src={category.icons[0].url} /></ShadowBox>
+                            <ShadowBox xSmall circle><img src={category.icons[0].url} alt={category.name}/></ShadowBox>
                         </button>
                         <ul>
                             {categoryId === category.id && categoryPlaylists?.map(playlist => (
