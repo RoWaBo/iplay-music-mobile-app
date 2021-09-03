@@ -19,7 +19,6 @@ import ShadowBox from '../components/ShadowBox';
 const Categories = () => {
 
     const [categoryId, setCategoryId] = useState();
-    const [isOpened, setIsOpened] = useState("false");
     const [categoryPlaylists, setCategoryPlaylists] = useState();
     const { authToken } = useAuth();
     const categoryList = useRef();
@@ -44,20 +43,16 @@ const Categories = () => {
     }, [categoryId, authToken])
 
     const toggleButton = (category, e) => {
+        const buttons = categoryList.current.querySelectorAll('button');
+
         if (e.target.value === "false") {
             setCategoryId(category.id)
-            resetButtonValuesToFalse()
+            buttons.forEach(button => button.setAttribute("value", "false"))
             e.target.value = "true"
         } else {
             e.target.value = "false"
             setCategoryId("")
         }
-    }
-
-    function resetButtonValuesToFalse() {
-        Array.from(categoryList.current.children).forEach(li => {
-            li.children[0].setAttribute("value", "false")
-        })
     }
 
     // === STYLING ===
