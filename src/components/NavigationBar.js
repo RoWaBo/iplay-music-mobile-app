@@ -52,14 +52,15 @@ const NavigationBar = () => {
             padding: 0 ${spacing.s};    
         }
 
-        & > :first-child, & > :last-child {
+        & > .outerLinks {
             padding: ${spacing.s} ${spacing.m};    
         }
 
-        & > :nth-child(3) {
+        & > .middelLink {
             font-size: 2.4rem;
         }
     `
+
     const navLink = ({ colors }) => css`
         font-size: 1.3rem;
         display: grid;
@@ -69,19 +70,19 @@ const NavigationBar = () => {
     return (
         <>
             <div css={navBarContainer}>
-                <Link css={navLink} to="/albums">
+                <Link className="outerLinks" css={navLink} to="/albums">
                     <IoIosPulse css={highlightIfCurrent("albums")} />
                 </Link>
                 <Link css={navLink} to="/playlists/featured">
                     <IoIosMicrophone css={highlightIfCurrent("playlists")} />
                 </Link>
-                <Link css={navLink} to="/featured">
+                <Link className="middelLink" css={navLink} to="/featured">
                     <IoIosDisc css={highlightIfCurrent("featured")} />
                 </Link>
                 <div css={navLink} onClick={toggleTheme}>
                     <IoIosContrast css={highlightIfCurrent()} />
                 </div>
-                <Link css={navLink} to="/categories">
+                <Link className="outerLinks" css={navLink} to="/categories">
                     <IoIosAlbums css={highlightIfCurrent("categories")} />
                 </Link>
             </div>
