@@ -79,6 +79,8 @@ const Playlists = ({ playlistId }) => {
                         description={item.track.artists[0].name}
                         additionalInfo={convertMsToMAndS(item.track.duration_ms)}
                         audioUrl={item.track.preview_url}
+                        tracksUrl={selectedPlaylist?.tracks.href}
+                        trackNumber={index}
                     />
                 ))}
                 <button css={button} onClick={() => setTrackLimit(selectedPlaylist.tracks.total)}>View All</button>

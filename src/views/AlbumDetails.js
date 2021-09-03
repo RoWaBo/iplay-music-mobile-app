@@ -44,13 +44,15 @@ const AlbumDetails = ({ id }) => {
                 </section>
                 <section css={trackContainer}>
                     <SubHeading>all songs</SubHeading>
-                    {album?.data.tracks.items.map(track => (
+                    {album?.data.tracks.items.map((track, index) => (
                         <ItemPresentationBar
                             key={track.uri} 
                             heading={track.name}
                             description={track.artists[0].name}
                             additionalInfo={convertMsToMAndS(track.duration_ms)}
                             audioUrl={track.preview_url}
+                            tracksUrl={album?.data.tracks.href}
+                            trackNumber={index}
                         />    
                     ))}
                 </section>
