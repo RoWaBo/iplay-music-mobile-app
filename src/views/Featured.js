@@ -8,22 +8,20 @@ import useSpotifyApiFetch from "../functions/useSpotifyApiFetch";
 import { Link } from "@reach/router";
 import UtilityBar from "../components/UtilityBar";
 import MainFullViewContainer from "../components/MainFullViewContainer";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 const Featured = () => {
-    const data = useSpotifyApiFetch("https://api.spotify.com/v1/browse/featured-playlists")
-    const [playlists] = useState(data)
-    const lazyLoadeImgs = useRef()
-    data && console.log(data);
 
+    const playlists = useSpotifyApiFetch("https://api.spotify.com/v1/browse/featured-playlists")
+    const lazyLoadeParent = useRef()
 
     // Options for IntersectionObserver
     const optionsObject = {
-        // loading the img/calling the callbackfunction 200px before img is in viewport
-        rootMargin: "0px 0px 200px",
+        // loading the img/calling the callbackfunction -200px before img is in viewport
+        rootMargin: "0px 0px -200px",
         // THRESHOLD controls when we call the callback function
         // 1 means 100% of the picture is visible
-        // Here we have 3 callbacks one at 0%, 50%, 100% img visiblility
+        // Here we have 3 callbacks one at 0%, 50%, 100% img visiblility 
         threshold: [0, 0.5, 1]
     }
 
@@ -31,21 +29,24 @@ const Featured = () => {
     const lazyImgObserver = new IntersectionObserver(entries => {
         // In this case entries is all observed images
         entries.forEach(entry => {
-            console.log(entry);
+            const img = entry.target.querySelector('img')
             // isIntersecting is true if the observed img is in the viewport
             if (entry.isIntersecting) {
-                // replaces the placeholder svg with the main img
-                entry.target.src = entry.target.dataset.src;
-                // removes the attribute which stored the main img url
-                entry.target.removeAttribute("data-src");
-                // Stops observing the img
+                // replaces the placeholder svg with the main img 
+                img.src = img.dataset.src
+                // removes the attribute which stored the main img url 
+                img.removeAttribute("data-src");
+                // Stops observing the img 
                 lazyImgObserver.unobserve(entry.target);
             }
         })
     }, optionsObject);
 
     // Adds IntersectionObserver to all images
-    lazyLoadeImgs.current?.children.length > 1 && Array.from(lazyLoadeImgs.current.children).forEach(lazyImg => lazyImgObserver.observe(lazyImg))
+    function applyObserver() {
+        const lazyImgs = Array.from(lazyLoadeParent.current.children) 
+        lazyImgs.forEach(lazyImg => lazyImgObserver.observe(lazyImg))   
+    }
 
     // === STYLING ===
     const contentContainer = ({ colors }) => css`
@@ -61,13 +62,16 @@ const Featured = () => {
         <MainFullViewContainer>
             <UtilityBar heading="Featured" />
             <HeadingPrimary />
-            <div css={contentContainer} ref={lazyLoadeImgs}>
-                {playlists?.data.playlists.items.map(list => (
-                    <ShadowBox key={list.id}>
-                        <Link to={`/playlists/${list.id}`}>
-                            <img src={'/placeholder-image.png'} alt={list.name} data-src={list.images[0].url} />
-                        </Link>
-                    </ShadowBox>
+            <div css={contentContainer} ref={lazyLoadeParent}>
+                {playlists?.data.playlists.items.map((list, index) => (
+                    <div key={list.id}>
+                        <ShadowBox >
+                            <Link to={`/playlists/${list.id}`}>
+                                <img src={'/placeholder-image.png'} alt={list.name} data-src={list.images[0].url} />
+                            </Link>
+                        </ShadowBox>
+                        {index === playlists.data.playlists.items.length - 1 && applyObserver()}
+                    </div>
                 ))}
             </div>
             <NavigationBar />
