@@ -8,7 +8,9 @@
   - PlayAudioButton change icon depending on play/pause
   - View All button fetches more content
   - karrausel on playlists
+  - Update icon when track finnish
+  - icon updates to "play" when skipping track
 
 # Issues
-  - NavBar: First child error message 
+   
 
