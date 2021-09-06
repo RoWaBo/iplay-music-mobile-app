@@ -7,12 +7,47 @@ import { spacing } from "../style/Styles";
 import useSpotifyApiFetch from "../functions/useSpotifyApiFetch";
 import { Link } from "@reach/router";
 import UtilityBar from "../components/UtilityBar";
-import MainFullViewContainer from "../components/MainFullViewContainer"; 
+import MainFullViewContainer from "../components/MainFullViewContainer";
+import { useRef, useState } from "react";
 
 const Featured = () => {
+    const data = useSpotifyApiFetch("https://api.spotify.com/v1/browse/featured-playlists")
+    const [playlists] = useState(data)
+    const lazyLoadeImgs = useRef()
+    data && console.log(data);
 
-    const playlists = useSpotifyApiFetch("https://api.spotify.com/v1/browse/featured-playlists")   
 
+    // Options for IntersectionObserver
+    const optionsObject = {
+        // loading the img/calling the callbackfunction 200px before img is in viewport
+        rootMargin: "0px 0px 200px",
+        // THRESHOLD controls when we call the callback function
+        // 1 means 100% of the picture is visible
+        // Here we have 3 callbacks one at 0%, 50%, 100% img visiblility
+        threshold: [0, 0.5, 1]
+    }
+
+    // IntersectionObserver takes 2 parameters: a function and an options object
+    const lazyImgObserver = new IntersectionObserver(entries => {
+        // In this case entries is all observed images
+        entries.forEach(entry => {
+            console.log(entry);
+            // isIntersecting is true if the observed img is in the viewport
+            if (entry.isIntersecting) {
+                // replaces the placeholder svg with the main img
+                entry.target.src = entry.target.dataset.src;
+                // removes the attribute which stored the main img url
+                entry.target.removeAttribute("data-src");
+                // Stops observing the img
+                lazyImgObserver.unobserve(entry.target);
+            }
+        })
+    }, optionsObject);
+
+    // Adds IntersectionObserver to all images
+    lazyLoadeImgs.current?.children.length > 1 && Array.from(lazyLoadeImgs.current.children).forEach(lazyImg => lazyImgObserver.observe(lazyImg))
+
+    // === STYLING ===
     const contentContainer = ({ colors }) => css`
         margin: 0 ${spacing.m};
         background: ${colors.background.primary};
@@ -26,11 +61,11 @@ const Featured = () => {
         <MainFullViewContainer>
             <UtilityBar heading="Featured" />
             <HeadingPrimary />
-            <div css={contentContainer}>
+            <div css={contentContainer} ref={lazyLoadeImgs}>
                 {playlists?.data.playlists.items.map(list => (
                     <ShadowBox key={list.id}>
                         <Link to={`/playlists/${list.id}`}>
-                            <img src={list.images[0].url} alt={list.name} />
+                            <img src={'/placeholder-image.png'} alt={list.name} data-src={list.images[0].url} />
                         </Link>
                     </ShadowBox>
                 ))}
