@@ -1,7 +1,7 @@
 # Todo
   - Featured: lazyload content with Intersection Observer API
   - Search on view specific endpoint and print to Song view
-  - Click on album name and link to Player. Fetch entire album or playlist on Player. 
+  - create gradient on skip buttons 
 
 # Nice to have
   - NavBar current page icon highlight
