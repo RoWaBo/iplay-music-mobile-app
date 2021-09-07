@@ -37,6 +37,10 @@ const Player = ({ mediaUrl, trackNumber }) => {
         }
     }, [authToken, mediaUrl])
 
+    useEffect(() => {
+        isPlaying && audioElement.current.play()
+    }, [trackIndex])
+
     // tracks && console.log(tracks[trackIndex]);
 
     function playPause() {
