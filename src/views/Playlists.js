@@ -23,6 +23,19 @@ const Playlists = ({ playlistId }) => {
 
     const selectedPlaylist = useSpotifyApiFetch(`https://api.spotify.com/v1/playlists/${playlistId}`)?.data
 
+    const toggleViewAll = (e, totalTracks) => {
+        if (e.target.value === "false") {
+            setTrackLimit(totalTracks)
+            e.target.innerText = "view less"
+            e.target.value = "true"
+        } else {
+            setTrackLimit(8)
+            e.target.innerText = "view all"    
+        }  
+    }
+
+    // selectedPlaylist && console.log(selectedPlaylist);
+
     // === STYLING ===
     const backgroundImg = ({ colors }) => css`
         background-image: url('/sound-wave.svg');
@@ -59,8 +72,6 @@ const Playlists = ({ playlistId }) => {
         margin: ${spacing.m} ${spacing.m};    
     `
 
-    selectedPlaylist && console.log(selectedPlaylist);    
-
     return (
         <MainFullViewContainer>
             <UtilityBar light heading="playlists" />
@@ -83,7 +94,7 @@ const Playlists = ({ playlistId }) => {
                         trackNumber={index}
                     />
                 ))}
-                <button css={button} onClick={() => setTrackLimit(selectedPlaylist.tracks.total)}>View All</button>
+                <button css={button} onClick={e => toggleViewAll(e, selectedPlaylist.tracks.total)} value="false">View All</button>
             </ul>
             <NavigationBar />
         </MainFullViewContainer>
