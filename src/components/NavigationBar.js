@@ -26,8 +26,7 @@ const NavigationBar = () => {
         const highlight = ({ colors }) => css`
             color: ${colors.font.primary};
         `
-        console.log(window.location.pathname.split("/")[1]);
-        console.log(linkName);
+        
         if (window.location.pathname.split("/")[1].includes(linkName)) {
             return highlight   
         } else {
