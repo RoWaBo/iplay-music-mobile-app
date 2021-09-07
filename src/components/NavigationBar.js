@@ -26,8 +26,9 @@ const NavigationBar = () => {
         const highlight = ({ colors }) => css`
             color: ${colors.font.primary};
         `
-
-        if (window.location.pathname.split("/")[1] === linkName) {
+        console.log(window.location.pathname.split("/")[1]);
+        console.log(linkName);
+        if (window.location.pathname.split("/")[1].includes(linkName)) {
             return highlight   
         } else {
             return ( 
@@ -72,7 +73,7 @@ const NavigationBar = () => {
         <>
             <div css={navBarContainer}>
                 <Link className="outerLinks" css={navLink} to="/albums">
-                    <IoIosPulse css={highlightIfCurrent("albums")} />
+                    <IoIosPulse css={highlightIfCurrent("album")} />
                 </Link>
                 <Link css={navLink} to="/playlists/featured">
                     <IoIosMicrophone css={highlightIfCurrent("playlists")} />
