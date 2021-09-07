@@ -8,7 +8,7 @@ import useSpotifyApiFetch from "../functions/useSpotifyApiFetch";
 import { Link } from "@reach/router";
 import UtilityBar from "../components/UtilityBar";
 import MainFullViewContainer from "../components/MainFullViewContainer";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const Featured = () => {
 
@@ -43,10 +43,12 @@ const Featured = () => {
     }, optionsObject);
 
     // Adds IntersectionObserver to all images
-    function applyObserver() {
-        const lazyImgs = Array.from(lazyLoadeParent.current.children) 
-        lazyImgs.forEach(lazyImg => lazyImgObserver.observe(lazyImg))   
-    }
+    useEffect(() => {
+        if (playlists) {
+            const lazyImgs = Array.from(lazyLoadeParent.current.children)
+            lazyImgs.forEach(lazyImg => lazyImgObserver.observe(lazyImg))
+        }
+    }, [playlists])
 
     // === STYLING ===
     const contentContainer = ({ colors }) => css`
@@ -63,15 +65,12 @@ const Featured = () => {
             <UtilityBar heading="Featured" />
             <HeadingPrimary />
             <div css={contentContainer} ref={lazyLoadeParent}>
-                {playlists?.data.playlists.items.map((list, index) => (
-                    <div key={list.id}>
-                        <ShadowBox >
-                            <Link to={`/playlists/${list.id}`}>
-                                <img src={'/placeholder-image.png'} alt={list.name} data-src={list.images[0].url} />
-                            </Link>
-                        </ShadowBox>
-                        {index === playlists.data.playlists.items.length - 1 && applyObserver()}
-                    </div>
+                {playlists?.data.playlists.items.map(list => (
+                    <ShadowBox key={list.id}>
+                        <Link to={`/playlists/${list.id}`}>
+                            <img src={'/placeholder-image.png'} alt={list.name} data-src={list.images[0].url} />
+                        </Link>
+                    </ShadowBox>
                 ))}
             </div>
             <NavigationBar />
