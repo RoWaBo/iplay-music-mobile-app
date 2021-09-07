@@ -30,7 +30,8 @@ const Playlists = ({ playlistId }) => {
             e.target.value = "true"
         } else {
             setTrackLimit(8)
-            e.target.innerText = "view all"    
+            e.target.innerText = "view all"
+            e.target.value = "false"    
         }  
     }
 

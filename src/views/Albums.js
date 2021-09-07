@@ -12,13 +12,28 @@ import SwipableContainer from '../components/SwipableContainer';
 import ItemPresentationBar from '../components/ItemPresentationBar';
 import MainFullViewContainer from "../components/MainFullViewContainer";
 import { decideSingularPlural } from '../functions/HelperFunctions';
+import { useState } from 'react';
 
 const Albums = () => {
+
+    const [newReleasesLimit, setnewReleasesLimit] = useState(4)
 
     // Fetches Yussef Dayes albums
     const featuredAlbums = useSpotifyApiFetch("https://api.spotify.com/v1/artists/2rspptKP0lPBdlJJAJHqht/albums?limit=10");
 
-    const newReleases = useSpotifyApiFetch("https://api.spotify.com/v1/browse/new-releases?limit=4");
+    const newReleases = useSpotifyApiFetch(`https://api.spotify.com/v1/browse/new-releases?limit=${newReleasesLimit}`);
+
+    const toggleViewAll = (e, newLimit) => {
+        if (e.target.value === "false") {
+            setnewReleasesLimit(newLimit)
+            e.target.innerText = "view less"
+            e.target.value = "true"
+        } else {
+            setnewReleasesLimit(4)
+            e.target.innerText = "view all"
+            e.target.value = "false"    
+        }  
+    }    
 
     // === STYLING ===
     const subHeadingContainer = css`
@@ -28,6 +43,8 @@ const Albums = () => {
     `
     const viewAll = ({ colors }) => css`
     color: ${colors.primary};
+    background: transparent;
+    border: none;
     font-size: ${font.size.m};
     font-weight: ${font.weight.light};
     text-transform: capitalize;
@@ -42,7 +59,7 @@ const Albums = () => {
             <section>
                 <header css={subHeadingContainer}>
                     <SubHeading>featured albums</SubHeading>
-                    <p css={viewAll}>view all</p>
+                    <button css={viewAll} style={{visibility: 'hidden'}}>view all</button>
                 </header>
                 <SwipableContainer>
                     {featuredAlbums?.data.items.map(album => (
@@ -57,7 +74,7 @@ const Albums = () => {
             <section css={css`margin: ${spacing.s} 0;`}>
                 <header css={subHeadingContainer}>
                     <SubHeading>new releases</SubHeading>
-                    <p css={viewAll}>view all</p>
+                    <button css={viewAll} onClick={e => toggleViewAll(e, 50)} value="false">view all</button>
                 </header>
                 <ul>
                     {newReleases?.data.albums.items.map(album => (

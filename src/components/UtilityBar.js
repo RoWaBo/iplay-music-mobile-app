@@ -28,7 +28,7 @@ const UtilityBar = ({ heading, light }) => {
         padding: ${spacing.m};
         display: grid;
         place-content: center;
-        font-size: 1.3rem;     
+        font-size: 1.3rem;   
     `
 
     const text = css`
@@ -47,7 +47,7 @@ const UtilityBar = ({ heading, light }) => {
             <div css={text}>
                 { heading }
             </div>    
-            <div css={icons}>
+            <div css={icons} style={{visibility: 'hidden'}}>
                 <IoIosSearch />
             </div>    
         </div>
