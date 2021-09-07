@@ -10,6 +10,7 @@ import { IoPlayBackSharp, IoPlayForwardSharp, IoPlaySkipBackSharp, IoPlaySkipFor
 import { useAuth } from "../contexts/AuthContext";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import Gradient from '../components/Gradient';
 
 const Player = ({ mediaUrl, trackNumber }) => {
 
@@ -91,12 +92,17 @@ const Player = ({ mediaUrl, trackNumber }) => {
         font-size: 1.4rem;
         padding: ${spacing.xs};
         color: ${colors.font.primary};
+
+        & > svg {
+            fill: url(#gradient-fill);
+            display: initial;    
+        }        
     `
     const backForwardButtons = ({ colors }) => css`
         color: ${colors.font.primary};
         background: transparent;
         font-size: 1.7rem;
-        padding: ${spacing.xs}; 
+        padding: ${spacing.xs};
     `
     const playButton = ({ colors }) => css`
         width: 75px;
@@ -137,6 +143,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
                 <button css={backForwardButtons}><IoPlayForwardSharp /></button>
                 <button css={skipButtons} onClick={() => trackIndex < tracks.length - 1 && setTrackIndex(trackIndex + 1) }><IoPlaySkipForwardSharp /></button>
             </div>
+            <Gradient />
         </MainFullViewContainer>
     );
 }
