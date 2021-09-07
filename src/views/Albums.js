@@ -37,7 +37,7 @@ const Albums = () => {
 
     return (
         <MainFullViewContainer>
-            <UtilityBar heading="music" />
+            <UtilityBar heading="albums" />
             <HeadingPrimary>all albums</HeadingPrimary>
             <section>
                 <header css={subHeadingContainer}>
