@@ -1,6 +1,5 @@
 # Todo
-  - Search on view specific endpoint and print to Song view
-  - create gradient on skip buttons 
+  - Search on view specific endpoint and print to Song view 
 
 # Nice to have
   - NavBar current page icon highlight
