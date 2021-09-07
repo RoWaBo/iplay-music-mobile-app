@@ -119,6 +119,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
             margin-left: ${isPlaying ? 'unset' : '.4rem'};
             pointer-events: none;
         }
+    
     `
 
     return (
@@ -132,7 +133,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
                 </header>
             )}
             <div css={mediaControlContainer}>
-                <button css={skipButtons} onClick={() => trackIndex > 0 && setTrackIndex(trackIndex - 1) }><IoPlaySkipBackSharp /></button>
+                <button css={skipButtons} onClick={() => trackIndex > 0 && setTrackIndex(trackIndex - 1) }><IoPlaySkipBackSharp style={trackIndex === 0 && {fill: 'unset'}}/></button>
                 <button css={backForwardButtons}><IoPlayBackSharp /></button>
                 <button css={playButton} onClick={playPause}>
                     {tracks && (
@@ -141,7 +142,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
                     {isPlaying ? <IoIosPause /> : <IoIosPlay />}
                 </button>
                 <button css={backForwardButtons}><IoPlayForwardSharp /></button>
-                <button css={skipButtons} onClick={() => trackIndex < tracks.length - 1 && setTrackIndex(trackIndex + 1) }><IoPlaySkipForwardSharp /></button>
+                <button css={skipButtons} onClick={() => trackIndex < tracks.length - 1 && setTrackIndex(trackIndex + 1) }><IoPlaySkipForwardSharp style={trackIndex === tracks?.length - 1 && {fill: 'unset'}}/></button>
             </div>
             <Gradient />
         </MainFullViewContainer>
