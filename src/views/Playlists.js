@@ -70,7 +70,7 @@ const Playlists = ({ playlistId }) => {
                     <ShadowBox medium><img src={selectedPlaylist?.images[0].url} alt={selectedPlaylist?.name}/></ShadowBox>
                 </div>
             </div>
-            <section css={trackContainer}>
+            <ul css={trackContainer}>
                 <SubHeading large>{selectedPlaylist?.name}</SubHeading>
                 {selectedPlaylist?.tracks.items.map((item, index) => index < trackLimit && (
                     <ItemPresentationBar
@@ -84,7 +84,7 @@ const Playlists = ({ playlistId }) => {
                     />
                 ))}
                 <button css={button} onClick={() => setTrackLimit(selectedPlaylist.tracks.total)}>View All</button>
-            </section>
+            </ul>
             <NavigationBar />
         </MainFullViewContainer>
     );

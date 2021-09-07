@@ -40,10 +40,10 @@ const Albums = () => {
             <UtilityBar heading="music" />
             <HeadingPrimary>all albums</HeadingPrimary>
             <section>
-                <div css={subHeadingContainer}>
+                <header css={subHeadingContainer}>
                     <SubHeading>featured albums</SubHeading>
                     <p css={viewAll}>view all</p>
-                </div>
+                </header>
                 <SwipableContainer>
                     {featuredAlbums?.data.items.map(album => (
                         <Link to={`/album_details/${album.id}`} key={album.id}>
@@ -55,20 +55,22 @@ const Albums = () => {
                 </SwipableContainer>
             </section>
             <section css={css`margin: ${spacing.s} 0;`}>
-                <div css={subHeadingContainer}>
+                <header css={subHeadingContainer}>
                     <SubHeading>new releases</SubHeading>
                     <p css={viewAll}>view all</p>
-                </div>
-                {newReleases?.data.albums.items.map((album, index) => (
-                    <Link to={`/album_details/${album.id}`} key={album.id}>
-                        <ItemPresentationBar
-                            imgUrl={album.images[2].url}
-                            heading={album.name}
-                            description={album.artists[0].name}
-                            additionalInfo={decideSingularPlural(album.total_tracks, "Song")}
-                        />
-                    </Link>    
-                ))}
+                </header>
+                <ul>
+                    {newReleases?.data.albums.items.map(album => (
+                        <Link to={`/album_details/${album.id}`} key={album.id}>
+                            <ItemPresentationBar
+                                imgUrl={album.images[2].url}
+                                heading={album.name}
+                                description={album.artists[0].name}
+                                additionalInfo={decideSingularPlural(album.total_tracks, "Song")}
+                            />
+                        </Link>
+                    ))}
+                </ul>
             </section>
             <NavigationBar />
         </MainFullViewContainer>

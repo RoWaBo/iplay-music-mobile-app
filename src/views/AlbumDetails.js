@@ -38,11 +38,11 @@ const AlbumDetails = ({ id }) => {
         <>
             <MainFullViewContainer>
                 <UtilityBar light heading="album" />
-                <section css={backgroundImg}>
+                <div css={backgroundImg}>
                     <HeadingPrimary light>{album?.data.name}</HeadingPrimary>
                     <p css={songs}>{decideSingularPlural(album?.data.total_tracks, "Song")}</p>
-                </section>
-                <section css={trackContainer}>
+                </div>
+                <ul css={trackContainer}>
                     <SubHeading>all songs</SubHeading>
                     {album?.data.tracks.items.map((track, index) => (
                         <ItemPresentationBar
@@ -55,7 +55,7 @@ const AlbumDetails = ({ id }) => {
                             trackNumber={index}
                         />    
                     ))}
-                </section>
+                </ul>
                 <NavigationBar />
             </MainFullViewContainer>
         </>

@@ -51,7 +51,7 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, aud
     `
 
     return (
-        <article css={container}>
+        <li css={container}>
             {imgUrl ? <ShadowBox small><img src={imgUrl} alt={heading} /></ShadowBox> : <PlayAudioButton audioUrl={audioUrl} />}
             <div css={textContainer}>
                 {tracksUrl ? (
@@ -77,8 +77,7 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, aud
                 </>    
                 )}
             </div>
-
-        </article>
+        </li>
     );
 }
 

@@ -37,15 +37,17 @@ const Featured = () => {
         <MainFullViewContainer>
             <UtilityBar heading="Featured" />
             <HeadingPrimary />
-            <div css={contentContainer} ref={lazyLoadeParent}>
+            <ul css={contentContainer} ref={lazyLoadeParent}>
                 {playlists?.data.playlists.items.map(list => (
-                    <ShadowBox key={list.id}>
-                        <Link to={`/playlists/${list.id}`}>
-                            <img src={'/placeholder-image.png'} alt={list.name} data-src={list.images[0].url} />
-                        </Link>
-                    </ShadowBox>
+                    <li key={list.id}>
+                        <ShadowBox>
+                            <Link to={`/playlists/${list.id}`}>
+                                <img src={'/placeholder-image.png'} alt={list.name} data-src={list.images[0].url} />
+                            </Link>
+                        </ShadowBox>
+                    </li>
                 ))}
-            </div>
+            </ul>
             <NavigationBar />
         </MainFullViewContainer>
     );
