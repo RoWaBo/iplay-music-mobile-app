@@ -14,7 +14,7 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, aud
         display: flex;
         align-items: center;
     `
-    const textContainer = css`
+    const textContainer = ({ colors }) => css`
         padding-left: ${spacing.s};
 
         & h2 {
@@ -29,12 +29,20 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, aud
             font-weight: ${font.weight.light};
             padding-top: ${spacing.xxs};    
         }
+
+        & a {
+            color: ${colors.font.primary};    
+        }
     `
-    const infoContainer = css`
+    const infoContainer = ({ colors }) => css`
         font-size: ${font.size.s};
         font-weight: ${font.weight.light};
         margin-left: auto;
         min-width: fit-content;
+
+        & a {
+            color: ${colors.font.primary};    
+        }
     `
 
     const linkStyle = css`

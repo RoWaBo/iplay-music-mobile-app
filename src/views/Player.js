@@ -48,7 +48,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
         }
         
         // Change icon when audio is finnished
-        setTimeout(() => !audioElement.current.paused && setIsPlaying(false), 29990)
+        // setTimeout(() => !audioElement.current.paused && setIsPlaying(false), 29990)
     }
 
     // === STYLE ===

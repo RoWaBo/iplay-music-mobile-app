@@ -7,12 +7,24 @@ import { spacing } from "../style/Styles";
 import useSpotifyApiFetch from "../functions/useSpotifyApiFetch";
 import { Link } from "@reach/router";
 import UtilityBar from "../components/UtilityBar";
-import MainFullViewContainer from "../components/MainFullViewContainer"; 
+import MainFullViewContainer from "../components/MainFullViewContainer";
+import { useEffect, useRef } from "react";
+import { lazyImgObserver } from "../functions/HelperFunctions";
 
 const Featured = () => {
 
-    const playlists = useSpotifyApiFetch("https://api.spotify.com/v1/browse/featured-playlists")   
+    const playlists = useSpotifyApiFetch("https://api.spotify.com/v1/browse/featured-playlists")
+    const lazyLoadeParent = useRef()
 
+    // Adds IntersectionObserver to all images
+    useEffect(() => {
+        if (playlists) {
+            const lazyImgs = Array.from(lazyLoadeParent.current.children)
+            lazyImgs.forEach(lazyImg => lazyImgObserver.observe(lazyImg))
+        }
+    }, [playlists])
+
+    // === STYLING ===
     const contentContainer = ({ colors }) => css`
         margin: 0 ${spacing.m};
         background: ${colors.background.primary};
@@ -21,16 +33,15 @@ const Featured = () => {
             margin-bottom: ${spacing.xl};    
         }
     `
-
     return (
         <MainFullViewContainer>
             <UtilityBar heading="Featured" />
             <HeadingPrimary />
-            <div css={contentContainer}>
+            <div css={contentContainer} ref={lazyLoadeParent}>
                 {playlists?.data.playlists.items.map(list => (
                     <ShadowBox key={list.id}>
                         <Link to={`/playlists/${list.id}`}>
-                            <img src={list.images[0].url} alt={list.name} />
+                            <img src={'/placeholder-image.png'} alt={list.name} data-src={list.images[0].url} />
                         </Link>
                     </ShadowBox>
                 ))}

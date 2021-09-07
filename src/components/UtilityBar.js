@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import { IoIosArrowBack, IoIosSearch } from 'react-icons/io';
 import { font, spacing } from '../style/Styles';
+import { navigate } from "@reach/router";
 
 const UtilityBar = ({ heading, light }) => {
 
@@ -33,7 +34,7 @@ const UtilityBar = ({ heading, light }) => {
 
     return ( 
         <div css={container}>
-            <div css={icons} onClick={() => window.history.back()}>
+            <div css={icons} onClick={() => navigate(-1)}>
                 <IoIosArrowBack />
             </div>    
             <div css={text}>
