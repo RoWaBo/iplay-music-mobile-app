@@ -1,5 +1,4 @@
 # Todo
-  - Featured: lazyload content with Intersection Observer API
   - Search on view specific endpoint and print to Song view
   - create gradient on skip buttons 
 
