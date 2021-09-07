@@ -32,6 +32,12 @@ const ShadowBox = ({ children, xSmall, small, medium, circle }) => {
         box-shadow: 0px 0px 25px #00000026;
         overflow: hidden;
         object-fit: cover;
+
+        /* Placeholder image */
+        background-image: url(/placeholder-image.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
     `
 
     return ( 
