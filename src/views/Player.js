@@ -39,7 +39,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
 
     useEffect(() => {
         isPlaying && audioElement.current.play()
-    }, [trackIndex])
+    }, [trackIndex, isPlaying])
 
     // tracks && console.log(tracks[trackIndex]);
 
@@ -51,9 +51,6 @@ const Player = ({ mediaUrl, trackNumber }) => {
             audioElement.current.pause()
             setIsPlaying(false)
         }
-        
-        // Change icon when audio is finnished
-        // setTimeout(() => !audioElement.current.paused && setIsPlaying(false), 29990)
     }
 
     // === STYLE ===
@@ -141,7 +138,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
                 <button css={backForwardButtons}><IoPlayBackSharp /></button>
                 <button css={playButton} onClick={playPause}>
                     {tracks && (
-                        <audio ref={audioElement} src={tracks[trackIndex].track?.preview_url || tracks[trackIndex].preview_url}/>    
+                        <audio ref={audioElement} onEnded={() => setIsPlaying(false)} src={tracks[trackIndex].track?.preview_url || tracks[trackIndex].preview_url}/>    
                     )}
                     {isPlaying ? <IoIosPause /> : <IoIosPlay />}
                 </button>
