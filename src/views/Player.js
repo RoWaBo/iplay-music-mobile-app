@@ -128,16 +128,28 @@ const Player = ({ mediaUrl, trackNumber }) => {
         padding: 0 ${spacing.m};
     `
     const timeLine = ({ colors }) => css`
-        background: ${colors.gradient};  
+        background: ${colors.primary};
+        height: 3px;
+        width: 100%;
+        position: relative;  
     `
     const timeLineDot = ({ colors }) => css`
-  
+        height: 12px;
+        width: 12px;
+        background: ${colors.primary};
+        border-radius: 50%;
+        box-shadow: 0px 0px 0px 6px rgba(255, 17, 104, 0.35);
+
+        position: absolute;
+        top: -4px;
+        left: 50%;
     `
     const time = ({ colors }) => css`
         color: ${colors.font.primary};
         font-size: ${font.size.m};
         font-weight: ${font.weight.light};
         display: flex;
+        padding-top: ${spacing.s};
 
         & > :first-of-type {
             margin-right: auto;
