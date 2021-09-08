@@ -11,6 +11,7 @@ import { useAuth } from "../contexts/AuthContext";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import Gradient from '../components/Gradient';
+import { convertMsToMAndS } from '../functions/HelperFunctions';
 
 const Player = ({ mediaUrl, trackNumber }) => {
 
@@ -20,7 +21,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
     let [trackIndex, setTrackIndex] = useState(Number(trackNumber));
     const audioElement = useRef();
     const [isPlaying, setIsPlaying] = useState(false);
-    const [currentTime, setCurrentTime] = useState();
+    const [currentTime, setCurrentTime] = useState(0);
 
     useEffect(() => {
         if (authToken) {
@@ -30,7 +31,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
                 }
             })
                 .then(result => {
-                    setTracks(result.data.items)    
+                    setTracks(result.data.items)
                 })
                 .catch(error => {
                     console.log(error)
@@ -42,7 +43,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
 
     // tracks && console.log(tracks[trackIndex]);
 
-    isPlaying && (audioElement.current.ontimeupdate = e => setCurrentTime(parseInt(e.target.currentTime)))
+    isPlaying && (audioElement.current.ontimeupdate = e => setCurrentTime(e.target.currentTime))
 
     function playPause() {
         if (audioElement.current.paused) {
@@ -76,7 +77,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
         text-transform: capitalize;
     `
     // MEDIACONTROL STYLING
-    const mediaControlContainer = ({ colors }) => css`
+    const mediaControls = ({ colors }) => css`
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -123,30 +124,59 @@ const Player = ({ mediaUrl, trackNumber }) => {
         }
     
     `
+    const mediaTimeLine = ({ colors }) => css`
+        padding: 0 ${spacing.m};
+    `
+    const timeLine = ({ colors }) => css`
+        background: ${colors.gradient};  
+    `
+    const timeLineDot = ({ colors }) => css`
+  
+    `
+    const time = ({ colors }) => css`
+        color: ${colors.font.primary};
+        font-size: ${font.size.m};
+        font-weight: ${font.weight.light};
+        display: flex;
+
+        & > :first-of-type {
+            margin-right: auto;
+        }
+    `
 
     return (
         <MainFullViewContainer>
             <UtilityBar heading="playing" />
             <div css={imgContainer}></div>
-            {tracks && (
+            {tracks && (<>
                 <header css={textContainer}>
                     <SubHeading large>{tracks[trackIndex].track?.name || tracks[trackIndex].name}</SubHeading>
-                    <h3 css={infoText}>{tracks[trackIndex].track?.artists[0].name || tracks[trackIndex].artists[0].name}</h3>                    
+                    <h3 css={infoText}>{tracks[trackIndex].track?.artists[0].name || tracks[trackIndex].artists[0].name}</h3>
                 </header>
-            )}
-            <div css={mediaControlContainer}>
-                <p>{currentTime}</p>
-                <button css={skipButtons} onClick={() => trackIndex > 0 && setTrackIndex(trackIndex - 1) }><IoPlaySkipBackSharp style={trackIndex === 0 && {fill: 'unset'}}/></button>
-                <button css={backForwardButtons}><IoPlayBackSharp /></button>
-                <button css={playButton} onClick={playPause}>
-                    {tracks && (
-                        <audio ref={audioElement} onEnded={() => setIsPlaying(false)} src={tracks[trackIndex].track?.preview_url || tracks[trackIndex].preview_url}/>    
-                    )}
-                    {isPlaying ? <IoIosPause /> : <IoIosPlay />}
-                </button>
-                <button css={backForwardButtons}><IoPlayForwardSharp /></button>
-                <button css={skipButtons} onClick={() => trackIndex < tracks.length - 1 && setTrackIndex(trackIndex + 1) }><IoPlaySkipForwardSharp style={trackIndex === tracks?.length - 1 && {fill: 'unset'}}/></button>
-            </div>
+
+                <div css={mediaTimeLine}>
+                    <div css={timeLine}>
+                        <div css={timeLineDot}></div>
+                    </div>
+                    <div css={time}>
+                        <p>{convertMsToMAndS(currentTime * 1000)}</p>
+                        <p>{convertMsToMAndS(tracks[trackIndex].track?.duration_ms || tracks[trackIndex].duration_ms)}</p>
+                    </div>
+                </div>
+
+                <div css={mediaControls}>
+                    <button css={skipButtons} onClick={() => trackIndex > 0 && setTrackIndex(trackIndex - 1)}><IoPlaySkipBackSharp style={trackIndex === 0 && { fill: 'unset' }} /></button>
+                    <button css={backForwardButtons}><IoPlayBackSharp /></button>
+                    <button css={playButton} onClick={playPause}>
+                        {tracks && (
+                            <audio ref={audioElement} onEnded={() => setIsPlaying(false)} src={tracks[trackIndex].track?.preview_url || tracks[trackIndex].preview_url} />
+                        )}
+                        {isPlaying ? <IoIosPause /> : <IoIosPlay />}
+                    </button>
+                    <button css={backForwardButtons}><IoPlayForwardSharp /></button>
+                    <button css={skipButtons} onClick={() => trackIndex < tracks.length - 1 && setTrackIndex(trackIndex + 1)}><IoPlaySkipForwardSharp style={trackIndex === tracks?.length - 1 && { fill: 'unset' }} /></button>
+                </div>
+            </>)}
             <Gradient />
         </MainFullViewContainer>
     );
