@@ -20,6 +20,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
     let [trackIndex, setTrackIndex] = useState(Number(trackNumber));
     const audioElement = useRef();
     const [isPlaying, setIsPlaying] = useState(false);
+    const [currentTime, setCurrentTime] = useState();
 
     useEffect(() => {
         if (authToken) {
@@ -37,11 +38,11 @@ const Player = ({ mediaUrl, trackNumber }) => {
         }
     }, [authToken, mediaUrl])
 
-    useEffect(() => {
-        isPlaying && audioElement.current.play()
-    }, [trackIndex, isPlaying])
+    useEffect(() => isPlaying && audioElement.current.play(), [trackIndex, isPlaying])
 
     // tracks && console.log(tracks[trackIndex]);
+
+    isPlaying && (audioElement.current.ontimeupdate = e => setCurrentTime(parseInt(e.target.currentTime)))
 
     function playPause() {
         if (audioElement.current.paused) {
@@ -134,6 +135,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
                 </header>
             )}
             <div css={mediaControlContainer}>
+                <p>{currentTime}</p>
                 <button css={skipButtons} onClick={() => trackIndex > 0 && setTrackIndex(trackIndex - 1) }><IoPlaySkipBackSharp style={trackIndex === 0 && {fill: 'unset'}}/></button>
                 <button css={backForwardButtons}><IoPlayBackSharp /></button>
                 <button css={playButton} onClick={playPause}>
