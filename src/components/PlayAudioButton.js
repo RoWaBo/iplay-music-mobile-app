@@ -1,49 +1,49 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { useState } from 'react';
-import { IoIosPlay, IoIosPause } from 'react-icons/io';
+// import { useState } from 'react';
+import { IoIosPlay } from 'react-icons/io';
 
-let previousAudio;
+// let previousAudio;
 
 const PlayAudioButton = ({ audioUrl }) => {
 
-    const [iconState] = useState("play")
+    // const [iconState] = useState("play")
 
-    const playPause = e => {
+    // const playPause = e => {
 
-        let currentAudio = e.target.querySelector("audio")  
+    //     let currentAudio = e.target.querySelector("audio")  
 
-        if (!previousAudio) {
-            console.log("no previous audio");
-            previousAudio = currentAudio;
-            currentAudio.play()
-        } else {
-            if (previousAudio === currentAudio){
-                console.log("audio match");
-                if (currentAudio.paused) {
-                    currentAudio.play()
-                } else {
-                    currentAudio.pause()
-                }  
-            } else {
-                console.log("else triggered");
-                previousAudio.pause()
-                currentAudio.play()
-                previousAudio = currentAudio;                
-            }           
-        }
+    //     if (!previousAudio) {
+    //         console.log("no previous audio");
+    //         previousAudio = currentAudio;
+    //         currentAudio.play()
+    //     } else {
+    //         if (previousAudio === currentAudio){
+    //             console.log("audio match");
+    //             if (currentAudio.paused) {
+    //                 currentAudio.play()
+    //             } else {
+    //                 currentAudio.pause()
+    //             }  
+    //         } else {
+    //             console.log("else triggered");
+    //             previousAudio.pause()
+    //             currentAudio.play()
+    //             previousAudio = currentAudio;                
+    //         }           
+    //     }
         
-        // if (currentAudio.paused) {
-        //     currentAudio.play()
-        //     setIconState("pause")
-        // } else {
-        //     currentAudio.pause()
-        //     setIconState("play")
-        // }
+    //     // if (currentAudio.paused) {
+    //     //     currentAudio.play()
+    //     //     setIconState("pause")
+    //     // } else {
+    //     //     currentAudio.pause()
+    //     //     setIconState("play")
+    //     // }
 
-        // Change icon when audio is finnished
-        // setTimeout(() => !currentAudio.paused && setIconState("play"),29990)
-    }
+    //     // Change icon when audio is finnished
+    //     // setTimeout(() => !currentAudio.paused && setIconState("play"),29990)
+    // }
 
     const icon = ({ colors }) => css`
         border: none;
@@ -63,9 +63,12 @@ const PlayAudioButton = ({ audioUrl }) => {
     `
 
     return ( 
-        <button data-audiourl={audioUrl} onClick={playPause} css={icon}>
-            <audio src={audioUrl} />
-            {iconState === "pause" ? <IoIosPause /> : <IoIosPlay />}
+        // <button data-audiourl={audioUrl} onClick={playPause} css={icon}>
+        //     <audio src={audioUrl} />
+        //     {iconState === "pause" ? <IoIosPause /> : <IoIosPlay />}
+        // </button>
+        <button css={icon}>
+            <IoIosPlay />
         </button>
      );
 }
