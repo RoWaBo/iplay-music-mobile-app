@@ -11,6 +11,7 @@ import { useAuth } from "../contexts/AuthContext";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import Gradient from '../components/Gradient';
+import { convertMsToMAndS } from '../functions/HelperFunctions';
 
 const Player = ({ mediaUrl, trackNumber }) => {
 
@@ -20,6 +21,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
     let [trackIndex, setTrackIndex] = useState(Number(trackNumber));
     const audioElement = useRef();
     const [isPlaying, setIsPlaying] = useState(false);
+    const [currentTime, setCurrentTime] = useState(0);
 
     useEffect(() => {
         if (authToken) {
@@ -29,7 +31,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
                 }
             })
                 .then(result => {
-                    setTracks(result.data.items)    
+                    setTracks(result.data.items)
                 })
                 .catch(error => {
                     console.log(error)
@@ -37,7 +39,9 @@ const Player = ({ mediaUrl, trackNumber }) => {
         }
     }, [authToken, mediaUrl])
 
-    // tracks && console.log(tracks[trackIndex]);
+    useEffect(() => isPlaying && audioElement.current.play(), [trackIndex, isPlaying])
+
+    isPlaying && (audioElement.current.ontimeupdate = e => (setCurrentTime(e.target.currentTime)))
 
     function playPause() {
         if (audioElement.current.paused) {
@@ -47,10 +51,17 @@ const Player = ({ mediaUrl, trackNumber }) => {
             audioElement.current.pause()
             setIsPlaying(false)
         }
-        
-        // Change icon when audio is finnished
-        // setTimeout(() => !audioElement.current.paused && setIsPlaying(false), 29990)
     }
+
+    const setTimeFromTimelineClick = e => {
+        const updatedTime = (e.clientX - 30) / e.target.clientWidth * audioElement.current.duration
+        audioElement.current.currentTime = updatedTime
+        setCurrentTime(updatedTime)  
+    }
+
+    // tracks && console.log(tracks[trackIndex]);
+    // console.log(currentTime * 1000);
+    // tracks && console.log(tracks[trackIndex].duration_ms);
 
     // === STYLE ===
     const imgContainer = css`
@@ -74,7 +85,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
         text-transform: capitalize;
     `
     // MEDIACONTROL STYLING
-    const mediaControlContainer = ({ colors }) => css`
+    const mediaControls = ({ colors }) => css`
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -121,29 +132,70 @@ const Player = ({ mediaUrl, trackNumber }) => {
         }
     
     `
+    const mediaTimeLine = ({ colors }) => css`
+        padding: 0 ${spacing.m};
+    `
+    const timeLine = ({ colors }) => css`
+        background: ${colors.primary};
+        height: 3px;
+        width: 100%;
+        position: relative;  
+    `
+    const timeLineDot = ({ colors }) => css`
+        height: 12px;
+        width: 12px;
+        background: ${colors.primary};
+        border-radius: 50%;
+        box-shadow: 0px 0px 0px 6px rgba(255, 17, 104, 0.35);
 
+        position: absolute;
+        top: -4px;
+        left: ${((currentTime * 1000) / (audioElement.current?.duration * 1000)) * 100}%;
+    `
+    const time = ({ colors }) => css`
+        color: ${colors.font.primary};
+        font-size: ${font.size.m};
+        font-weight: ${font.weight.light};
+        display: flex;
+        padding-top: ${spacing.s};
+
+        & > :first-of-type {
+            margin-right: auto;
+        }
+    `
     return (
         <MainFullViewContainer>
             <UtilityBar heading="playing" />
             <div css={imgContainer}></div>
-            {tracks && (
+            {tracks && (<>
                 <header css={textContainer}>
                     <SubHeading large>{tracks[trackIndex].track?.name || tracks[trackIndex].name}</SubHeading>
-                    <h3 css={infoText}>{tracks[trackIndex].track?.artists[0].name || tracks[trackIndex].artists[0].name}</h3>                    
+                    <h3 css={infoText}>{tracks[trackIndex].track?.artists[0].name || tracks[trackIndex].artists[0].name}</h3>
                 </header>
-            )}
-            <div css={mediaControlContainer}>
-                <button css={skipButtons} onClick={() => trackIndex > 0 && setTrackIndex(trackIndex - 1) }><IoPlaySkipBackSharp style={trackIndex === 0 && {fill: 'unset'}}/></button>
-                <button css={backForwardButtons}><IoPlayBackSharp /></button>
-                <button css={playButton} onClick={playPause}>
-                    {tracks && (
-                        <audio ref={audioElement} src={tracks[trackIndex].track?.preview_url || tracks[trackIndex].preview_url}/>    
-                    )}
-                    {isPlaying ? <IoIosPause /> : <IoIosPlay />}
-                </button>
-                <button css={backForwardButtons}><IoPlayForwardSharp /></button>
-                <button css={skipButtons} onClick={() => trackIndex < tracks.length - 1 && setTrackIndex(trackIndex + 1) }><IoPlaySkipForwardSharp style={trackIndex === tracks?.length - 1 && {fill: 'unset'}}/></button>
-            </div>
+
+                <div css={mediaTimeLine}>
+                    <div css={timeLine} onClick={setTimeFromTimelineClick}>
+                        <div css={timeLineDot}></div>
+                    </div>
+                    <div css={time}>
+                        <p>{convertMsToMAndS(currentTime * 1000)}</p>
+                        <p>{convertMsToMAndS(audioElement.current?.duration * 1000 || 30000)}</p>
+                    </div>
+                </div>
+
+                <div css={mediaControls}>
+                    <button css={skipButtons} onClick={() => trackIndex > 0 && setTrackIndex(trackIndex - 1)}><IoPlaySkipBackSharp style={trackIndex === 0 && { fill: 'unset' }} /></button>
+                    <button css={backForwardButtons} onClick={() => (audioElement.current.currentTime = audioElement.current.currentTime - 3)}><IoPlayBackSharp /></button>
+                    <button css={playButton} onClick={playPause}>
+                        {tracks && (
+                            <audio ref={audioElement} onEnded={() => trackIndex < tracks.length - 1 ? setTrackIndex(trackIndex + 1) : setIsPlaying(false)} src={tracks[trackIndex].track?.preview_url || tracks[trackIndex].preview_url} />
+                        )}
+                        {isPlaying ? <IoIosPause /> : <IoIosPlay />}
+                    </button>
+                    <button css={backForwardButtons} onClick={() => (audioElement.current.currentTime = audioElement.current.currentTime + 3)}><IoPlayForwardSharp /></button>
+                    <button css={skipButtons} onClick={() => trackIndex < tracks.length - 1 && setTrackIndex(trackIndex + 1)}><IoPlaySkipForwardSharp style={trackIndex === tracks?.length - 1 && { fill: 'unset' }} /></button>
+                </div>
+            </>)}
             <Gradient />
         </MainFullViewContainer>
     );

@@ -11,11 +11,12 @@ import { font, spacing } from '../style/Styles';
 import { convertMsToMAndS } from '../functions/HelperFunctions';
 import { useState } from 'react';
 import ShadowBox from '../components/ShadowBox';
+import { Link } from '@reach/router';
 
 const Playlists = ({ playlistId }) => {
 
     const [trackLimit, setTrackLimit] = useState(8)
-    
+
     const feauteredPlaylists = useSpotifyApiFetch("https://api.spotify.com/v1/browse/featured-playlists")?.data.playlists.items
     const randomPlaylistId = feauteredPlaylists && feauteredPlaylists[6].id
 
@@ -31,8 +32,8 @@ const Playlists = ({ playlistId }) => {
         } else {
             setTrackLimit(8)
             e.target.innerText = "view all"
-            e.target.value = "false"    
-        }  
+            e.target.value = "false"
+        }
     }
 
     // selectedPlaylist && console.log(selectedPlaylist);
@@ -56,7 +57,7 @@ const Playlists = ({ playlistId }) => {
         width: 100%;
         display: grid;
         place-content: center;
-    `        
+    `
 
     const button = ({ colors }) => css`
         color: ${colors.primary};
@@ -79,21 +80,20 @@ const Playlists = ({ playlistId }) => {
             <div css={backgroundImg}>
                 <HeadingPrimary light>playlists</HeadingPrimary>
                 <div css={imgContainer}>
-                    <ShadowBox medium><img src={selectedPlaylist?.images[0].url} alt={selectedPlaylist?.name}/></ShadowBox>
+                    <ShadowBox medium><img src={selectedPlaylist?.images[0].url} alt={selectedPlaylist?.name} /></ShadowBox>
                 </div>
             </div>
             <ul css={trackContainer}>
                 <SubHeading large>{selectedPlaylist?.name}</SubHeading>
                 {selectedPlaylist?.tracks.items.map((item, index) => index < trackLimit && (
-                    <ItemPresentationBar
-                        key={item.track.uri}
-                        heading={item.track.name}
-                        description={item.track.artists[0].name}
-                        additionalInfo={convertMsToMAndS(item.track.duration_ms)}
-                        audioUrl={item.track.preview_url}
-                        tracksUrl={selectedPlaylist?.tracks.href}
-                        trackNumber={index}
-                    />
+                    <Link to={`/player/${encodeURIComponent(selectedPlaylist?.tracks.href)}/${index}`} key={item.track.uri}>
+                        <ItemPresentationBar
+                            heading={item.track.name}
+                            description={item.track.artists[0].name}
+                            additionalInfo={convertMsToMAndS(item.track.duration_ms)}
+                            audioUrl={item.track.preview_url}
+                        />
+                    </Link>
                 ))}
                 <button css={button} onClick={e => toggleViewAll(e, selectedPlaylist.tracks.total)} value="false">View All</button>
             </ul>

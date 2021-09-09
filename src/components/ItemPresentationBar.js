@@ -4,9 +4,8 @@ import ShadowBox from "./ShadowBox";
 import SubHeading from "./SubHeading";
 import { font, spacing } from '../style/Styles';
 import PlayAudioButton from './PlayAudioButton';
-import { Link } from '@reach/router';
 
-const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, audioUrl, tracksUrl, trackNumber }) => {
+const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, audioUrl }) => {
 
     const container = ({ colors }) => css`
         color: ${colors.font.primary};
@@ -45,39 +44,18 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, aud
         }
     `
 
-    const linkStyle = css`
-        width: 100%;
-        height: 100%;
-    `
-
     return (
         <li css={container}>
             {imgUrl ? <ShadowBox small><img src={imgUrl} alt={heading} /></ShadowBox> : <PlayAudioButton audioUrl={audioUrl} />}
             <div css={textContainer}>
-                {tracksUrl ? (
-                <Link css={linkStyle} to={`/player/${encodeURIComponent(tracksUrl)}/${trackNumber}`}>
-                    <SubHeading>{heading}</SubHeading>
-                    <p>{description}</p>
-                </Link>                    
-                ) : (
-                <>
-                    <SubHeading>{heading}</SubHeading>
-                    <p>{description}</p>
-                </>    
-                )}
+                <SubHeading>{heading}</SubHeading>
+                <p>{description}</p>
             </div>
             <div css={infoContainer}>
-            {tracksUrl ? (
-                <Link css={linkStyle} to={`/player/${encodeURIComponent(tracksUrl)}/${trackNumber}`}>
-                    <p>{additionalInfo}</p>
-                </Link>                    
-                ) : (
-                <>
-                    <p>{additionalInfo}</p>
-                </>    
-                )}
+                <p>{additionalInfo}</p>
             </div>
         </li>
+
     );
 }
 

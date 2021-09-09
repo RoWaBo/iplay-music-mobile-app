@@ -9,6 +9,7 @@ import { font, spacing } from '../style/Styles';
 import SubHeading from '../components/SubHeading';
 import ItemPresentationBar from '../components/ItemPresentationBar';
 import { decideSingularPlural, convertMsToMAndS } from '../functions/HelperFunctions';
+import { Link } from '@reach/router';
 
 const AlbumDetails = ({ id }) => {
 
@@ -33,7 +34,7 @@ const AlbumDetails = ({ id }) => {
             padding: ${spacing.m} ${spacing.m} 0;
         }
     `
-    
+
     return (
         <>
             <MainFullViewContainer>
@@ -45,15 +46,14 @@ const AlbumDetails = ({ id }) => {
                 <ul css={trackContainer}>
                     <SubHeading>all songs</SubHeading>
                     {album?.data.tracks.items.map((track, index) => (
-                        <ItemPresentationBar
-                            key={track.uri} 
-                            heading={track.name}
-                            description={track.artists[0].name}
-                            additionalInfo={convertMsToMAndS(track.duration_ms)}
-                            audioUrl={track.preview_url}
-                            tracksUrl={album?.data.tracks.href}
-                            trackNumber={index}
-                        />    
+                        <Link to={`/player/${encodeURIComponent(album?.data.tracks.href)}/${index}`} key={track.uri}>
+                            <ItemPresentationBar
+                                heading={track.name}
+                                description={track.artists[0].name}
+                                additionalInfo={convertMsToMAndS(track.duration_ms)}
+                                audioUrl={track.preview_url}
+                            />
+                        </Link>
                     ))}
                 </ul>
                 <NavigationBar />
