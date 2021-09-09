@@ -41,9 +41,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
 
     useEffect(() => isPlaying && audioElement.current.play(), [trackIndex, isPlaying])
 
-    // tracks && console.log(tracks[trackIndex]);
-
-    isPlaying && (audioElement.current.ontimeupdate = e => setCurrentTime(e.target.currentTime))
+    isPlaying && (audioElement.current.ontimeupdate = e => (setCurrentTime(e.target.currentTime), console.log(e)))
 
     function playPause() {
         if (audioElement.current.paused) {
@@ -54,6 +52,10 @@ const Player = ({ mediaUrl, trackNumber }) => {
             setIsPlaying(false)
         }
     }
+
+    // tracks && console.log(tracks[trackIndex]);
+    // console.log(currentTime * 1000);
+    // tracks && console.log(tracks[trackIndex].duration_ms);
 
     // === STYLE ===
     const imgContainer = css`
@@ -142,7 +144,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
 
         position: absolute;
         top: -4px;
-        left: 50%;
+        left: ${(currentTime * 1000 / tracks[trackIndex].duration_ms) * 100}%;
     `
     const time = ({ colors }) => css`
         color: ${colors.font.primary};
@@ -155,7 +157,6 @@ const Player = ({ mediaUrl, trackNumber }) => {
             margin-right: auto;
         }
     `
-
     return (
         <MainFullViewContainer>
             <UtilityBar heading="playing" />
