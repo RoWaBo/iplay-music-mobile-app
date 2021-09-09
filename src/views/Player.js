@@ -68,7 +68,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
         background-image: url('/vinyl.png'), ${theme === 'light' ? `url('/sound-wave-light.png')` : `url('/sound-wave-dark.png')`};
         background-position: center;
         background-repeat: no-repeat;
-        height: 300px;
+        height: 395px;
         margin-top: 81px;
     `
 
