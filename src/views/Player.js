@@ -22,6 +22,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
     const audioElement = useRef();
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
+    const playBtn = useRef();
 
     useEffect(() => {
         if (authToken) {
@@ -39,7 +40,19 @@ const Player = ({ mediaUrl, trackNumber }) => {
         }
     }, [authToken, mediaUrl])
 
-    useEffect(() => isPlaying && audioElement.current.play(), [trackIndex, isPlaying])
+    useEffect(() => {
+        isPlaying && audioElement.current.play()
+
+        // ERROR HANDLING
+        if (tracks && !tracks[trackIndex].track?.preview_url && !tracks[trackIndex].preview_url) {
+            !audioElement.current.paused && audioElement.current.pause()
+            setIsPlaying(false)
+            playBtn.current.disabled = true
+            alert(`"${tracks[trackIndex].track?.name || tracks[trackIndex].name}" can't be played because of missing preview url!`)
+        } else {
+            playBtn.current && (playBtn.current.disabled = false)    
+        }
+    }, [trackIndex, isPlaying, tracks])
 
     isPlaying && (audioElement.current.ontimeupdate = e => (setCurrentTime(e.target.currentTime)))
 
@@ -56,10 +69,10 @@ const Player = ({ mediaUrl, trackNumber }) => {
     const setTimeFromTimelineClick = e => {
         const updatedTime = (e.clientX - 30) / e.target.clientWidth * audioElement.current.duration
         audioElement.current.currentTime = updatedTime
-        setCurrentTime(updatedTime)  
+        setCurrentTime(updatedTime)
     }
 
-    // tracks && console.log(tracks[trackIndex]);
+    // audioElement && console.log(audioElement.current);
     // console.log(currentTime * 1000);
     // tracks && console.log(tracks[trackIndex].duration_ms);
 
@@ -186,7 +199,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
                 <div css={mediaControls}>
                     <button css={skipButtons} onClick={() => trackIndex > 0 && setTrackIndex(trackIndex - 1)}><IoPlaySkipBackSharp style={trackIndex === 0 && { fill: 'unset' }} /></button>
                     <button css={backForwardButtons} onClick={() => (audioElement.current.currentTime = audioElement.current.currentTime - 3)}><IoPlayBackSharp /></button>
-                    <button css={playButton} onClick={playPause}>
+                    <button ref={playBtn} css={playButton} onClick={playPause}>
                         {tracks && (
                             <audio ref={audioElement} onEnded={() => trackIndex < tracks.length - 1 ? setTrackIndex(trackIndex + 1) : setIsPlaying(false)} src={tracks[trackIndex].track?.preview_url || tracks[trackIndex].preview_url} />
                         )}
