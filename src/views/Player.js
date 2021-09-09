@@ -53,6 +53,10 @@ const Player = ({ mediaUrl, trackNumber }) => {
         }
     }
 
+    const setCurrentTimeOnTimeLine = e => {
+        audioElement.current.currentTime = e.clientX / e.target.clientWidth * audioElement.current.duration  
+    }
+
     // tracks && console.log(tracks[trackIndex]);
     // console.log(currentTime * 1000);
     // tracks && console.log(tracks[trackIndex].duration_ms);
@@ -168,7 +172,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
                 </header>
 
                 <div css={mediaTimeLine}>
-                    <div css={timeLine}>
+                    <div css={timeLine} onClick={setCurrentTimeOnTimeLine}>
                         <div css={timeLineDot}></div>
                     </div>
                     <div css={time}>
