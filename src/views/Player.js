@@ -41,7 +41,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
 
     useEffect(() => isPlaying && audioElement.current.play(), [trackIndex, isPlaying])
 
-    isPlaying && (audioElement.current.ontimeupdate = e => (setCurrentTime(e.target.currentTime), console.log(e)))
+    isPlaying && (audioElement.current.ontimeupdate = e => (setCurrentTime(e.target.currentTime)))
 
     function playPause() {
         if (audioElement.current.paused) {
@@ -144,7 +144,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
 
         position: absolute;
         top: -4px;
-        left: ${(currentTime * 1000 / tracks[trackIndex].duration_ms) * 100}%;
+        left: ${((currentTime * 1000) / (audioElement.current?.duration * 1000)) * 100}%;
     `
     const time = ({ colors }) => css`
         color: ${colors.font.primary};
@@ -173,20 +173,20 @@ const Player = ({ mediaUrl, trackNumber }) => {
                     </div>
                     <div css={time}>
                         <p>{convertMsToMAndS(currentTime * 1000)}</p>
-                        <p>{convertMsToMAndS(tracks[trackIndex].track?.duration_ms || tracks[trackIndex].duration_ms)}</p>
+                        <p>{convertMsToMAndS(audioElement.current?.duration * 1000 || 30000)}</p>
                     </div>
                 </div>
 
                 <div css={mediaControls}>
                     <button css={skipButtons} onClick={() => trackIndex > 0 && setTrackIndex(trackIndex - 1)}><IoPlaySkipBackSharp style={trackIndex === 0 && { fill: 'unset' }} /></button>
-                    <button css={backForwardButtons}><IoPlayBackSharp /></button>
+                    <button css={backForwardButtons} onClick={() => (audioElement.current.currentTime = audioElement.current.currentTime - 3)}><IoPlayBackSharp /></button>
                     <button css={playButton} onClick={playPause}>
                         {tracks && (
                             <audio ref={audioElement} onEnded={() => setIsPlaying(false)} src={tracks[trackIndex].track?.preview_url || tracks[trackIndex].preview_url} />
                         )}
                         {isPlaying ? <IoIosPause /> : <IoIosPlay />}
                     </button>
-                    <button css={backForwardButtons}><IoPlayForwardSharp /></button>
+                    <button css={backForwardButtons} onClick={() => (audioElement.current.currentTime = audioElement.current.currentTime + 3)}><IoPlayForwardSharp /></button>
                     <button css={skipButtons} onClick={() => trackIndex < tracks.length - 1 && setTrackIndex(trackIndex + 1)}><IoPlaySkipForwardSharp style={trackIndex === tracks?.length - 1 && { fill: 'unset' }} /></button>
                 </div>
             </>)}
