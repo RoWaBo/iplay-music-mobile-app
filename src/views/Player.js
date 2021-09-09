@@ -53,8 +53,10 @@ const Player = ({ mediaUrl, trackNumber }) => {
         }
     }
 
-    const setCurrentTimeOnTimeLine = e => {
-        audioElement.current.currentTime = e.clientX / e.target.clientWidth * audioElement.current.duration  
+    const setTimeFromTimelineClick = e => {
+        const updatedTime = (e.clientX - 30) / e.target.clientWidth * audioElement.current.duration
+        audioElement.current.currentTime = updatedTime
+        setCurrentTime(updatedTime)  
     }
 
     // tracks && console.log(tracks[trackIndex]);
@@ -172,7 +174,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
                 </header>
 
                 <div css={mediaTimeLine}>
-                    <div css={timeLine} onClick={setCurrentTimeOnTimeLine}>
+                    <div css={timeLine} onClick={setTimeFromTimelineClick}>
                         <div css={timeLineDot}></div>
                     </div>
                     <div css={time}>
@@ -186,7 +188,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
                     <button css={backForwardButtons} onClick={() => (audioElement.current.currentTime = audioElement.current.currentTime - 3)}><IoPlayBackSharp /></button>
                     <button css={playButton} onClick={playPause}>
                         {tracks && (
-                            <audio ref={audioElement} onEnded={() => setIsPlaying(false)} src={tracks[trackIndex].track?.preview_url || tracks[trackIndex].preview_url} />
+                            <audio ref={audioElement} onEnded={() => trackIndex < tracks.length - 1 ? setTrackIndex(trackIndex + 1) : setIsPlaying(false)} src={tracks[trackIndex].track?.preview_url || tracks[trackIndex].preview_url} />
                         )}
                         {isPlaying ? <IoIosPause /> : <IoIosPlay />}
                     </button>
