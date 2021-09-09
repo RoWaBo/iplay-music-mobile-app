@@ -4,6 +4,7 @@ import { useTheme } from "../contexts/ThemeContext";
 import { Link } from '@reach/router'
 import { IoIosPulse, IoIosMicrophone, IoIosDisc, IoIosContrast, IoIosAlbums } from 'react-icons/io'
 import { spacing } from '../style/Styles';
+import Gradient from '../components/Gradient';
 
 const NavigationBar = () => {
 
@@ -25,8 +26,8 @@ const NavigationBar = () => {
         const highlight = ({ colors }) => css`
             color: ${colors.font.primary};
         `
-
-        if (window.location.pathname.split("/")[1] === linkName) {
+        
+        if (window.location.pathname.split("/")[1].includes(linkName)) {
             return highlight   
         } else {
             return ( 
@@ -52,14 +53,15 @@ const NavigationBar = () => {
             padding: 0 ${spacing.s};    
         }
 
-        & > :first-child, & > :last-child {
+        & > .outerLinks {
             padding: ${spacing.s} ${spacing.m};    
         }
 
-        & > :nth-child(3) {
+        & > .middelLink {
             font-size: 2.4rem;
         }
     `
+
     const navLink = ({ colors }) => css`
         font-size: 1.3rem;
         display: grid;
@@ -69,28 +71,23 @@ const NavigationBar = () => {
     return (
         <>
             <div css={navBarContainer}>
-                <Link css={navLink} to="/albums">
-                    <IoIosPulse css={highlightIfCurrent("albums")} />
+                <Link className="outerLinks" css={navLink} to="/albums">
+                    <IoIosPulse css={highlightIfCurrent("album")} />
                 </Link>
                 <Link css={navLink} to="/playlists/featured">
                     <IoIosMicrophone css={highlightIfCurrent("playlists")} />
                 </Link>
-                <Link css={navLink} to="/featured">
+                <Link className="middelLink" css={navLink} to="/featured">
                     <IoIosDisc css={highlightIfCurrent("featured")} />
                 </Link>
                 <div css={navLink} onClick={toggleTheme}>
                     <IoIosContrast css={highlightIfCurrent()} />
                 </div>
-                <Link css={navLink} to="/categories">
+                <Link className="outerLinks" css={navLink} to="/categories">
                     <IoIosAlbums css={highlightIfCurrent("categories")} />
                 </Link>
             </div>
-            <svg width="0" height="0" style={{ position: "absolute" }}>
-                <linearGradient id="gradient-fill" x1="0" y1="0" x2="800" y2="0" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stopColor="#ee0979" />
-                    <stop offset="1" stopColor="#ff6a00" />
-                </linearGradient>
-            </svg>
+            <Gradient />            
         </>
     );
 }

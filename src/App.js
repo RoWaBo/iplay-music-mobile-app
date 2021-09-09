@@ -32,7 +32,7 @@ function App() {
               <AlbumDetails path="album_details/:id" />
               <Categories path="categories" />
               <Playlists path="playlists/:playlistId" />
-              <Player path="player" />
+              <Player path="player/:mediaUrl/:trackNumber" />
             </Router>
           </Theme>
         </ThemeContextProvider>

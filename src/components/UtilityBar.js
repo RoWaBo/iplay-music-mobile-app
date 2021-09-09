@@ -2,25 +2,32 @@
 import { css } from '@emotion/react';
 import { IoIosArrowBack, IoIosSearch } from 'react-icons/io';
 import { font, spacing } from '../style/Styles';
+import { navigate } from "@reach/router";
+import { useState } from 'react';
 
 const UtilityBar = ({ heading, light }) => {
 
+    const [opacity, setOpacity] = useState()
+    
+    window.onscroll = () => light && window.scrollY / 150 < 1.1 && setOpacity(window.scrollY / 150)            
+    
     const container = ({ colors }) => css`
         color: ${light ? colors.font.secondary : colors.font.primary};
-        background: ${colors.background.primary};
+        background-color: ${light ? `rgba(255, 17, 104, ${opacity})` : colors.background.primary};
         display: flex;
         align-items: center;
         width: 100%;
         height: 81px;
-        position: absolute;
-        top:0; 
+        position: fixed;
+        top:0;
+        transition: ease-in-out;
     `
 
     const icons = css`
         padding: ${spacing.m};
         display: grid;
         place-content: center;
-        font-size: 1.3rem;     
+        font-size: 1.3rem;   
     `
 
     const text = css`
@@ -33,13 +40,13 @@ const UtilityBar = ({ heading, light }) => {
 
     return ( 
         <div css={container}>
-            <div css={icons}>
+            <div css={icons} onClick={() => navigate(-1)}>
                 <IoIosArrowBack />
             </div>    
             <div css={text}>
                 { heading }
             </div>    
-            <div css={icons}>
+            <div css={icons} style={{visibility: 'hidden'}}>
                 <IoIosSearch />
             </div>    
         </div>
