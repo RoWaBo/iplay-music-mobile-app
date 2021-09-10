@@ -38,7 +38,14 @@
 #### Axios
 - Funktionen som fetcher data udfra en url. Det er ligesom fetch, men en smule mere strømlignet og return objektet er struktureret pænere.
 
+#### Querystring
+- Bruges to at parse data i et format så det kan læses som et url parameter. Jeg bruger det i forbindelse med login kommunikation med spotify.
 
+#### React icons
+- Bibliotek af ikoner som nemt kan importeres ind i ens reactprojekt. Meget brugbart i alle projekter! 
+
+#### Netlify-cli
+- Netlify håndterer vores server site kode og denne pakke gør det muligt at køre netlify på vores lokale server.  
 ---
 
 ### Argumentation for de valg du selvstændigt har truffet under løsningen af opgaven
