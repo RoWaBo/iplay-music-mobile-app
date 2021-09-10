@@ -5,28 +5,50 @@ import SubHeading from "./SubHeading";
 import { font, spacing } from '../style/Styles';
 import PlayAudioButton from './PlayAudioButton';
 
-const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, audioUrl }) => {
+const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, audioUrl, skeleton }) => {
 
     const container = ({ colors }) => css`
+        ${skeleton && (`
+            background: #efefef; 
+            height: 50.7px;
+            border-radius: 5px;
+
+            & > :first-of-type {
+                margin-left: .4rem;
+            }
+        `)};     
         color: ${colors.font.primary};
         margin: ${spacing.m};
         display: flex;
         align-items: center;
+            
     `
     const textContainer = ({ colors }) => css`
         padding-left: ${spacing.s};
 
         & h2 {
-            width: ${imgUrl ? '45vw' : '58vw'} ;
+            ${skeleton && (`
+            background: #dbdbdb;
+            width: 100%;
+            height: ${font.size.m};
+            border-radius: 3px; 
+            `)}
+            width: ${imgUrl ? '45vw' : '58vw'};
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;            
+            white-space: nowrap; 
         }
 
         & p {
+            ${skeleton && (`
+            background: #dbdbdb;
+            width: 50%;
+            height: ${font.size.s};
+            border-radius: 3px; 
+            `)}
             font-size: ${font.size.s};
             font-weight: ${font.weight.light};
-            padding-top: ${spacing.xxs};    
+            margin-top: ${spacing.xxs};    
         }
 
         & a {
@@ -46,7 +68,9 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, aud
 
     return (
         <li css={container}>
-            {imgUrl ? <ShadowBox small><img src={imgUrl} alt={heading} /></ShadowBox> : <PlayAudioButton audioUrl={audioUrl} />}
+            {skeleton && <ShadowBox xSmall/>}
+            {!imgUrl && !skeleton && <PlayAudioButton audioUrl={audioUrl} />}
+            {imgUrl && <ShadowBox small><img src={imgUrl} alt={heading} /></ShadowBox>}
             <div css={textContainer}>
                 <SubHeading>{heading}</SubHeading>
                 <p>{description}</p>
