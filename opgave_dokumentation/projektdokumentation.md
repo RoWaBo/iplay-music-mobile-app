@@ -17,10 +17,8 @@
 -   CSS
 -   JavaScript
 -   React
--   ...
 
 ---
-
 
 
 ### Redegørelse for oprindelsen af evt. tredjeparts kode anvendt i opgaveløsningen (Teknisk dokumentation)
@@ -50,12 +48,31 @@
 
 ### Argumentation for de valg du selvstændigt har truffet under løsningen af opgaven
 
-(Hvilke overvejelser har du gjort dig, fx. i forbindelse med dit valg af animationer)
+#### Egne løsninger
+Generelt har jeg haft fokus på at forsøge at kode alt selv uden brug af npm-pakker. Jeg traf det valg, da det tvinger mig til at tænke mere over hvordan React fungerer. Det betyder tilgengæld at nogle funktioner kunne være løst bedre, men nu har jeg forsøgt selv og lært en del på vejen.
+
+#### Ingen animationer
+Jeg valgte at lægge alt min energi i at forstå de basale React States og hooks, derfor har jeg ikke brugt tid på at tilføje animationer. Jeg brugte den sidste del af tiden på at få min player til at virke og lave error handling.
+
+#### Ekstra "quality of life" funktionalitet
+Jeg har brugt ekstra tid på mindre funktioner såsom: 
+	* View all - funktionen som ved klik viser eller fjerner kontent
+	* UtilityBar - dynamisk bagground-color når der scrolles
+	* NavBar - highlighter ikon som matcher det view man er på
+	* ShadowBox - Placeholderbillede der vises før kontent loades
+	* Custom hook - som henter spotify api data
+	* Fuld funktionel Player hvor alle knapper virker - også med autoplay når track slutter
 
 ---
 ### Vurdering af egen indsats & gennemførelse af opgaveforløbet (Arbejdsgangen)
 
-(Hvad gik godt. Hvor prioriterede du forkert. Klagesange fra de varme lande om halvfærdigt produkt, på grund af manglende nattesøvn, fordi din kæle-skildpadde havde tandpine er IKKE interessante.)
+Det er gået rimelig godt, synes jeg. Jeg har fået en del bedre forståelse for React, men der er stadig noget vej endnu. Er stadig lidt forvirret over re-renders og detaljerne omkring de forskellige hooks. Men efter jeg programmerede Playeren, begyndte jeg at fatte hvordan states og useEffect kan arbejde sammen. Har stadig en fornemmelse af at der bliver trigget lidt for mange re-renders, men det må vi lige vende ved lejlighed!
+
+Jeg er stadig ved at finde frem til mine egne systemer i forhold til sammensætning og filstruktur i React. Det har været en udfordring at bevare den samme logik og struktur igennem projektet. Men det er jo bare noget der tager tid og øvelse. Generelt har jeg forsøgt at være konsekvent med opsætning af komponenter og navngivning af variabler.
+
+Jeg begik den fejl ikke at læse opgavebeskrivelsen godt nok, så har spildt tid på nogle opgaver som ikke var obligatoriske. Jeg skrottede fuldstændig funktionerne i min PlayAudioButton.
+
+Alt i alt et godt og interessant projekt. Det har været sjovt det meste af tiden.
 
 ---
 ### En beskrivelse af særlige punkter til bedømmelse
