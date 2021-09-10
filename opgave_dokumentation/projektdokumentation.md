@@ -77,18 +77,89 @@ Alt i alt et godt og interessant projekt. Det har været sjovt det meste af tide
 ---
 ### En beskrivelse af særlige punkter til bedømmelse
 
-(er der en særlig detalje som du synes din underviser bør lægge mærke til når dit projekt evalueres)
-
-Du kan vise kode i markdown på følgende måder: 
+Brug af objects som dynamisk css værdier:
 ```js
-function myFunction() {
-	
+export const font = {
+    fontImportUrl: 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap',
+    family: `'Poppins', sans-serif`,
+    size: {
+        xl: "36px",
+        l: "20px",
+        m: "15px",
+        s: "12px"
+    },
+    weight: {
+        bold: "600",
+        light: "400"
+    }
+}
+
+export const spacing = {
+    xxs: "0.2rem",
+    xs: "0.5rem",
+    s: "1rem",
+    m: "1.5rem",
+    l: "2rem",
+    xl: "2.5rem",
+    xxl: "5rem"
+}
+```
+Eksempel af komponent objekterne er brugt:
+```js
+const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, audioUrl }) => {
+
+    const container = ({ colors }) => css`
+        color: ${colors.font.primary};
+        margin: ${spacing.m};
+        display: flex;
+        align-items: center;
+    `
+    const textContainer = ({ colors }) => css`
+        padding-left: ${spacing.s};
+
+        & h2 {
+            width: ${imgUrl ? '45vw' : '58vw'} ;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;            
+        }
+
+        & p {
+            font-size: ${font.size.s};
+            font-weight: ${font.weight.light};
+            padding-top: ${spacing.xxs};    
+        }
+
+        & a {
+            color: ${colors.font.primary};    
+        }
+    `
+    const infoContainer = ({ colors }) => css`
+        font-size: ${font.size.s};
+        font-weight: ${font.weight.light};
+        margin-left: auto;
+        min-width: fit-content;
+
+        & a {
+            color: ${colors.font.primary};    
+        }
+    `
+
+    return (
+        <li css={container}>
+            {imgUrl ? <ShadowBox small><img src={imgUrl} alt={heading} /></ShadowBox> : <PlayAudioButton audioUrl={audioUrl} />}
+            <div css={textContainer}>
+                <SubHeading>{heading}</SubHeading>
+                <p>{description}</p>
+            </div>
+            <div css={infoContainer}>
+                <p>{additionalInfo}</p>
+            </div>
+        </li>
+
+    );
 }
 ```
 
-```css
-.my__CSSrule {
-	property: value;
-}
-```
+
 
