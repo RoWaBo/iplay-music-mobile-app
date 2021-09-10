@@ -77,7 +77,7 @@ Alt i alt et godt og interessant projekt. Det har været sjovt det meste af tide
 ---
 ### En beskrivelse af særlige punkter til bedømmelse
 
-#### Dynamisk css værdier
+#### Dynamiske css værdier
 Brug af objekter som dynamisk css værdier:
 ```js
 export const font = {
@@ -346,6 +346,34 @@ const Player = ({ mediaUrl, trackNumber }) => {
             <Gradient />
         </MainFullViewContainer>
     );
+}
+```
+
+#### Custom hook
+```js
+const useSpotifyApiFetch = url => {
+
+    const { authToken } = useAuth();
+
+    const [data, setData] = useState(); 
+
+    useEffect(() => {
+        if (authToken) {
+            axios(url, {
+                headers: {
+                    "Authorization": `${authToken.token_type} ${authToken.access_token}`
+                }
+            })
+                .then(result => { 
+                    setData(result) 
+                })
+                .catch(error => { 
+                    console.log(error) 
+                })                 
+        }
+    }, [authToken, url])
+
+    return data
 }
 ```
 
