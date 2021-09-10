@@ -1,6 +1,6 @@
 # Projektdokumentation
 
-#### Navn:
+#### Navn: Robert Watt Boolsen
 
 ##### Hold: 1146521c105 / WU05
 
@@ -26,6 +26,18 @@
 ### Redegørelse for oprindelsen af evt. tredjeparts kode anvendt i opgaveløsningen (Teknisk dokumentation)
 
 (Hvilke npm-pakker har du installeret for at dit projekt virker? Beskriv kort hvilket "problem" hver pakke løser.)
+
+#### Emotion
+- Css styling direktig i js. Igennem css funktion kan der skrives css på samme måde som i en css fil. Jeg bruger også deres ThemeProvider, som gør det muligt at dele og dynamisk ændre css værdier med alle views. Dette er smart når app'ens farver/tema skal kunne ændres ved tryk på en knap. Derudover bruger jeg Global funktionen som tilføjer og aktiverer css værdier globalt på alle views. Jeg bruger det som en boilerplate til at nulstille default styling og bruge settings som jeg foretrækker. 
+
+#### Reach Router
+- ROUTER/PATH: Styrer hvilke views der bliver loaded udfra browser urlen.
+- LINK fungerer som et a tag og loader det view som "to attributen" henviser til. 
+- NAVIGATE er næsten ligesom Link, men er en funktion som kan kaldes og loaded et nyt view. 
+
+#### Axios
+- Funktionen som fetcher data udfra en url. Det er ligesom fetch, men en smule mere strømlignet og return objektet er struktureret pænere.
+
 
 ---
 
