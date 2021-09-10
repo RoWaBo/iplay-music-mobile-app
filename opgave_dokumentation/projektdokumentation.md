@@ -23,8 +23,6 @@
 
 ### Redegørelse for oprindelsen af evt. tredjeparts kode anvendt i opgaveløsningen (Teknisk dokumentation)
 
-(Hvilke npm-pakker har du installeret for at dit projekt virker? Beskriv kort hvilket "problem" hver pakke løser.)
-
 #### Emotion
 - Css styling direktig i js. Igennem css funktion kan der skrives css på samme måde som i en css fil. Jeg bruger også deres ThemeProvider, som gør det muligt at dele og dynamisk ændre css værdier med alle views. Dette er smart når app'ens farver/tema skal kunne ændres ved tryk på en knap. Derudover bruger jeg Global funktionen som tilføjer og aktiverer css værdier globalt på alle views. Jeg bruger det som en boilerplate til at nulstille default styling og bruge settings som jeg foretrækker. 
 
@@ -43,7 +41,7 @@
 - Bibliotek af ikoner som nemt kan importeres ind i ens reactprojekt. Meget brugbart i alle projekter! 
 
 #### Netlify-cli
-- Netlify håndterer vores server site kode og denne pakke gør det muligt at køre netlify på vores lokale server.  
+- Netlify håndterer vores serversidekode og denne pakke gør det muligt at køre netlify på vores lokale server.  
 ---
 
 ### Argumentation for de valg du selvstændigt har truffet under løsningen af opgaven
