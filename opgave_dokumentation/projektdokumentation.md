@@ -77,7 +77,7 @@ Alt i alt et godt og interessant projekt. Det har været sjovt det meste af tide
 ---
 ### En beskrivelse af særlige punkter til bedømmelse
 
-Brug af objects som dynamisk css værdier:
+Brug af objekter som dynamisk css værdier:
 ```js
 export const font = {
     fontImportUrl: 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap',
@@ -104,7 +104,7 @@ export const spacing = {
     xxl: "5rem"
 }
 ```
-Eksempel af komponent objekterne er brugt:
+Komponent hvor objekterne er brugt:
 ```js
 const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, audioUrl }) => {
 
