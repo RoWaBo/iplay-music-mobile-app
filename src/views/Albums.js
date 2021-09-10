@@ -5,17 +5,35 @@ import NavigationBar from '../components/NavigationBar';
 import HeadingPrimary from '../components/HeadingPrimary';
 import UtilityBar from '../components/UtilityBar';
 import SubHeading from '../components/SubHeading';
-import SpotifyApiFetch from '../components/SpotifyApiFetch';
+import useSpotifyApiFetch from '../functions/useSpotifyApiFetch';
 import ShadowBox from '../components/ShadowBox';
 import { Link } from '@reach/router';
 import SwipableContainer from '../components/SwipableContainer';
 import ItemPresentationBar from '../components/ItemPresentationBar';
+import MainFullViewContainer from "../components/MainFullViewContainer";
+import { decideSingularPlural } from '../functions/HelperFunctions';
+import { useState } from 'react';
 
 const Albums = () => {
 
-    const featuredAlbums = SpotifyApiFetch("https://api.spotify.com/v1/browse/featured-playlists");
+    const [newReleasesLimit, setnewReleasesLimit] = useState(4)
 
-    const newReleases = SpotifyApiFetch("https://api.spotify.com/v1/browse/new-releases?limit=4");
+    // Fetches Yussef Dayes albums
+    const featuredAlbums = useSpotifyApiFetch("https://api.spotify.com/v1/artists/2rspptKP0lPBdlJJAJHqht/albums?limit=10");
+
+    const newReleases = useSpotifyApiFetch(`https://api.spotify.com/v1/browse/new-releases?limit=${newReleasesLimit}`);
+
+    const toggleViewAll = (e, newLimit) => {
+        if (e.target.value === "false") {
+            setnewReleasesLimit(newLimit)
+            e.target.innerText = "view less"
+            e.target.value = "true"
+        } else {
+            setnewReleasesLimit(4)
+            e.target.innerText = "view all"
+            e.target.value = "false"    
+        }  
+    }    
 
     // === STYLING ===
     const subHeadingContainer = css`
@@ -25,6 +43,8 @@ const Albums = () => {
     `
     const viewAll = ({ colors }) => css`
     color: ${colors.primary};
+    background: transparent;
+    border: none;
     font-size: ${font.size.m};
     font-weight: ${font.weight.light};
     text-transform: capitalize;
@@ -32,48 +52,45 @@ const Albums = () => {
     cursor: pointer;
     `
 
-    const style = css`
-        min-width: 100px;
-        min-height: 100px;
-    `
-
     return (
-        <main css={({ colors }) => css`background: ${colors.background.primary};`}>
-            <UtilityBar heading="music" />
+        <MainFullViewContainer>
+            <UtilityBar heading="albums" />
             <HeadingPrimary>all albums</HeadingPrimary>
             <section>
-                <div css={subHeadingContainer}>
+                <header css={subHeadingContainer}>
                     <SubHeading>featured albums</SubHeading>
-                    <p css={viewAll}>view all</p>
-                </div>
+                    <button css={viewAll} style={{visibility: 'hidden'}}>view all</button>
+                </header>
                 <SwipableContainer>
-                    {featuredAlbums?.data.playlists.items.map(list => (
-                        <Link to="/album_details">
+                    {featuredAlbums?.data.items.map(album => (
+                        <Link to={`/album_details/${album.id}`} key={album.id}>
                             <ShadowBox>
-                                <img src={list.images[0].url} alt={list.name} />
+                                <img src={album.images[0].url} alt={album.name} />
                             </ShadowBox>
                         </Link>
                     ))}
                 </SwipableContainer>
             </section>
-            <section css={css`margin: ${spacing.s} 0 ${spacing.xxl};`}>
-                <div css={subHeadingContainer}>
+            <section css={css`margin: ${spacing.s} 0;`}>
+                <header css={subHeadingContainer}>
                     <SubHeading>new releases</SubHeading>
-                    <p css={viewAll}>view all</p>
-                </div>
-                {newReleases?.data.albums.items.map(album => (
-                    <Link to={`/album_details/${album.id}`} key={album.id}>
-                        <ItemPresentationBar 
-                            imgUrl={album.images[2].url}
-                            heading={album.name}
-                            description={album.artists[0].name}
-                            additionalInfo={album.total_tracks + " songs"}
-                        />
-                    </Link>    
-                ))}
+                    <button css={viewAll} onClick={e => toggleViewAll(e, 50)} value="false">view all</button>
+                </header>
+                <ul>
+                    {newReleases?.data.albums.items.map(album => (
+                        <Link to={`/album_details/${album.id}`} key={album.id}>
+                            <ItemPresentationBar
+                                imgUrl={album.images[2].url}
+                                heading={album.name}
+                                description={album.artists[0].name}
+                                additionalInfo={decideSingularPlural(album.total_tracks, "Song")}
+                            />
+                        </Link>
+                    ))}
+                </ul>
             </section>
             <NavigationBar />
-        </main>
+        </MainFullViewContainer>
     );
 }
 

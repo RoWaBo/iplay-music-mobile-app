@@ -2,7 +2,7 @@ import { useAuth } from "../contexts/AuthContext";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const SpotifyApiFetch = url => {
+const useSpotifyApiFetch = url => {
 
     const { authToken } = useAuth();
 
@@ -16,8 +16,7 @@ const SpotifyApiFetch = url => {
                 }
             })
                 .then(result => { 
-                    setData(result)
-                    console.log(result) 
+                    setData(result) 
                 })
                 .catch(error => { 
                     console.log(error) 
@@ -28,4 +27,4 @@ const SpotifyApiFetch = url => {
     return data
 }
 
-export default SpotifyApiFetch;
+export default useSpotifyApiFetch;

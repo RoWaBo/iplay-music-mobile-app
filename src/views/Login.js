@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import querystring from "querystring";
-import { bigButtonStyle } from '../style/BigButtonStyle';
+import { bigButtonStyle } from '../style/bigButtonStyle';
 import { font, spacing } from '../style/Styles';
 
 const Login = () => {

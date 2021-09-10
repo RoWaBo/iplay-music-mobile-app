@@ -1,9 +1,6 @@
 import { ThemeProvider } from "@emotion/react";
 import { useTheme } from "../contexts/ThemeContext";
 import { darkTheme, lightTheme } from "./ThemeStyles";
-// import { useEffect, useState } from "react";
-// import { useTheme } from "../contexts/ThemeContext";
-/** @jsxImportSource @emotion/react */
 
 const Theme = ({ children }) => {
 

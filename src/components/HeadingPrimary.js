@@ -2,17 +2,16 @@
 import { css } from '@emotion/react';
 import { font, spacing } from '../style/Styles';
 
-const HeadingPrimary = ({ children }) => {
+const HeadingPrimary = ({ children, light }) => {
 
     const container = ({ colors }) => css`
-        margin: ${spacing.xxl} ${spacing.m} ${spacing.m};
-        background: ${colors.background.primary};    
+        padding: ${spacing.xxl} ${spacing.m} ${spacing.m};   
     `
 
     return (
         <header css={container}>
             <h1 css={({ colors }) => css`
-            background: ${colors.gradient};
+            background: ${light ? colors.font.secondary : colors.gradient};
             background-clip: text;
             -webkit-text-fill-color: transparent;
             display: initial;
