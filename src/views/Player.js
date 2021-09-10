@@ -59,10 +59,6 @@ const Player = ({ mediaUrl, trackNumber }) => {
         setCurrentTime(updatedTime)  
     }
 
-    // tracks && console.log(tracks[trackIndex]);
-    // console.log(currentTime * 1000);
-    // tracks && console.log(tracks[trackIndex].duration_ms);
-
     // === STYLE ===
     const imgContainer = css`
         background-image: url('/vinyl.png'), ${theme === 'light' ? `url('/sound-wave-light.png')` : `url('/sound-wave-dark.png')`};
