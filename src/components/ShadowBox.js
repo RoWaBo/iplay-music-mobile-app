@@ -38,6 +38,7 @@ const ShadowBox = ({ children, xSmall, small, medium, circle }) => {
         background-position: center;
         background-repeat: no-repeat;
         background-size: contain;
+        background-color: #eaeaea;
     `
 
     return ( 

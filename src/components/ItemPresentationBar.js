@@ -9,12 +9,8 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, aud
 
     const container = ({ colors }) => css`
         ${skeleton && (`
-            height: 60px;
+            height: 50px;
             border-radius: 5px;
-
-            & > :first-of-type {
-                margin-left: .4rem;
-            }
         `)};     
         color: ${colors.font.primary};
         margin: ${spacing.m};
@@ -30,7 +26,8 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, aud
             background: #eaeaea;
             width: 100%;
             height: ${font.size.m};
-            border-radius: 3px; 
+            border-radius: 3px;
+            margin-bottom: .5rem; 
             `)}
             width: ${imgUrl ? '45vw' : '58vw'};
             overflow: hidden;
