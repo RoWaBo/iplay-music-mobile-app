@@ -122,6 +122,7 @@ const Categories = () => {
         }
     `
     const categoryPlaylistLinkSkeleton = ({ colors }) => css`
+        color: ${colors.font.primary};
         display: flex;
         align-items: center;
         padding: ${spacing.m} ${spacing.m} 0;
