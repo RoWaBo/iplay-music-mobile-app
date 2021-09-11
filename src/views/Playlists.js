@@ -85,16 +85,32 @@ const Playlists = ({ playlistId }) => {
             </div>
             <ul css={trackContainer}>
                 <SubHeading large>{selectedPlaylist?.name}</SubHeading>
-                {selectedPlaylist?.tracks.items.map((item, index) => index < trackLimit && (
-                    <Link to={`/player/${encodeURIComponent(selectedPlaylist?.tracks.href)}/${index}`} key={item.track.uri}>
-                        <ItemPresentationBar
-                            heading={item.track.name}
-                            description={item.track.artists[0].name}
-                            additionalInfo={convertMsToMAndS(item.track.duration_ms)}
-                            audioUrl={item.track.preview_url}
-                        />
-                    </Link>
-                ))}
+                {selectedPlaylist ? (
+                    <>
+                        {selectedPlaylist?.tracks.items.map((item, index) => index < trackLimit && (
+                            <Link to={`/player/${encodeURIComponent(selectedPlaylist?.tracks.href)}/${index}`} key={item.track.uri}>
+                                <ItemPresentationBar
+                                    heading={item.track.name}
+                                    description={item.track.artists[0].name}
+                                    additionalInfo={convertMsToMAndS(item.track.duration_ms)}
+                                    audioUrl={item.track.preview_url}
+                                />
+                            </Link>
+                        ))}
+                    </>
+                ) : (
+                    <>
+                        <ItemPresentationBar skeleton />
+                        <ItemPresentationBar skeleton />
+                        <ItemPresentationBar skeleton />
+                        <ItemPresentationBar skeleton />
+                        <ItemPresentationBar skeleton />
+                        <ItemPresentationBar skeleton />
+                        <ItemPresentationBar skeleton />
+                        <ItemPresentationBar skeleton />
+                    </>
+                )}
+
                 <button css={button} onClick={e => toggleViewAll(e, selectedPlaylist.tracks.total)} value="false">View All</button>
             </ul>
             <NavigationBar />

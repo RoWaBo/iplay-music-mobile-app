@@ -72,10 +72,6 @@ const Player = ({ mediaUrl, trackNumber }) => {
         setCurrentTime(updatedTime)
     }
 
-    // audioElement && console.log(audioElement.current);
-    // console.log(currentTime * 1000);
-    // tracks && console.log(tracks[trackIndex].duration_ms);
-
     // === STYLE ===
     const imgContainer = css`
         background-image: url('/vinyl.png'), ${theme === 'light' ? `url('/sound-wave-light.png')` : `url('/sound-wave-dark.png')`};
@@ -162,7 +158,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
         box-shadow: 0px 0px 0px 6px rgba(255, 17, 104, 0.35);
 
         position: absolute;
-        top: -4px;
+        top: -4.5px;
         left: ${((currentTime * 1000) / (audioElement.current?.duration * 1000)) * 100}%;
     `
     const time = ({ colors }) => css`

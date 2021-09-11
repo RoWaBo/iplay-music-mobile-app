@@ -28,7 +28,6 @@ const Featured = () => {
     const contentContainer = ({ colors }) => css`
         margin: 0 ${spacing.m};
         background: ${colors.background.primary};
-
         & > * {
             margin-bottom: ${spacing.xl};    
         }
