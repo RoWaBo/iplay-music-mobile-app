@@ -44,7 +44,7 @@ const Categories = () => {
 
     const toggleButton = (category, e) => {
         const buttons = categoryList.current.querySelectorAll('button');
-        
+
         setCategoryPlaylists && setCategoryPlaylists(undefined)
 
         if (e.target.value === "false") {
@@ -121,6 +121,19 @@ const Categories = () => {
             white-space: nowrap; 
         }
     `
+    const categoryPlaylistLinkSkeleton = ({ colors }) => css`
+        display: flex;
+        align-items: center;
+        padding: ${spacing.m} ${spacing.m} 0;
+
+        & div {
+            width: 60%;
+            height: 22.5px;
+            background: #eaeaea;
+            border-radius: 4px;
+            margin-right: auto;
+        }
+    `
 
     const categoryColors = ["#D70060", "#E54028", "#F18D05", "#F2BC06", "#5EB11C", "#3A7634", "#0ABEBE", "#00A1CB", "#115793"]
 
@@ -138,39 +151,40 @@ const Categories = () => {
                                 <ShadowBox xSmall circle><img src={category.icons[0].url} alt={category.name} /></ShadowBox>
                             </button>
                             <ul>
-                                {categoryId === category.id && categoryPlaylists?.map( playlist => (
-                                    <li key={playlist.id}>
-                                        <Link to={`/playlists/${playlist.id}`} css={categoryPlaylistLink}>
-                                            <h3>{playlist.name}</h3>
-                                            <IoIosArrowForward />
-                                        </Link>
-                                    </li>
-                                ))}
+                                {categoryId === category.id && (categoryPlaylists ? (
+                                    categoryPlaylists?.map(playlist => (
+                                        <li key={playlist.id}>
+                                            <Link to={`/playlists/${playlist.id}`} css={categoryPlaylistLink}>
+                                                <h3>{playlist.name}</h3>
+                                                <IoIosArrowForward />
+                                            </Link>
+                                        </li>
+                                    ))
+                                ) : ( <>
+                                    <div css={categoryPlaylistLinkSkeleton}><div></div><IoIosArrowForward /></div>
+                                    <div css={categoryPlaylistLinkSkeleton}><div></div><IoIosArrowForward /></div>
+                                    <div css={categoryPlaylistLinkSkeleton}><div></div><IoIosArrowForward /></div>
+                                    <div css={categoryPlaylistLinkSkeleton}><div></div><IoIosArrowForward /></div>
+                                    <div css={categoryPlaylistLinkSkeleton}><div></div><IoIosArrowForward /></div>
+                                    <div css={categoryPlaylistLinkSkeleton}><div></div><IoIosArrowForward /></div>
+                                    <div css={categoryPlaylistLinkSkeleton}><div></div><IoIosArrowForward /></div>
+                                    <div css={categoryPlaylistLinkSkeleton}><div></div><IoIosArrowForward /></div>
+                                </> )
+                                )}
                             </ul>
                         </li>
                     ))}
-                </>) : (<>
-                    <button css={categoryButtonSkeleton}>
-                        <SubHeading></SubHeading>
-                        <ShadowBox xSmall circle></ShadowBox>
-                    </button>
-                    <button css={categoryButtonSkeleton}>
-                        <SubHeading></SubHeading>
-                        <ShadowBox xSmall circle></ShadowBox>
-                    </button>
-                    <button css={categoryButtonSkeleton}>
-                        <SubHeading></SubHeading>
-                        <ShadowBox xSmall circle></ShadowBox>
-                    </button>
-                    <button css={categoryButtonSkeleton}>
-                        <SubHeading></SubHeading>
-                        <ShadowBox xSmall circle></ShadowBox>
-                    </button>
-                    <button css={categoryButtonSkeleton}>
-                        <SubHeading></SubHeading>
-                        <ShadowBox xSmall circle></ShadowBox>
-                    </button>
-                </>)}
+                </>) : ( <>
+                    <button css={categoryButtonSkeleton}><SubHeading></SubHeading><ShadowBox xSmall circle></ShadowBox></button>
+                    <button css={categoryButtonSkeleton}><SubHeading></SubHeading><ShadowBox xSmall circle></ShadowBox></button>
+                    <button css={categoryButtonSkeleton}><SubHeading></SubHeading><ShadowBox xSmall circle></ShadowBox></button>
+                    <button css={categoryButtonSkeleton}><SubHeading></SubHeading><ShadowBox xSmall circle></ShadowBox></button>
+                    <button css={categoryButtonSkeleton}><SubHeading></SubHeading><ShadowBox xSmall circle></ShadowBox></button>
+                    <button css={categoryButtonSkeleton}><SubHeading></SubHeading><ShadowBox xSmall circle></ShadowBox></button>
+                    <button css={categoryButtonSkeleton}><SubHeading></SubHeading><ShadowBox xSmall circle></ShadowBox></button>
+                    <button css={categoryButtonSkeleton}><SubHeading></SubHeading><ShadowBox xSmall circle></ShadowBox></button>
+                    <button css={categoryButtonSkeleton}><SubHeading></SubHeading><ShadowBox xSmall circle></ShadowBox></button>
+                </> )}
             </ul>
             <NavigationBar />
         </MainFullViewContainer>
