@@ -9,8 +9,7 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, aud
 
     const container = ({ colors }) => css`
         ${skeleton && (`
-            background: #efefef; 
-            height: 50.7px;
+            height: 60px;
             border-radius: 5px;
 
             & > :first-of-type {
@@ -28,7 +27,7 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, aud
 
         & h2 {
             ${skeleton && (`
-            background: #dbdbdb;
+            background: #eaeaea;
             width: 100%;
             height: ${font.size.m};
             border-radius: 3px; 
@@ -41,7 +40,7 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, aud
 
         & p {
             ${skeleton && (`
-            background: #dbdbdb;
+            background: #eaeaea;
             width: 50%;
             height: ${font.size.s};
             border-radius: 3px; 
@@ -68,7 +67,7 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, aud
 
     return (
         <li css={container}>
-            {skeleton && <ShadowBox xSmall/>}
+            {skeleton && <ShadowBox small/>}
             {!imgUrl && !skeleton && <PlayAudioButton audioUrl={audioUrl} />}
             {imgUrl && <ShadowBox small><img src={imgUrl} alt={heading} /></ShadowBox>}
             <div css={textContainer}>

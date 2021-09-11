@@ -85,8 +85,7 @@ const Playlists = ({ playlistId }) => {
             </div>
             <ul css={trackContainer}>
                 <SubHeading large>{selectedPlaylist?.name}</SubHeading>
-                {selectedPlaylist ? (
-                    <>
+                {selectedPlaylist ? ( <>
                         {selectedPlaylist?.tracks.items.map((item, index) => index < trackLimit && (
                             <Link to={`/player/${encodeURIComponent(selectedPlaylist?.tracks.href)}/${index}`} key={item.track.uri}>
                                 <ItemPresentationBar
@@ -97,9 +96,7 @@ const Playlists = ({ playlistId }) => {
                                 />
                             </Link>
                         ))}
-                    </>
-                ) : (
-                    <>
+                </> ) : ( <>
                         <ItemPresentationBar skeleton />
                         <ItemPresentationBar skeleton />
                         <ItemPresentationBar skeleton />
@@ -107,9 +104,8 @@ const Playlists = ({ playlistId }) => {
                         <ItemPresentationBar skeleton />
                         <ItemPresentationBar skeleton />
                         <ItemPresentationBar skeleton />
-                        <ItemPresentationBar skeleton />
-                    </>
-                )}
+                        <ItemPresentationBar skeleton />                   
+                </> )}
 
                 <button css={button} onClick={e => toggleViewAll(e, selectedPlaylist.tracks.total)} value="false">View All</button>
             </ul>

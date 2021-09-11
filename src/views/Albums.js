@@ -77,16 +77,23 @@ const Albums = () => {
                     <button css={viewAll} onClick={e => toggleViewAll(e, 50)} value="false">view all</button>
                 </header>
                 <ul>
-                    {newReleases?.data.albums.items.map(album => (
-                        <Link to={`/album_details/${album.id}`} key={album.id}>
-                            <ItemPresentationBar
-                                imgUrl={album.images[2].url}
-                                heading={album.name}
-                                description={album.artists[0].name}
-                                additionalInfo={decideSingularPlural(album.total_tracks, "Song")}
-                            />
-                        </Link>
-                    ))}
+                    {newReleases ? ( <>
+                        {newReleases?.data.albums.items.map(album => (
+                            <Link to={`/album_details/${album.id}`} key={album.id}>
+                                <ItemPresentationBar
+                                    imgUrl={album.images[2].url}
+                                    heading={album.name}
+                                    description={album.artists[0].name}
+                                    additionalInfo={decideSingularPlural(album.total_tracks, "Song")}
+                                />
+                            </Link>
+                        ))}
+                    </> ) : ( <>
+                        <ItemPresentationBar skeleton />
+                        <ItemPresentationBar skeleton />
+                        <ItemPresentationBar skeleton />
+                        <ItemPresentationBar skeleton />
+                    </>)}
                 </ul>
             </section>
             <NavigationBar />
