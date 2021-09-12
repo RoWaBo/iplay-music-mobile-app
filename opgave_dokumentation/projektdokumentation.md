@@ -53,7 +53,8 @@
 Generelt har jeg haft fokus på at forsøge at kode alt selv uden brug af npm-pakker. Jeg traf det valg, da det tvinger mig til at tænke mere over hvordan React fungerer. Det betyder tilgengæld at nogle funktioner kunne være løst bedre, men nu har jeg forsøgt selv og lært en del på vejen.
 
 #### Ekstra "quality of life" funktionalitet
-Jeg har brugt ekstra tid på mindre funktioner såsom: 
+Jeg har brugt ekstra tid på mindre funktioner såsom:
+
 	* View all - funktionen som ved klik viser eller fjerner kontent
 	
 	* UtilityBar - dynamisk bagground-color når der scrolles
