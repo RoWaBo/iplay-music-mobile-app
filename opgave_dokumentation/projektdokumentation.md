@@ -78,6 +78,8 @@ Jeg er stadig ved at finde frem til mine egne systemer i forhold til sammensætn
 
 Jeg begik den fejl ikke at læse opgavebeskrivelsen godt nok, så har spildt tid på nogle opgaver som ikke var obligatoriske. Jeg skrottede fuldstændig funktionerne i min PlayAudioButton.
 
+OBS! Efter jeg tilføjede react-reveal animationer, får jeg en del warnings i consollen, ellers har React ikke kastet mange fejl efter mig andet end 404 på Playlists.
+
 Alt i alt et godt og interessant projekt. Det har været sjovt det meste af tiden.
 
 ---
