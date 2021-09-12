@@ -4,6 +4,7 @@ import ShadowBox from "./ShadowBox";
 import SubHeading from "./SubHeading";
 import { font, spacing } from '../style/Styles';
 import PlayAudioButton from './PlayAudioButton';
+import Fade from 'react-reveal/Fade';
 
 const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, audioUrl, skeleton }) => {
 
@@ -63,19 +64,20 @@ const ItemPresentationBar = ({ imgUrl, heading, description, additionalInfo, aud
     `
 
     return (
-        <li css={container}>
-            {skeleton && <ShadowBox small/>}
-            {!imgUrl && !skeleton && <PlayAudioButton audioUrl={audioUrl} />}
-            {imgUrl && <ShadowBox small><img src={imgUrl} alt={heading} /></ShadowBox>}
-            <div css={textContainer}>
-                <SubHeading>{heading}</SubHeading>
-                <p>{description}</p>
-            </div>
-            <div css={infoContainer}>
-                <p>{additionalInfo}</p>
-            </div>
-        </li>
-
+        <Fade>
+            <li css={container}>
+                {skeleton && <ShadowBox small />}
+                {!imgUrl && !skeleton && <PlayAudioButton audioUrl={audioUrl} />}
+                {imgUrl && <ShadowBox small><img src={imgUrl} alt={heading} /></ShadowBox>}
+                <div css={textContainer}>
+                    <SubHeading>{heading}</SubHeading>
+                    <p>{description}</p>
+                </div>
+                <div css={infoContainer}>
+                    <p>{additionalInfo}</p>
+                </div>
+            </li>
+        </Fade>
     );
 }
 

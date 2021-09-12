@@ -20,6 +20,7 @@ const UtilityBar = ({ heading, light }) => {
         height: 81px;
         position: fixed;
         top:0;
+        z-index: 10;
         transition: ease-in-out;
     `
 

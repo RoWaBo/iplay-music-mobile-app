@@ -1,28 +1,29 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import Fade from 'react-reveal/Fade';
 
 const ShadowBox = ({ children, xSmall, small, medium, circle }) => {
 
-    const defaultSize = `min-width: 130px; min-height: 130px;`        
+    const defaultSize = `min-width: 130px; min-height: 130px;`
     const mediumSize = `
         min-width: 155px; 
         min-height: 155px;
         max-width: 155px; 
         max-height: 155px;
-    `        
+    `
     const smallSize = `
         min-width: 50px; 
         min-height: 50px;
         max-width: 50px; 
         max-height: 50px;
-    `        
+    `
     const xSmallSize = `
         min-width: 40px; 
         min-height: 40px;
         max-width: 40px; 
         max-height: 40px;
-    `        
-    
+    `
+
     const styling = css`
         ${small && smallSize};
         ${medium && mediumSize};
@@ -41,11 +42,13 @@ const ShadowBox = ({ children, xSmall, small, medium, circle }) => {
         background-color: #eaeaea;
     `
 
-    return ( 
-        <div css={styling}>
-            { children }
-        </div>
-     );
+    return (
+        <Fade>
+            <div css={styling}>
+                {children}
+            </div>
+        </Fade>
+    );
 }
- 
+
 export default ShadowBox;

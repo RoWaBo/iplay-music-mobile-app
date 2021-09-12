@@ -10,6 +10,7 @@ import SubHeading from '../components/SubHeading';
 import ItemPresentationBar from '../components/ItemPresentationBar';
 import { decideSingularPlural, convertMsToMAndS } from '../functions/HelperFunctions';
 import { Link } from '@reach/router';
+import Fade from 'react-reveal/Fade';
 
 const AlbumDetails = ({ id }) => {
 
@@ -39,10 +40,12 @@ const AlbumDetails = ({ id }) => {
         <>
             <MainFullViewContainer>
                 <UtilityBar light heading="album" />
-                <div css={backgroundImg}>
-                    <HeadingPrimary light>{album?.data.name}</HeadingPrimary>
-                    <p css={songs}>{decideSingularPlural(album?.data.total_tracks, "Song")}</p>
-                </div>
+                <Fade>
+                    <div css={backgroundImg}>
+                        <HeadingPrimary light>{album?.data.name}</HeadingPrimary>
+                        <p css={songs}>{decideSingularPlural(album?.data.total_tracks, "Song")}</p>
+                    </div>
+                </Fade>
                 <ul css={trackContainer}>
                     <SubHeading>all songs</SubHeading>
                     {album?.data.tracks.items.map((track, index) => (

@@ -14,6 +14,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from '@reach/router';
 import { IoIosArrowForward } from 'react-icons/io';
 import ShadowBox from '../components/ShadowBox';
+import Fade from 'react-reveal/Fade';
 
 
 const Categories = () => {
@@ -130,8 +131,8 @@ const Categories = () => {
         & div {
             width: 60%;
             height: 22.5px;
-            background: #eaeaea;
-            border-radius: 4px;
+            background: #efefef;
+            border-radius: 11px;
             margin-right: auto;
         }
     `
@@ -146,22 +147,26 @@ const Categories = () => {
                 {allCategories ? (<>
                     {allCategories?.map((category, index) => index < categoryColors.length && (
                         <li key={category.id + index}>
-                            <button style={{ background: categoryColors[index] }} css={categoryButton} onClick={e => toggleButton(category, e)} value="false">
-                                <SubHeading>{category.name}</SubHeading>
-                                {/* <HiOutlineDotsHorizontal /> */}
-                                <ShadowBox xSmall circle><img src={category.icons[0].url} alt={category.name} /></ShadowBox>
-                            </button>
+                            <Fade>
+                                <button style={{ background: categoryColors[index] }} css={categoryButton} onClick={e => toggleButton(category, e)} value="false">
+                                    <SubHeading>{category.name}</SubHeading>
+                                    {/* <HiOutlineDotsHorizontal /> */}
+                                    <ShadowBox xSmall circle><img src={category.icons[0].url} alt={category.name} /></ShadowBox>
+                                </button>
+                            </Fade>
                             <ul>
                                 {categoryId === category.id && (categoryPlaylists ? (
                                     categoryPlaylists?.map(playlist => (
                                         <li key={playlist.id}>
-                                            <Link to={`/playlists/${playlist.id}`} css={categoryPlaylistLink}>
-                                                <h3>{playlist.name}</h3>
-                                                <IoIosArrowForward />
-                                            </Link>
+                                            <Fade>
+                                                <Link to={`/playlists/${playlist.id}`} css={categoryPlaylistLink}>
+                                                    <h3>{playlist.name}</h3>
+                                                    <IoIosArrowForward />
+                                                </Link>
+                                            </Fade>
                                         </li>
                                     ))
-                                ) : ( <>
+                                ) : (<>
                                     <div css={categoryPlaylistLinkSkeleton}><div></div><IoIosArrowForward /></div>
                                     <div css={categoryPlaylistLinkSkeleton}><div></div><IoIosArrowForward /></div>
                                     <div css={categoryPlaylistLinkSkeleton}><div></div><IoIosArrowForward /></div>
@@ -170,12 +175,12 @@ const Categories = () => {
                                     <div css={categoryPlaylistLinkSkeleton}><div></div><IoIosArrowForward /></div>
                                     <div css={categoryPlaylistLinkSkeleton}><div></div><IoIosArrowForward /></div>
                                     <div css={categoryPlaylistLinkSkeleton}><div></div><IoIosArrowForward /></div>
-                                </> )
+                                </>)
                                 )}
                             </ul>
                         </li>
                     ))}
-                </>) : ( <>
+                </>) : (<>
                     <button css={categoryButtonSkeleton}><SubHeading></SubHeading><ShadowBox xSmall circle></ShadowBox></button>
                     <button css={categoryButtonSkeleton}><SubHeading></SubHeading><ShadowBox xSmall circle></ShadowBox></button>
                     <button css={categoryButtonSkeleton}><SubHeading></SubHeading><ShadowBox xSmall circle></ShadowBox></button>
@@ -185,7 +190,7 @@ const Categories = () => {
                     <button css={categoryButtonSkeleton}><SubHeading></SubHeading><ShadowBox xSmall circle></ShadowBox></button>
                     <button css={categoryButtonSkeleton}><SubHeading></SubHeading><ShadowBox xSmall circle></ShadowBox></button>
                     <button css={categoryButtonSkeleton}><SubHeading></SubHeading><ShadowBox xSmall circle></ShadowBox></button>
-                </> )}
+                </>)}
             </ul>
             <NavigationBar />
         </MainFullViewContainer>
