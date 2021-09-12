@@ -55,11 +55,17 @@ Generelt har jeg haft fokus på at forsøge at kode alt selv uden brug af npm-pa
 #### Ekstra "quality of life" funktionalitet
 Jeg har brugt ekstra tid på mindre funktioner såsom: 
 	* View all - funktionen som ved klik viser eller fjerner kontent
+	
 	* UtilityBar - dynamisk bagground-color når der scrolles
+	
 	* NavBar - highlighter ikon som matcher det view man er på
+	
 	* ShadowBox - Placeholderbillede der vises før kontent loades
+	
 	* Custom hook - som henter spotify api data
+	
 	* Fuld funktionel Player hvor alle knapper virker - også med autoplay når track slutter
+	
 	* Player error handling
 
 ---
