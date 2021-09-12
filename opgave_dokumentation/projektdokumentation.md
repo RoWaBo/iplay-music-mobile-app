@@ -32,13 +32,16 @@
 - NAVIGATE er næsten ligesom Link, men er en funktion som kan kaldes og loaded et nyt view. 
 
 #### Axios
-- Funktionen som fetcher data udfra en url. Det er ligesom fetch, men en smule mere strømlignet og return objektet er struktureret pænere.
+- Funktionen som fetcher data udfra en url. Det er ligesom fetch, men en smule mere strømlignet og return-objektet er struktureret pænere.
 
 #### Querystring
 - Bruges to at parse data i et format så det kan læses som et url parameter. Jeg bruger det i forbindelse med login kommunikation med spotify.
 
 #### React icons
-- Bibliotek af ikoner som nemt kan importeres ind i ens reactprojekt. Meget brugbart i alle projekter! 
+- Bibliotek af ikoner som nemt kan importeres ind i ens reactprojekt. Meget brugbart i alle projekter!
+
+#### React Reveal
+- Bibliotek af animationer som nemt kan tilføjes til komponenter ved at wrappe dem i et animationskomponent. 
 
 #### Netlify-cli
 - Netlify håndterer vores serversidekode og denne pakke gør det muligt at køre netlify på vores lokale server.  
@@ -49,22 +52,27 @@
 #### Egne løsninger
 Generelt har jeg haft fokus på at forsøge at kode alt selv uden brug af npm-pakker. Jeg traf det valg, da det tvinger mig til at tænke mere over hvordan React fungerer. Det betyder tilgengæld at nogle funktioner kunne være løst bedre, men nu har jeg forsøgt selv og lært en del på vejen.
 
-#### Ingen animationer
-Jeg valgte at lægge alt min energi i at forstå de basale React States og hooks, derfor har jeg ikke brugt tid på at tilføje animationer. Jeg brugte den sidste del af tiden på at få min player til at virke og lave error handling.
-
 #### Ekstra "quality of life" funktionalitet
-Jeg har brugt ekstra tid på mindre funktioner såsom: 
+Jeg har brugt ekstra tid på mindre funktioner såsom:
+
 	* View all - funktionen som ved klik viser eller fjerner kontent
+	
 	* UtilityBar - dynamisk bagground-color når der scrolles
+	
 	* NavBar - highlighter ikon som matcher det view man er på
+	
 	* ShadowBox - Placeholderbillede der vises før kontent loades
+	
 	* Custom hook - som henter spotify api data
+	
 	* Fuld funktionel Player hvor alle knapper virker - også med autoplay når track slutter
+	
+	* Player error handling
 
 ---
 ### Vurdering af egen indsats & gennemførelse af opgaveforløbet (Arbejdsgangen)
 
-Det er gået rimelig godt, synes jeg. Jeg har fået en del bedre forståelse for React, men der er stadig noget vej endnu. Er stadig lidt forvirret over re-renders og detaljerne omkring de forskellige hooks. Men efter jeg programmerede Playeren, begyndte jeg at fatte hvordan states og useEffect kan arbejde sammen. Har stadig en fornemmelse af at der bliver trigget lidt for mange re-renders, men det må vi lige vende ved lejlighed!
+Det er gået rimelig godt, synes jeg. Jeg har fået en del bedre forståelse af React. Ønsker stadig at blive bedre til at overskue re-renders og detaljerne omkring de forskellige hooks. Efter jeg programmerede Playeren, begyndte jeg at fatte hvordan states og useEffect kan arbejde sammen. Har stadig en fornemmelse af at der bliver trigget lidt for mange re-renders, men det må vi lige vende ved lejlighed!
 
 Jeg er stadig ved at finde frem til mine egne systemer i forhold til sammensætning og filstruktur i React. Det har været en udfordring at bevare den samme logik og struktur igennem projektet. Men det er jo bare noget der tager tid og øvelse. Generelt har jeg forsøgt at være konsekvent med opsætning af komponenter og navngivning af variabler.
 
