@@ -5,25 +5,16 @@ import NavigationBar from '../components/NavigationBar';
 import HeadingPrimary from '../components/HeadingPrimary';
 import UtilityBar from '../components/UtilityBar';
 import SubHeading from '../components/SubHeading';
-import useSpotifyApiFetch from '../functions/useSpotifyApiFetch';
-import { Link } from '@reach/router';
 import SwipableContainer from '../components/SwipableContainer';
-import ItemPresentationBar from '../components/ItemPresentationBar';
 import MainFullViewContainer from "../components/MainFullViewContainer";
-import { decideSingularPlural } from '../functions/HelperFunctions';
 import { useState } from 'react';
 import ErrorBoundary from '../components/ErrorBoundary';
 import FeaturedAlbums from '../components/FeaturedAlbums';
-import * as Sentry from '@sentry/react'; 
+import NewAlbumReleases from '../components/NewAlbumReleases';
 
 const Albums = () => {
 
     const [newReleasesLimit, setnewReleasesLimit] = useState(4)
-
-    // Fetches Yussef Dayes albums
-    const featuredAlbums = useSpotifyApiFetch("https://api.spotify.com/v1/artists/2rspptKP0lPBdlJJAJHqht/albums?limit=10");
-
-    const newReleases = useSpotifyApiFetch(`https://api.spotify.com/v1/browse/new-releases?limit=${newReleasesLimit}`);
 
     const toggleViewAll = (e, newLimit) => {
         if (e.target.value === "false") {
@@ -64,8 +55,8 @@ const Albums = () => {
                     <button css={viewAll} style={{ visibility: 'hidden' }}>view all</button>
                 </header>
                 <SwipableContainer>
-                    <ErrorBoundary message="No albums could be found">
-                        <FeaturedAlbums contentArray={featuredAlbums?.data.items} />
+                    <ErrorBoundary message="No featured albums could be found">
+                        <FeaturedAlbums />
                     </ErrorBoundary>
                 </SwipableContainer>
             </section>
@@ -74,25 +65,11 @@ const Albums = () => {
                     <SubHeading>new releases</SubHeading>
                     <button css={viewAll} onClick={e => toggleViewAll(e, 50)} value="false">view all</button>
                 </header>
-                <ul>
-                    {newReleases ? (<>
-                        {newReleases?.data.albums.items.map(album => (
-                            <Link to={`/album_details/${album.id}`} key={album.id}>
-                                <ItemPresentationBar
-                                    imgUrl={album.images[2].url}
-                                    heading={album.name}
-                                    description={album.artists[0].name}
-                                    additionalInfo={decideSingularPlural(album.total_tracks, "Song")}
-                                />
-                            </Link>
-                        ))}
-                    </>) : (<>
-                        <ItemPresentationBar skeleton />
-                        <ItemPresentationBar skeleton />
-                        <ItemPresentationBar skeleton />
-                        <ItemPresentationBar skeleton />
-                    </>)}
-                </ul>
+                <ErrorBoundary message="No new albums releases could be found">
+                    <ul>
+                        <NewAlbumReleases limit={newReleasesLimit} />
+                    </ul>
+                </ErrorBoundary>
             </section>
             <NavigationBar />
         </MainFullViewContainer>
