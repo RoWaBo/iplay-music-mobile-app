@@ -52,7 +52,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
             !audioElement.current.paused && audioElement.current.pause()
             setIsPlaying(false)
             playBtn.current.disabled = true
-            alert(`"${trackName()}" can't be played because of missing preview url!`)
+            alert(`"${tracks[trackIndex].track?.name || tracks[trackIndex].name}" can't be played because of missing preview url!`)
         } else {
             playBtn.current && (playBtn.current.disabled = false)
         }
