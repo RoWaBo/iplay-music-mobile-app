@@ -6,13 +6,15 @@ import HeadingPrimary from '../components/HeadingPrimary';
 import UtilityBar from '../components/UtilityBar';
 import SubHeading from '../components/SubHeading';
 import useSpotifyApiFetch from '../functions/useSpotifyApiFetch';
-import ShadowBox from '../components/ShadowBox';
 import { Link } from '@reach/router';
 import SwipableContainer from '../components/SwipableContainer';
 import ItemPresentationBar from '../components/ItemPresentationBar';
 import MainFullViewContainer from "../components/MainFullViewContainer";
 import { decideSingularPlural } from '../functions/HelperFunctions';
 import { useState } from 'react';
+import ErrorBoundary from '../components/ErrorBoundary';
+import FeaturedAlbums from '../components/FeaturedAlbums';
+import * as Sentry from '@sentry/react'; 
 
 const Albums = () => {
 
@@ -31,9 +33,9 @@ const Albums = () => {
         } else {
             setnewReleasesLimit(4)
             e.target.innerText = "view all"
-            e.target.value = "false"    
-        }  
-    }    
+            e.target.value = "false"
+        }
+    }
 
     // === STYLING ===
     const subHeadingContainer = css`
@@ -59,16 +61,12 @@ const Albums = () => {
             <section>
                 <header css={subHeadingContainer}>
                     <SubHeading>featured albums</SubHeading>
-                    <button css={viewAll} style={{visibility: 'hidden'}}>view all</button>
+                    <button css={viewAll} style={{ visibility: 'hidden' }}>view all</button>
                 </header>
                 <SwipableContainer>
-                    {featuredAlbums?.data.items.map(album => (
-                        <Link to={`/album_details/${album.id}`} key={album.id}>
-                            <ShadowBox>
-                                <img src={album.images[0].url} alt={album.name} />
-                            </ShadowBox>
-                        </Link>
-                    ))}
+                    <ErrorBoundary message="No albums could be found">
+                        <FeaturedAlbums contentArray={featuredAlbums?.data.items} />
+                    </ErrorBoundary>
                 </SwipableContainer>
             </section>
             <section css={css`margin: ${spacing.s} 0;`}>
@@ -77,7 +75,7 @@ const Albums = () => {
                     <button css={viewAll} onClick={e => toggleViewAll(e, 50)} value="false">view all</button>
                 </header>
                 <ul>
-                    {newReleases ? ( <>
+                    {newReleases ? (<>
                         {newReleases?.data.albums.items.map(album => (
                             <Link to={`/album_details/${album.id}`} key={album.id}>
                                 <ItemPresentationBar
@@ -88,7 +86,7 @@ const Albums = () => {
                                 />
                             </Link>
                         ))}
-                    </> ) : ( <>
+                    </>) : (<>
                         <ItemPresentationBar skeleton />
                         <ItemPresentationBar skeleton />
                         <ItemPresentationBar skeleton />
