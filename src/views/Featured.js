@@ -2,14 +2,13 @@
 import { css } from "@emotion/react";
 import NavigationBar from "../components/NavigationBar";
 import HeadingPrimary from "../components/HeadingPrimary";
-import ShadowBox from "../components/ShadowBox";
 import { spacing } from "../style/Styles";
 import useSpotifyApiFetch from "../functions/useSpotifyApiFetch";
-import { Link } from "@reach/router";
 import UtilityBar from "../components/UtilityBar";
 import MainFullViewContainer from "../components/MainFullViewContainer";
 import { useEffect, useRef } from "react";
 import { lazyImgObserver } from "../functions/HelperFunctions";
+import FeaturedList from "../components/FeaturedList";
 
 const Featured = () => {
 
@@ -37,15 +36,7 @@ const Featured = () => {
             <UtilityBar heading="Featured" />
             <HeadingPrimary />
             <ul css={contentContainer} ref={lazyLoadeParent}>
-                {playlists?.data.playlists.items.map(list => (
-                    <li key={list.id}>
-                        <ShadowBox>
-                            <Link to={`/playlists/${list.id}`}>
-                                <img src={'/placeholder-image.png'} alt={list.name} data-src={list.images[0].url} />
-                            </Link>
-                        </ShadowBox>
-                    </li>
-                ))}
+                {playlists && <FeaturedList contentArray={playlists.data.playlists.items} />}
             </ul>
             <NavigationBar />
         </MainFullViewContainer>
