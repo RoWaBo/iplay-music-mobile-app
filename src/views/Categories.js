@@ -46,7 +46,7 @@ const Categories = () => {
     const toggleButton = (category, e) => {
         const buttons = categoryList.current.querySelectorAll('button');
 
-        setCategoryPlaylists && setCategoryPlaylists(undefined)
+        setCategoryPlaylists && setCategoryPlaylists(null)
 
         if (e.target.value === "false") {
             setCategoryId(category.id)

@@ -161,6 +161,7 @@ const Player = ({ mediaUrl, trackNumber }) => {
         border-radius: 50%;
         box-shadow: 0px 0px 0px 6px rgba(255, 17, 104, 0.35);
 
+        transition: all 1s linear; 
         position: absolute;
         top: -4.5px;
         left: ${((currentTime * 1000) / (audioElement.current?.duration * 1000)) * 100}%;
